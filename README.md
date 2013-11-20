@@ -1,0 +1,4 @@
+DietManager
+===========
+
+Manage your dite 
