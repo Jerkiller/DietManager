@@ -17,6 +17,8 @@ using System.Data.Linq.Mapping;
 namespace LocalDatabaseSample.Model
 {
 
+
+    #region CLASSE TDODATACONTEXT
     public class ToDoDataContext : DataContext
     {
         // Pass the connection string to the base class.
@@ -29,15 +31,181 @@ namespace LocalDatabaseSample.Model
 
         // Specify a table for the categories.
         public Table<ToDoCategory> Categories;
-
-        ///qua dobbiamo aggiungere la tabella "pasti"
-        ///public Table<ToDoMeals> Meals
-        ///(campi sono idpasto, autogenerato...
-        ///data
-        ///idprodotto
-        ///quantità
-        ///carboidrati, grassi, proteine, calorie -> campi calcolati, ma se salvati subito accelerano il processo
     }
+
+    #endregion CLASSE TODODATACONTEXT
+
+    #region CLASSE PASTI
+    [Table]
+    public class ToDoMeals : INotifyPropertyChanged, INotifyPropertyChanging
+    {
+        //VAR: id
+        private int _toDoMealId;
+        [Column(IsPrimaryKey = true, IsDbGenerated = true, DbType = "INT NOT NULL Identity", CanBeNull = false, AutoSync = AutoSync.OnInsert)]
+        public int ToDoMealId
+        {
+            get { return _toDoMealId; }
+
+            set
+            {
+                if (this._toDoMealId != value)
+                {
+                    NotifyPropertyChanging("ToDoMealId");
+                    this._toDoMealId = value;
+                    NotifyPropertyChanged("ToDoMealId");
+                }
+            }
+        
+        }
+
+        //VAR: (performance)
+        [Column(IsVersion = true)]
+        private Binary _version;
+
+        //VAR: data
+        private string _date;
+        [Column]
+        public string Date
+        {
+            get { return _date; }
+
+            set { this._date = value; }
+        }
+
+
+        //VAR: Quantita del prodotto del pasto (perchè l'item ha una quantità?????)
+        private int _quantity;
+        [Column]
+        public int Quantity
+        {
+
+            get { return this._quantity; }
+
+            set { this._quantity = value; }
+
+        }
+
+
+        //VAR:Carboidrati totali del pasto
+        private double _carboidrati;
+        [Column]
+        public double Carboidrati
+        {
+
+            get
+            {
+
+                return this._carboidrati;
+            }
+
+            set
+            {
+                this._carboidrati = value;
+            }
+
+        }
+
+        //VAR: grassi totali del pasto
+        private double _grassi;
+        [Column]
+        public double Grassi
+        {
+
+            get
+            {
+
+                return this._grassi;
+            }
+
+            set
+            {
+                this._grassi = value;
+            }
+
+        }
+
+
+        //VAR: proteine totali del pasto
+        private double _proteine;
+        [Column]
+        public double Proteine
+        {
+
+            get
+            {
+
+                return this._proteine;
+            }
+
+            set
+            {
+                this._proteine = value;
+            }
+        }
+
+
+        //VAR: calorie totali del pasto
+        private double _calorie;
+        [Column]
+        public double Calorie
+        {
+
+            get
+            {
+
+                return this._calorie;
+            }
+
+            set
+            {
+                this._calorie = value;
+            }
+
+        }
+
+        //VAR: set di items prodotti per giornata
+        private EntitySet<ToDoItem> _todos;
+        [Association(Storage = "_todos", OtherKey = "_toDoItemId", ThisKey = "ToDoMealId")]
+        public EntitySet<ToDoItem> ToDos
+        {
+            get { return this._todos; }
+            set { this._todos.Assign(value); }
+        }
+
+        #region INotifyPropertyChanged Members
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        // Used to notify that a property changed
+        private void NotifyPropertyChanged(string propertyName)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+
+        #endregion
+
+        #region INotifyPropertyChanging Members
+
+        public event PropertyChangingEventHandler PropertyChanging;
+
+        // Used to notify that a property is about to change
+        private void NotifyPropertyChanging(string propertyName)
+        {
+            if (PropertyChanging != null)
+            {
+                PropertyChanging(this, new PropertyChangingEventArgs(propertyName));
+            }
+        }
+
+        #endregion
+
+    }
+    #endregion CLASSE PASTI
+
+    #region CLASSE PRODOTTI
 
     [Table]
     public class ToDoItem : INotifyPropertyChanged, INotifyPropertyChanging
@@ -315,8 +483,9 @@ namespace LocalDatabaseSample.Model
         #endregion
     }
 
+    #endregion CLASSE PASTI
 
-    /*############################################## CATEGORIA ############################################*/
+    #region CLASSE CATEGORIE
 
     [Table]
     public class ToDoCategory : INotifyPropertyChanged, INotifyPropertyChanging
@@ -421,5 +590,6 @@ namespace LocalDatabaseSample.Model
         #endregion
     }
 
+    #endregion CLASSE CATEGORIE
 
 }
