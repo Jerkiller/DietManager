@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Data.Linq;
 using System.Data.Linq.Mapping;
+using System.Windows;
 
 namespace DietManager_new.Model
 {
@@ -33,7 +34,7 @@ namespace DietManager_new.Model
                     this.Categorie.InsertOnSubmit(catPanini);
                     this.Categorie.InsertOnSubmit(catBevande);
                     this.Categorie.InsertOnSubmit(catPanificati);
-                    /*
+                    
                     // Create a new to-do item.
                     this.Prodotti.InsertOnSubmit(new Prodotto
                     {
@@ -51,7 +52,7 @@ namespace DietManager_new.Model
                     }
                         );
 
-                    this.Prodotti.InsertOnSubmit(new Prodotto
+                    Prodotto p=new Prodotto
                     {
                         NomeProdotto = "coca coea",
                         CategoriaFK = catBevande,
@@ -63,9 +64,35 @@ namespace DietManager_new.Model
                         Media = 250,
                         Piccola = 500,
                         Grande = 1000
-                    }
-                       );*/
+                    };
+                      this.Prodotti.InsertOnSubmit(p);
 
+                      this.Pasti.InsertOnSubmit(new Pasto
+                        {
+                            Quantita = 10,
+                            Data = DateTime.Now,
+                            ProdottoFK = p,
+                            ProdottoFKInternal = p.ProdottoId,
+                            Calorie= p.Calorie* 10,
+                            Grassi = p.Grassi * 10,
+                            Carboidrati = p.Carboidrati * 10,
+                            Proteine = p.Proteine * 10
+
+                        });
+                      
+
+                        this.Pasti.InsertOnSubmit(new Pasto
+                        {
+                            Quantita = 10,
+                            Data = DateTime.Now,
+                            ProdottoFK = p,
+                            ProdottoFKInternal = p.ProdottoId,
+                            Calorie = p.Calorie * 10,
+                            Grassi = p.Grassi * 10,
+                            Carboidrati = p.Carboidrati * 10,
+                            Proteine = p.Proteine * 10
+
+                        });
                     this.SubmitChanges();
                 }
             }

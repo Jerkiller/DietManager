@@ -64,16 +64,9 @@ namespace DietManager_new.Model
         public double Carboidrati
         {
 
-            get
-            {
+            get{return this._carboidrati;}
 
-                return this._carboidrati;
-            }
-
-            set
-            {
-                this._carboidrati = value;
-            }
+            set{this._carboidrati = value;}
 
         }
 
@@ -83,16 +76,9 @@ namespace DietManager_new.Model
         public double Grassi
         {
 
-            get
-            {
+            get {return this._grassi;}
 
-                return this._grassi;
-            }
-
-            set
-            {
-                this._grassi = value;
-            }
+            set {this._grassi = value;}
 
         }
 
@@ -103,16 +89,9 @@ namespace DietManager_new.Model
         public double Proteine
         {
 
-            get
-            {
+            get { return this._proteine;}
 
-                return this._proteine;
-            }
-
-            set
-            {
-                this._proteine = value;
-            }
+            set { this._proteine = value; }
         }
 
 
@@ -122,53 +101,47 @@ namespace DietManager_new.Model
         public double Calorie
         {
 
-            get
-            {
+            get { return this._calorie; }
 
-                return this._calorie;
-            }
-
-            set
-            {
-                this._calorie = value;
-            }
+            set { this._calorie = value; }
 
         }
 
 
 
         // Internal column for the associated ToDoCategory ID value
+       
+        private int _prodottoFKInternal;
         [Column]
-        private int _categoriaFKInternal;
-        public int CategoriaFKInternal
+        public int ProdottoFKInternal
         {
-            get { return this._categoriaFKInternal; }
-            set { this._categoriaFKInternal = value; }
+            get { return this._prodottoFKInternal; }
+            set { this._prodottoFKInternal = value; }
         }
 
 
 
         // Entity reference, to identify the ToDoCategory "storage" table
-        private EntityRef<Prodotto> _categoriaFK;
+        private EntityRef<Prodotto> _prodottoFK;
 
 
 
         // Association, to describe the relationship between this key and that "storage" table
-        [Association(Storage = "_categoriaFK", ThisKey = "CategoriaFKInternal", OtherKey = "ProdottoId", IsForeignKey = true)]
-        public Prodotto CategoriaFK
+        [Association(Storage = "_prodottoFK", ThisKey = "ProdottoFKInternal", OtherKey = "ProdottoId", IsForeignKey = true)]
+        public Prodotto ProdottoFK
         {
-            get { return _categoriaFK.Entity; }
+            get { return _prodottoFK.Entity; }
             set
             {
-                NotifyPropertyChanging("CategoriaFK");
-                _categoriaFK.Entity = value;
+                NotifyPropertyChanging("ProdottoFK");
+                _prodottoFK.Entity = value;
 
                 if (value != null)
                 {
-                    _categoriaFKInternal = value.ProdottoId;
+                    _prodottoFKInternal = value.ProdottoId;
                 }
 
-                NotifyPropertyChanged("CategoriaFK");
+                NotifyPropertyChanged("ProdottoFK");
             }
         }
 

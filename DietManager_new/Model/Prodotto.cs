@@ -154,7 +154,7 @@ namespace DietManager_new.Model
         }
 
 
-        /*
+        
         // Internal column for the associated ToDoCategory ID value
         [Column]
         private int _categoriaFKInternal;
@@ -189,27 +189,12 @@ namespace DietManager_new.Model
             }
         }
 
-        /*
-        // Define the entity set for the collection side of the relationship.
-           private EntitySet<Pasto> _pastiFK;
-
-           [Association(Storage = "_pastiFK", OtherKey = "ProdottoFKInternal", ThisKey = "_prodottoId")]
-           public EntitySet<Pasto> PastiFK
-           {
-               get { return this._pastiFK; }
-               set { this._pastiFK.Assign(value); }
-           }
-
-           // Assign handlers for the add and remove operations, respectively.
-           public Prodotto()
-           {
-               _pastiFK = new EntitySet<Pasto>();
-           }*/
+      
 
         //FOREIGN KEY
         private EntitySet<Pasto> _pastiFK;
 
-        [Association(Storage = "_pastiFK", OtherKey = "CategoriaFKInternal", ThisKey = "ProdottoId")]
+        [Association(Storage = "_pastiFK", OtherKey = "ProdottoFKInternal", ThisKey = "ProdottoId")]
         public EntitySet<Pasto> PastiFK
         {
             get { return this._pastiFK; }

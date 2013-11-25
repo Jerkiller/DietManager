@@ -1,0 +1,13 @@
+C:\Users\Francesco\documents\GitHub\DietManager_new\DietManager_new\DietManager_new\Bin\Release\ApplicationIcon.png
+C:\Users\Francesco\documents\GitHub\DietManager_new\DietManager_new\DietManager_new\Bin\Release\Background.png
+C:\Users\Francesco\documents\GitHub\DietManager_new\DietManager_new\DietManager_new\Bin\Release\DietManager_new.dll
+C:\Users\Francesco\documents\GitHub\DietManager_new\DietManager_new\DietManager_new\Bin\Release\DietManager_new.pdb
+C:\Users\Francesco\documents\GitHub\DietManager_new\DietManager_new\DietManager_new\Bin\Release\AppManifest.xaml
+C:\Users\Francesco\documents\GitHub\DietManager_new\DietManager_new\DietManager_new\Bin\Release\DietManager_new.xap
+C:\Users\Francesco\documents\GitHub\DietManager_new\DietManager_new\DietManager_new\obj\Release\App.g.cs
+C:\Users\Francesco\documents\GitHub\DietManager_new\DietManager_new\DietManager_new\obj\Release\MainPage.g.cs
+C:\Users\Francesco\documents\GitHub\DietManager_new\DietManager_new\DietManager_new\obj\Release\DietManager_new.g.resources
+C:\Users\Francesco\documents\GitHub\DietManager_new\DietManager_new\DietManager_new\obj\Release\DietManager_new.dll
+C:\Users\Francesco\documents\GitHub\DietManager_new\DietManager_new\DietManager_new\obj\Release\DietManager_new.pdb
+C:\Users\Francesco\documents\GitHub\DietManager_new\DietManager_new\DietManager_new\obj\Release\XapCacheFile.xml
+C:\Users\Francesco\documents\GitHub\DietManager_new\DietManager_new\DietManager_new\obj\Release\DietManager_new.csprojResolveAssemblyReference.cache

@@ -44,7 +44,7 @@ namespace DietManager_new.Model
         // Version column aids update performance.
         [Column(IsVersion = true)]
         private Binary _version;
-        /*
+        
         //FOREIGN KEY
         private EntitySet<Prodotto> _prodottiFK;
 
@@ -55,21 +55,11 @@ namespace DietManager_new.Model
             set { this._prodottiFK.Assign(value); }
         }
 
-        /*
-        //FOREIGN KEY
-        private EntitySet<Pasto> _pastiFK;
 
-        [Association(Storage = "_pastiFK", OtherKey = "CategoriaFKInternal", ThisKey = "IdCategoria")]
-        public EntitySet<Pasto> PastiFK
-        {
-            get { return this._pastiFK; }
-            set { this._pastiFK.Assign(value); }
-        }*/
 
         public Categoria() {
 
-            //this._prodottiFK = new EntitySet<Prodotto>();
-            //this._pastiFK = new EntitySet<Pasto>();
+            this._prodottiFK = new EntitySet<Prodotto>();
         
         }
 
