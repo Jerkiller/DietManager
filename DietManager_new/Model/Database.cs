@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data.Linq;
 using System.Data.Linq.Mapping;
@@ -8,10 +9,7 @@ namespace DietManager_new.Model
 {
     public class Database : DataContext
     {
-
-
         public Table<Prodotto> Prodotti;
-
         public Table<Categoria> Categorie;
         public Table<Pasto> Pasti;
 
@@ -38,10 +36,12 @@ namespace DietManager_new.Model
                     // Create a new to-do item.
                     this.Prodotti.InsertOnSubmit(new Prodotto
                     {
-                        NomeProdotto = "panin col prossiuto",
+                        NomeProdotto = "crispy",
                         CategoriaFK = catPanini,
+                        PathFoto="Immagini/crispy.png",
                         Quantita = 100,
                         Carboidrati = 70,
+                        UnitaDiMisura="pz",
                         Grassi = 20,
                         Proteine = 10,
                         Calorie = 150,
@@ -57,6 +57,8 @@ namespace DietManager_new.Model
                         NomeProdotto = "coca coea",
                         CategoriaFK = catBevande,
                         Quantita = 69,
+                        PathFoto="Immagini/cocacoea.jpg",
+                        UnitaDiMisura="ml",
                         Carboidrati = 10,
                         Grassi = 10,
                         Proteine = 11,
@@ -97,8 +99,9 @@ namespace DietManager_new.Model
                 }
             }
 
-        
-        
+     
+          
+
         }
 
 

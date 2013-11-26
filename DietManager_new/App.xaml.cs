@@ -21,6 +21,7 @@ namespace DietManager_new
 
         private static Database db ;
 
+        public static DBManager dbManager;
 
         /// <summary>
         /// Provides easy access to the root frame of the Phone Application.
@@ -67,7 +68,7 @@ namespace DietManager_new
 
             db = new Database("Data Source=isostore:/database.sdf");
 
-
+            dbManager = new DBManager(db);
 
 
 

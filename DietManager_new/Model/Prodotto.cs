@@ -47,10 +47,35 @@ namespace DietManager_new.Model
             }
         }
 
+        private string pathFoto;
+        [Column]
+        public string PathFoto {
+
+            get { return this.pathFoto; }
+            set {
+                NotifyPropertyChanging("PathFoto");
+                if (this.pathFoto != value)
+                    this.pathFoto = value;
+                NotifyPropertyChanged("PathFoto");
+            }
+        }
+
         // Version column aids update performance.
         [Column(IsVersion = true)]
         private Binary _version;
 
+        private string _unitaDiMisura;
+        [Column]
+        public string UnitaDiMisura {
+
+            get { return this._unitaDiMisura; }
+            set {
+                NotifyPropertyChanging("UnitaDiMisura");
+                if (this._unitaDiMisura != value)
+                    this._unitaDiMisura = value;
+                NotifyPropertyChanged("UnitaDiMisura");
+            }
+        }
 
         // Quantita del prodotto
         private int _quantita;
@@ -201,9 +226,8 @@ namespace DietManager_new.Model
             set { this._pastiFK.Assign(value); }
         }
 
-        public Prodotto() { _pastiFK = new EntitySet<Pasto>(); }
-
-
+        //COSTRUTTORE
+        public Prodotto() { this._pastiFK = new EntitySet<Pasto>(); }
 
 
         #region INotifyPropertyChanged Members

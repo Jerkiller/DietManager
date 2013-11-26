@@ -1,0 +1,112 @@
+﻿<phone:PhoneApplicationPage 
+    x:Class="DietManager_new.PaginaGiornata"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:controls="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="768"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait"  Orientation="Portrait"
+    shell:SystemTray.IsVisible="True">
+
+    <!--LayoutRoot è la griglia radice in cui viene inserito tutto il contenuto della pagina-->
+    <Grid x:Name="LayoutRoot" Background="Transparent">
+        <!--Controllo Pivot-->
+        <controls:Pivot Title="MANAGE YOUR DIET">
+            <!--Elemento Pivot uno-->
+            <controls:PivotItem Header="Giorno">
+                <StackPanel>
+                    <Grid x:Name="Add" Background="Transparent">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="2*"/>
+                        </Grid.ColumnDefinitions>
+                        <Button  VerticalAlignment="Center"  HorizontalAlignment="Center" Grid.Row="0" Grid.Column="0" Content="+"/>
+                        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="1" Text="Aggiungi alimento" TextWrapping="NoWrap"  Style="{StaticResource PhoneTextLargeStyle}"/>
+                    </Grid>
+                    <TextBlock VerticalAlignment="Center" Grid.Row="0" Grid.Column="2" Text="Elenco alimenti:" TextWrapping="NoWrap" Margin="12,-6,0,0" Style="{StaticResource PhoneTextExtraLargeStyle}"/>
+                    <!--Elenco a doppia riga con testo a capo-->
+                    <ListBox x:Name="FirstListBox" Margin="0,0,-12,0" ItemsSource="{Binding Items}">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Margin="0,0,0,17" Width="432" Height="78">
+                                    <Grid x:Name="Add" Background="Transparent">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="*"/>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="4*"/>
+                                            <ColumnDefinition Width="2*"/>
+                                            <ColumnDefinition Width="1*"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="0" Text="Pasta al pomodoro" TextWrapping="NoWrap"  Style="{StaticResource PhoneTextNormalStyle}"/>
+                                        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="1" Text="800r" TextWrapping="NoWrap"  Style="{StaticResource PhoneTextNormalStyle}"/>
+                                        <Button VerticalAlignment="Center"  HorizontalAlignment="Center" Grid.Row="0" Grid.Column="2" Content="-" />
+                                    </Grid>
+                                    <!--<TextBlock Text="{Binding LineOne}" TextWrapping="Wrap" Style="{StaticResource PhoneTextExtraLargeStyle}"/>
+                              <TextBlock Text="{Binding LineTwo}" TextWrapping="Wrap" Margin="12,-6,12,0" Style="{StaticResource PhoneTextSubtleStyle}"/>-->
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </StackPanel>
+            </controls:PivotItem>
+
+            <!--Elemento Pivot due-->
+            <controls:PivotItem Header="Situazione">
+                <!--Elenco a tripla riga senza testo a capo-->
+
+                <Grid x:Name="Situazione" >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="3*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="0" >
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+
+                        <TextBlock VerticalAlignment="Center" Grid.Row="0" Text="Calorie" TextWrapping="NoWrap"  Style="{StaticResource PhoneTextNormalStyle}"/>
+                        <ProgressBar VerticalAlignment="Center" Grid.Row="0" Grid.Column="1" Height="10" Width="100" Value="10"  />
+                        <TextBlock VerticalAlignment="Center" Grid.Row="0" Grid.Column="2" Text="10/100" TextWrapping="NoWrap" Margin="12,-6,0,0" Style="{StaticResource PhoneTextNormalStyle}"/>
+
+                        <TextBlock VerticalAlignment="Center" Grid.Row="1" Text="Carboidrati" TextWrapping="NoWrap"  Style="{StaticResource PhoneTextNormalStyle}"/>
+                        <ProgressBar VerticalAlignment="Center" Grid.Row="1" Grid.Column="1" Height="10" Width="100" Value="10"  />
+                        <TextBlock VerticalAlignment="Center" Grid.Row="1" Grid.Column="2" Text="10/100" TextWrapping="NoWrap" Margin="12,-6,0,0" Style="{StaticResource PhoneTextNormalStyle}"/>
+
+                        <TextBlock VerticalAlignment="Center" Grid.Row="2" Text="Grassi" TextWrapping="NoWrap"  Style="{StaticResource PhoneTextNormalStyle}"/>
+                        <ProgressBar VerticalAlignment="Center" Grid.Row="2" Grid.Column="1" Height="10" Width="100" Value="10"  />
+                        <TextBlock VerticalAlignment="Center" Grid.Row="2" Grid.Column="2" Text="10/100" TextWrapping="NoWrap" Margin="12,-6,0,0" Style="{StaticResource PhoneTextNormalStyle}"/>
+
+                        <TextBlock VerticalAlignment="Center" Grid.Row="3" Text="Proteine" TextWrapping="NoWrap"  Style="{StaticResource PhoneTextNormalStyle}"/>
+                        <ProgressBar VerticalAlignment="Center" Grid.Row="3" Grid.Column="1" Height="10" Width="100" Value="10"  />
+                        <TextBlock VerticalAlignment="Center" Grid.Row="3" Grid.Column="2" Text="10/100" TextWrapping="NoWrap" Margin="12,-6,0,0" Style="{StaticResource PhoneTextNormalStyle}"/>
+                    </Grid>
+                    <Button Grid.Row="1"  Name="Calendario" Content="Vedi calendario" />
+                </Grid>
+
+
+            </controls:PivotItem>
+        </controls:Pivot>
+    </Grid>
+
+</phone:PhoneApplicationPage>
