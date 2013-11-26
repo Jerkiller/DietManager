@@ -8,6 +8,7 @@ namespace DietManager_new.ViewModel
     public class ProdottoViewModel
     {
 
+       
 
     }
 }

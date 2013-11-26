@@ -29,3 +29,4 @@ C:\Users\Francesco\Documents\GitHub\DietManager\DietManager_new\obj\Release\Diet
 C:\Users\Francesco\Documents\GitHub\DietManager\DietManager_new\obj\Release\DietManager_new.dll
 C:\Users\Francesco\Documents\GitHub\DietManager\DietManager_new\obj\Release\DietManager_new.pdb
 C:\Users\Francesco\Documents\GitHub\DietManager\DietManager_new\obj\Release\XapCacheFile.xml
+C:\Users\Francesco\Documents\GitHub\DietManager\DietManager_new\obj\Release\View\PaginaCategorie.g.cs

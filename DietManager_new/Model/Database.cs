@@ -38,7 +38,7 @@ namespace DietManager_new.Model
                     {
                         NomeProdotto = "crispy",
                         CategoriaFK = catPanini,
-                        PathFoto="Immagini/crispy.png",
+                        PathFoto="crispy.png",
                         Quantita = 100,
                         Carboidrati = 70,
                         UnitaDiMisura="pz",
@@ -57,7 +57,7 @@ namespace DietManager_new.Model
                         NomeProdotto = "coca coea",
                         CategoriaFK = catBevande,
                         Quantita = 69,
-                        PathFoto="Immagini/cocacoea.jpg",
+                        PathFoto="cocacoea.jpg",
                         UnitaDiMisura="ml",
                         Carboidrati = 10,
                         Grassi = 10,

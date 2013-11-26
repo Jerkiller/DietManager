@@ -75,6 +75,9 @@
     <Compile Include="ViewModel\CategoriaViewModel.cs" />
     <Compile Include="ViewModel\GiornataViewModel.cs" />
     <Compile Include="ViewModel\ProdottoViewModel.cs" />
+    <Compile Include="View\PaginaCategorie.xaml.cs">
+      <DependentUpon>PaginaCategorie.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\PaginaGiornata.xaml.cs">
       <DependentUpon>PaginaGiornata.xaml</DependentUpon>
     </Compile>
@@ -92,6 +95,10 @@
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
     <Page Include="MainPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\PaginaCategorie.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
