@@ -11,3 +11,16 @@ C:\Users\Francesco\documents\GitHub\DietManager_new\DietManager_new\DietManager_
 C:\Users\Francesco\documents\GitHub\DietManager_new\DietManager_new\DietManager_new\obj\Debug\DietManager_new.dll
 C:\Users\Francesco\documents\GitHub\DietManager_new\DietManager_new\DietManager_new\obj\Debug\DietManager_new.pdb
 C:\Users\Francesco\documents\GitHub\DietManager_new\DietManager_new\DietManager_new\obj\Debug\XapCacheFile.xml
+C:\Users\Francesco\Documents\GitHub\DietManager\DietManager_new\Bin\Debug\ApplicationIcon.png
+C:\Users\Francesco\Documents\GitHub\DietManager\DietManager_new\Bin\Debug\Background.png
+C:\Users\Francesco\Documents\GitHub\DietManager\DietManager_new\Bin\Debug\DietManager_new.dll
+C:\Users\Francesco\Documents\GitHub\DietManager\DietManager_new\Bin\Debug\DietManager_new.pdb
+C:\Users\Francesco\Documents\GitHub\DietManager\DietManager_new\Bin\Debug\AppManifest.xaml
+C:\Users\Francesco\Documents\GitHub\DietManager\DietManager_new\Bin\Debug\DietManager_new.xap
+C:\Users\Francesco\Documents\GitHub\DietManager\DietManager_new\obj\Debug\DietManager_new.csprojResolveAssemblyReference.cache
+C:\Users\Francesco\Documents\GitHub\DietManager\DietManager_new\obj\Debug\App.g.cs
+C:\Users\Francesco\Documents\GitHub\DietManager\DietManager_new\obj\Debug\MainPage.g.cs
+C:\Users\Francesco\Documents\GitHub\DietManager\DietManager_new\obj\Debug\DietManager_new.g.resources
+C:\Users\Francesco\Documents\GitHub\DietManager\DietManager_new\obj\Debug\DietManager_new.dll
+C:\Users\Francesco\Documents\GitHub\DietManager\DietManager_new\obj\Debug\DietManager_new.pdb
+C:\Users\Francesco\Documents\GitHub\DietManager\DietManager_new\obj\Debug\XapCacheFile.xml

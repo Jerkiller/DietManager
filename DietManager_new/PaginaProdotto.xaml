@@ -1,0 +1,160 @@
+﻿<phone:PhoneApplicationPage 
+    x:Class="DietManager_new.PaginaProdotto"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:controls="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="768"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait"  Orientation="Portrait"
+    shell:SystemTray.IsVisible="True">
+
+    <!--LayoutRoot è la griglia radice in cui viene inserito tutto il contenuto della pagina-->
+    <Grid x:Name="LayoutRoot" Background="Transparent">
+        <!--Controllo Pivot-->
+        <controls:Pivot Title="MANAGE YOUR DIET">
+            <!--Elemento Pivot uno-->
+            <controls:PivotItem Header="Prodotto">
+                <Grid x:Name="Main1" Background="Transparent" >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="3*" />
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="2*"/>
+                        <RowDefinition Height="1*"/>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Image Grid.Column="0" HorizontalAlignment="Center" Width="180"  Source="/Background.png" VerticalAlignment="Center" />
+                        <Grid Grid.Column="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="1*" />
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="1*"/>
+                            </Grid.RowDefinitions>
+
+                            <Button Grid.Row="0" Name="Small" Content="Porzione piccola" />
+                            <Button Grid.Row="1" Name="Medium" Content="Porzione media" />
+                            <Button Grid.Row="2" Name="Big" Content="Porzione grande" />
+                        </Grid>
+                    </Grid>
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="3*" />
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock  VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="0" Text="Quantità assunta" TextWrapping="NoWrap"  Style="{StaticResource PhoneTextLargeStyle}"/>
+                        <TextBox  VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="1" Text="1000" TextWrapping="NoWrap"  />
+                        <TextBlock  VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="2" Text="gr" TextWrapping="NoWrap"  Style="{StaticResource PhoneTextNormalStyle}"/>
+                    </Grid>
+                    <TextBlock VerticalAlignment="Center"  HorizontalAlignment="Left" Grid.Row="2"  Text="Preview Situazione" TextWrapping="NoWrap"  Style="{StaticResource PhoneTextLargeStyle}"/>
+                    <Grid Grid.Row="3" x:Name="Situazione" >
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+
+                        <TextBlock VerticalAlignment="Center" Grid.Row="0" Text="Calorie" TextWrapping="NoWrap"  Style="{StaticResource PhoneTextNormalStyle}"/>
+                        <ProgressBar VerticalAlignment="Center" Grid.Row="0" Grid.Column="1" Height="10" Width="100" Value="10"  />
+                        <TextBlock VerticalAlignment="Center" Grid.Row="0" Grid.Column="2" Text="10/100" TextWrapping="NoWrap" Margin="12,-6,0,0" Style="{StaticResource PhoneTextNormalStyle}"/>
+
+                        <TextBlock VerticalAlignment="Center" Grid.Row="1" Text="Carboidrati" TextWrapping="NoWrap"  Style="{StaticResource PhoneTextNormalStyle}"/>
+                        <ProgressBar VerticalAlignment="Center" Grid.Row="1" Grid.Column="1" Height="10" Width="100" Value="10"  />
+                        <TextBlock VerticalAlignment="Center" Grid.Row="1" Grid.Column="2" Text="10/100" TextWrapping="NoWrap" Margin="12,-6,0,0" Style="{StaticResource PhoneTextNormalStyle}"/>
+
+                        <TextBlock VerticalAlignment="Center" Grid.Row="2" Text="Grassi" TextWrapping="NoWrap"  Style="{StaticResource PhoneTextNormalStyle}"/>
+                        <ProgressBar VerticalAlignment="Center" Grid.Row="2" Grid.Column="1" Height="10" Width="100" Value="10"  />
+                        <TextBlock VerticalAlignment="Center" Grid.Row="2" Grid.Column="2" Text="10/100" TextWrapping="NoWrap" Margin="12,-6,0,0" Style="{StaticResource PhoneTextNormalStyle}"/>
+
+                        <TextBlock VerticalAlignment="Center" Grid.Row="3" Text="Proteine" TextWrapping="NoWrap"  Style="{StaticResource PhoneTextNormalStyle}"/>
+                        <ProgressBar VerticalAlignment="Center" Grid.Row="3" Grid.Column="1" Height="10" Width="100" Value="10"  />
+                        <TextBlock VerticalAlignment="Center" Grid.Row="3" Grid.Column="2" Text="10/100" TextWrapping="NoWrap" Margin="12,-6,0,0" Style="{StaticResource PhoneTextNormalStyle}"/>
+
+
+                    </Grid>
+                    <Button Content="Aggiungi alimento" VerticalAlignment="Center" Grid.Row="4" />
+                </Grid>
+            </controls:PivotItem>
+
+            <!--Elemento Pivot due-->
+            <controls:PivotItem Header="Info">
+                <Grid x:Name="Main2" Background="Transparent" >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*" />
+                        <RowDefinition Height="1*" />
+                        <RowDefinition Height="2*"/>
+                        <RowDefinition Height="1*" />
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0" x:Name="Categoria" Background="Transparent" >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="1*" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock  VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="0"  Text="Categoria" TextWrapping="NoWrap"  Style="{StaticResource PhoneTextLargeStyle}"/>
+                        <TextBlock  VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="1"  Text="NomeCategoria" TextWrapping="NoWrap"  Style="{StaticResource PhoneTextNormalStyle}"/>
+                    </Grid>
+                    <Grid Grid.Row="1" Background="Transparent" >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="4*" />
+                            <ColumnDefinition Width="2*" />
+                            <ColumnDefinition Width="1*" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock  VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="0"  Text="Valori medi per " TextWrapping="NoWrap"  Style="{StaticResource PhoneTextLargeStyle}"/>
+                        <TextBlock  VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="1"  Text="100" TextWrapping="NoWrap"  Style="{StaticResource PhoneTextLargeStyle}"/>
+                        <TextBlock  VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="2"  Text="gr" TextWrapping="NoWrap"  Style="{StaticResource PhoneTextLargeStyle}"/>
+
+                    </Grid>
+                    <Grid Grid.Row="2" x:Name="Valori" Background="Transparent" >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*" />
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="1*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1*" />
+                            <RowDefinition Height="1*" />
+                            <RowDefinition Height="1*" />
+                            <RowDefinition Height="1*" />
+                        </Grid.RowDefinitions>
+                        <TextBlock  VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Row="0" Grid.Column="0"  Text="Calorie" TextWrapping="NoWrap"  Style="{StaticResource PhoneTextLargeStyle}"/>
+                        <TextBlock  VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="1"  Text="125Kcal" TextWrapping="NoWrap"  Style="{StaticResource PhoneTextNormalStyle}"/>
+                        <TextBlock  VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="2"  Text="" TextWrapping="NoWrap"  Style="{StaticResource PhoneTextNormalStyle}"/>
+
+                        <TextBlock  VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Row="1" Grid.Column="0"  Text="Carboidrati" TextWrapping="NoWrap"  Style="{StaticResource PhoneTextLargeStyle}"/>
+                        <TextBlock  VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="1" Grid.Column="1"  Text="30gr" TextWrapping="NoWrap"  Style="{StaticResource PhoneTextNormalStyle}"/>
+                        <TextBlock  VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="1" Grid.Column="2"  Text="80%" TextWrapping="NoWrap"  Style="{StaticResource PhoneTextNormalStyle}"/>
+
+                        <TextBlock  VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Row="2" Grid.Column="0"  Text="Grassi" TextWrapping="NoWrap"  Style="{StaticResource PhoneTextLargeStyle}"/>
+                        <TextBlock  VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="2" Grid.Column="1"  Text="30gr" TextWrapping="NoWrap"  Style="{StaticResource PhoneTextNormalStyle}"/>
+                        <TextBlock  VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="2" Grid.Column="2"  Text="80%" TextWrapping="NoWrap"  Style="{StaticResource PhoneTextNormalStyle}"/>
+
+                        <TextBlock  VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Row="3" Grid.Column="0"  Text="Proteine" TextWrapping="NoWrap"  Style="{StaticResource PhoneTextLargeStyle}"/>
+                        <TextBlock  VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="3" Grid.Column="1"  Text="30gr" TextWrapping="NoWrap"  Style="{StaticResource PhoneTextNormalStyle}"/>
+                        <TextBlock  VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="3" Grid.Column="2"  Text="80%" TextWrapping="NoWrap"  Style="{StaticResource PhoneTextNormalStyle}"/>
+                    </Grid>
+                    <Button Content="Aggiungi alimento" VerticalAlignment="Center" Grid.Row="3" />
+
+                </Grid>
+            </controls:PivotItem>
+        </controls:Pivot>
+    </Grid>
+
+</phone:PhoneApplicationPage>
