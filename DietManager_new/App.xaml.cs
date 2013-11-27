@@ -13,15 +13,16 @@ using System.Windows.Shapes;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using DietManager_new.Model;
+using DietManager_new.ViewModel;
 
 namespace DietManager_new
 {
     public partial class App : Application
     {
 
-        //private static Database db ;
+        public static string PathDB = "Data Source=isostore:/database.sdf";
 
-        public static DBManager dbManager;
+        public static CategoriaViewModel categoriaVM;
 
         /// <summary>
         /// Provides easy access to the root frame of the Phone Application.
@@ -64,14 +65,93 @@ namespace DietManager_new
             }
 
 
-            
+          
 
-            //db = new Database("Data Source=isostore:/database.sdf");
+           using(Database db = new Database(App.PathDB)){
+               if (db.DatabaseExists() == false)
+            {
+                // Create the local database.
+                db.CreateDatabase();
 
-            dbManager = new DBManager(new Database("Data Source=isostore:/database.sdf"));
+                Categoria catPanini = new Categoria { NomeCategoria = "Panini" };
+                Categoria catBevande = new Categoria { NomeCategoria = "Bevande" };
+                Categoria catPanificati = new Categoria { NomeCategoria = "Panificati" };
 
 
 
+                // Prepopulate the categories.
+                db.Categorie.InsertOnSubmit(catPanini);
+                db.Categorie.InsertOnSubmit(catBevande);
+                db.Categorie.InsertOnSubmit(catPanificati);
+
+
+
+
+                // Create a new to-do item.
+                db.Prodotti.InsertOnSubmit(new Prodotto
+                {
+                    NomeProdotto = "crispy",
+                    CategoriaFK = catPanini,
+                    PathFoto = "crispy.png",
+                    Quantita = 100,
+                    Carboidrati = 70,
+                    UnitaDiMisura = "pz",
+                    Grassi = 20,
+                    Proteine = 10,
+                    Calorie = 150,
+                    Media = 100,
+                    Piccola = 50,
+                    Grande = 150
+
+                }
+                    );
+
+                Prodotto p = new Prodotto
+                {
+                    NomeProdotto = "coca coea",
+                    CategoriaFK = catBevande,
+                    Quantita = 69,
+                    PathFoto = "cocacoea.jpg",
+                    UnitaDiMisura = "ml",
+                    Carboidrati = 10,
+                    Grassi = 10,
+                    Proteine = 11,
+                    Calorie = 200,
+                    Media = 250,
+                    Piccola = 500,
+                    Grande = 1000
+                };
+                db.Prodotti.InsertOnSubmit(p);
+
+
+                Prodotto p2 = new Prodotto
+                {
+                    NomeProdotto = "medoemedo",
+                    CategoriaFK = catBevande,
+                    Quantita = 69,
+                    PathFoto = "cocacoea.jpg",
+                    UnitaDiMisura = "ml",
+                    Carboidrati = 10,
+                    Grassi = 10,
+                    Proteine = 11,
+                    Calorie = 200,
+                    Media = 250,
+                    Piccola = 500,
+                    Grande = 1000
+                };
+
+                db.Prodotti.InsertOnSubmit(p2);
+         
+                db.SubmitChanges();
+
+
+                 }
+        
+        }
+
+            categoriaVM = new CategoriaViewModel();
+
+        
         }
 
         // Code to execute when the application is launching (eg, from Start)

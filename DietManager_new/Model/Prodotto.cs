@@ -35,7 +35,7 @@ namespace DietManager_new.Model
         [Column]
         public string NomeProdotto
         {
-            get { return _nomeProdotto; }
+            get { return this._nomeProdotto; }
             set
             {
                 if (_nomeProdotto != value)
@@ -223,6 +223,11 @@ namespace DietManager_new.Model
         //COSTRUTTORE
         public Prodotto() { this._pastiFK = new EntitySet<Pasto>(); }
 
+        //OVERRIDE to string per mostrare il nome
+       public override string ToString()
+        {
+            return this.NomeProdotto;
+        }
 
         #region INotifyPropertyChanged Members
 

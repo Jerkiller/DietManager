@@ -19,7 +19,7 @@ namespace DietManager_new
         public PaginaCategorie()
         {
             InitializeComponent();
-            this.DataContext = new CategoriaViewModel(); 
+            this.DataContext = App.categoriaVM;
         }
 
 
