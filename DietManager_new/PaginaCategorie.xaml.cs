@@ -30,10 +30,11 @@ namespace DietManager_new
           
         }
 
-        private void listaPanini_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void lista_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
-          string tagProd=((Prodotto)listaPanini.SelectedItem).ProdottoId.ToString();
+          //string tagProd=((Prodotto)listaPanini.SelectedItem).ProdottoId.ToString();
+            string tagProd = ((Prodotto)(((ListBox)sender).SelectedItem)).ProdottoId.ToString();
 
             NavigationService.Navigate(new Uri("/PaginaProdotto.xaml?id=" + tagProd, UriKind.Relative));
 

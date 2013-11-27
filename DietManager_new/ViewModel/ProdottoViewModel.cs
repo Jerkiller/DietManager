@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.IO.IsolatedStorage;
 using System.Linq;
 using System.Text;
+using System.Windows;
 
 namespace DietManager_new.ViewModel
 {
@@ -39,25 +40,22 @@ namespace DietManager_new.ViewModel
             get { return this._quantita; }
             set {
                 if (this._quantita != value) {
-                    this._quantita = value;
-                    NotifyPropertyChanged("Quantita");
-                    NotifyPropertyChanged("CaloriePreview");
-                    NotifyPropertyChanged("CaloriePreviewPercentuale");
-                    NotifyPropertyChanged("GrassiPreview");
-                    NotifyPropertyChanged("GrassiPreviewPercentuale");
-                    NotifyPropertyChanged("CarboidratiPreview");
-                    NotifyPropertyChanged("CarboidratiPreviewPercentuale");
-                    NotifyPropertyChanged("ProteinePreview");
-                    NotifyPropertyChanged("ProteinePreviewPercentuale");
-                    NotifyPropertyChanged("StatoCalorie");
-                    NotifyPropertyChanged("StatoCarboidrati");
-                    NotifyPropertyChanged("StatoGrassi");
-                    NotifyPropertyChanged("StatoProteine");
-
-
-
-
-                }
+                        this._quantita = value;
+                        NotifyPropertyChanged("Quantita");
+                        NotifyPropertyChanged("CaloriePreview");
+                        NotifyPropertyChanged("CaloriePreviewPercentuale");
+                        NotifyPropertyChanged("GrassiPreview");
+                        NotifyPropertyChanged("GrassiPreviewPercentuale");
+                        NotifyPropertyChanged("CarboidratiPreview");
+                        NotifyPropertyChanged("CarboidratiPreviewPercentuale");
+                        NotifyPropertyChanged("ProteinePreview");
+                        NotifyPropertyChanged("ProteinePreviewPercentuale");
+                        NotifyPropertyChanged("StatoCalorie");
+                        NotifyPropertyChanged("StatoCarboidrati");
+                        NotifyPropertyChanged("StatoGrassi");
+                        NotifyPropertyChanged("StatoProteine");
+                    }
+                    
             }
         }
 
@@ -104,10 +102,12 @@ namespace DietManager_new.ViewModel
         }
 
         public string StatoCalorie { 
-            
+           
             get {
                 if (CaloriePreview >= this.db.MaxQntaCalorie)
+                {
                     return "Red";
+                }
                 else
                     return "Green";
             }
@@ -121,7 +121,9 @@ namespace DietManager_new.ViewModel
             get
             {
                 if (CarboidratiPreview >= this.db.MaxQntaCarboidrati)
+                {
                     return "Red";
+                }
                 else
                     return "Green";
             }
@@ -134,7 +136,9 @@ namespace DietManager_new.ViewModel
             get
             {
                 if (GrassiPreview >= this.db.MaxQntaGrassi)
+                {
                     return "Red";
+                }
                 else
                     return "Green";
             }
@@ -147,7 +151,9 @@ namespace DietManager_new.ViewModel
            get
            {
                if (ProteinePreview >= this.db.MaxQntaProteine)
+               {
                    return "Red";
+               }
                else
                    return "Green";
            }
@@ -161,11 +167,14 @@ namespace DietManager_new.ViewModel
         
             this.db = new Database(App.PathDB);
 
+            this.db.LoadCollectionsFromDatabase();
+
             this.dataCorrente = (DateTime)appSettings["DataCorrente"];
 
             this._prodotto = this.db.RitornaProdotto(id);
 
             this._calorieGiornata = this.db.CalorieDelGiorno(dataCorrente);
+
 
             this._grassiGiornata = this.db.GrassiDelGiorno(dataCorrente);
 
@@ -173,6 +182,22 @@ namespace DietManager_new.ViewModel
 
             this._carboidratiGiornata = this.db.CarboidratiDelGiorno(dataCorrente);
 
+           
+
+        }
+
+        public void Piccola() {
+            Quantita = this._prodotto.Piccola;
+        }
+
+        public void Media()
+        {
+            Quantita = this._prodotto.Media;
+        }
+
+        public void Grande()
+        {
+            Quantita = this._prodotto.Grande;
         }
 
         #region INotifyPropertyChanged Members

@@ -46,6 +46,27 @@ namespace DietManager_new
 
         }
 
+        private void Small_Click(object sender, RoutedEventArgs e)
+        {
+            ((ProdottoViewModel)this.DataContext).Piccola();
+        }
+
+        private void Medium_Click(object sender, RoutedEventArgs e)
+        {
+            ((ProdottoViewModel)this.DataContext).Media();
+        }
+
+        private void Big_Click(object sender, RoutedEventArgs e)
+        {
+            ((ProdottoViewModel)this.DataContext).Grande();
+        }
+
+        private void controllaVuota(object sender, TextChangedEventArgs e)
+        {
+            if(((TextBox)sender).Text =="")
+                ((TextBox)sender).Text="0";
+        }
+
 
     }
 }

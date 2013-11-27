@@ -73,7 +73,7 @@ namespace DietManager_new
             appSettings.Add("Carboidrati", 2000);
             appSettings.Add("Grassi", 2000);
             appSettings.Add("Proteine", 2000);
-            appSettings.Add("DataCorrente", DateTime.Now);
+            appSettings.Add("DataCorrente", DateTime.Today);
 
           
 
@@ -103,15 +103,15 @@ namespace DietManager_new
                     NomeProdotto = "crispy",
                     CategoriaFK = catPanini,
                     PathFoto = "crispy.png",
-                    Quantita = 100,
+                    Quantita = 1,
                     Carboidrati = 70,
                     UnitaDiMisura = "pz",
                     Grassi = 20,
                     Proteine = 10,
                     Calorie = 150,
-                    Media = 100,
-                    Piccola = 50,
-                    Grande = 150
+                    Media = 1,
+                    Piccola = 1,
+                    Grande = 1
 
                 }
                     );
@@ -138,7 +138,7 @@ namespace DietManager_new
                 {
                     NomeProdotto = "medoemedo",
                     CategoriaFK = catBevande,
-                    Quantita = 69,
+                    Quantita = 100,
                     PathFoto = "cocacoea.jpg",
                     UnitaDiMisura = "ml",
                     Carboidrati = 10,
@@ -151,6 +151,17 @@ namespace DietManager_new
                 };
 
                 db.Prodotti.InsertOnSubmit(p2);
+
+                db.Pasti.InsertOnSubmit(new Pasto
+                 {
+                     ProdottoFK=p2,
+                     Quantita=200,
+                     Calorie = Math.Round(((200 * p2.Calorie) / p2.Quantita),2),  // quantità media prodotto : calorie prodotto = quantità assunta : calorie assunte
+                     Grassi=Math.Round(((200*p2.Grassi)/p2.Quantita),2),
+                     Carboidrati = Math.Round(((200 * p2.Carboidrati) / p2.Quantita),2),
+                     Proteine = Math.Round(((200 * p2.Proteine) / p2.Quantita),2),
+                     Data=DateTime.Today
+                    });
          
                 db.SubmitChanges();
 

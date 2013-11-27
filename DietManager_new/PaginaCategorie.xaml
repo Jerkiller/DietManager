@@ -23,7 +23,7 @@
                 
                 <StackPanel >
 
-                    <ListBox Name="listaPanini" ItemsSource="{Binding CategoriaPanini}" SelectionChanged="listaPanini_SelectionChanged" >
+                    <ListBox Name="listaPanini" ItemsSource="{Binding CategoriaPanini}" SelectionChanged="lista_SelectionChanged" >
                         
                         <DataTemplate>
                             <ListBoxItem Content="{Binding NomeProdotto}" Tag="{Binding ProdottoId}" />
@@ -42,13 +42,18 @@
 
                 <StackPanel >
 
-                    <ListBox Name="listaBevande" ItemsSource="{Binding CategoriaBevande}">
+                    <StackPanel >
 
-                        <DataTemplate>
-                            <Button Content="{Binding NomeProdotto}" />
-                        </DataTemplate>
+                        <ListBox Name="listaBevande" ItemsSource="{Binding CategoriaBevande}" SelectionChanged="lista_SelectionChanged" >
 
-                    </ListBox>
+                            <DataTemplate>
+                                <ListBoxItem Content="{Binding NomeProdotto}" Tag="{Binding ProdottoId}" />
+                            </DataTemplate>
+
+                        </ListBox>
+
+
+                    </StackPanel>
 
 
                 </StackPanel>

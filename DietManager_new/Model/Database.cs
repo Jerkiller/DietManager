@@ -189,6 +189,12 @@ namespace DietManager_new.Model
             
             this.prodottiTotali = new ObservableCollection<Prodotto>(prodottiInDB);
 
+            var pastiInDB = from Pasto pa in this.Pasti
+                               select pa;
+
+
+            this.pastiTotali = new ObservableCollection<Pasto>(pastiInDB);
+
 
             var categorieInDB = from Categoria cat in this.Categorie
                                      select cat;
@@ -218,7 +224,6 @@ namespace DietManager_new.Model
 
         //METODO ritorna il prodotto con determinato id
         public Prodotto RitornaProdotto(int id) {
-
             foreach (Prodotto p in this.prodottiTotali) {
 
                 if (p.ProdottoId == id)
@@ -274,7 +279,7 @@ namespace DietManager_new.Model
             foreach (Pasto p in pastiGiornata)
             {
 
-                grassiTot += p.Calorie;
+                grassiTot += p.Grassi;
             }
             return grassiTot;
         }
@@ -290,7 +295,7 @@ namespace DietManager_new.Model
             foreach (Pasto p in pastiGiornata)
             {
 
-                proteineTot += p.Calorie;
+                proteineTot += p.Proteine;
             }
             return proteineTot;
         }
@@ -306,7 +311,7 @@ namespace DietManager_new.Model
             foreach (Pasto p in pastiGiornata)
             {
 
-                carboidratiTot += p.Calorie;
+                carboidratiTot += p.Carboidrati;
             }
             return carboidratiTot;
         }
