@@ -120,7 +120,7 @@ namespace DietManager_new
                 {
                     NomeProdotto = "coca coea",
                     CategoriaFK = catBevande,
-                    Quantita = 69,
+                    Quantita = 100,
                     PathFoto = "cocacoea.jpg",
                     UnitaDiMisura = "ml",
                     Carboidrati = 10,

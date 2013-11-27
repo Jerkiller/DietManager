@@ -62,7 +62,7 @@ namespace DietManager_new.ViewModel
         private double _calorieGiornata;
         public double CaloriePreview {
 
-            get { return this._calorieGiornata + (this._quantita * this._prodotto.Calorie); }
+            get { return this._calorieGiornata + (this._quantita * this._prodotto.Calorie)/this._prodotto.Quantita; }
         }
         public double CaloriePreviewPercentuale {
             get { return (CaloriePreview * 100) / this.db.ValCalorie; }
@@ -72,7 +72,7 @@ namespace DietManager_new.ViewModel
         public double GrassiPreview
         {
 
-            get { return this._grassiGiornata + (this._quantita * this._prodotto.Grassi); }
+            get { return this._grassiGiornata + (this._quantita * this._prodotto.Grassi) / this._prodotto.Quantita; }
         }
         public double GrassiPreviewPercentuale
         {
@@ -83,7 +83,7 @@ namespace DietManager_new.ViewModel
         public double ProteinePreview
         {
 
-            get { return this._proteineGiornata + (this._quantita * this._prodotto.Proteine); }
+            get { return this._proteineGiornata + (this._quantita * this._prodotto.Proteine) / this._prodotto.Quantita; }
         }
         public double ProteinePreviewPercentuale
         {
@@ -94,7 +94,7 @@ namespace DietManager_new.ViewModel
         public double CarboidratiPreview
         {
 
-            get { return this._carboidratiGiornata + (this._quantita * this._prodotto.Carboidrati); }
+            get { return this._carboidratiGiornata + (this._quantita * this._prodotto.Carboidrati) / this._prodotto.Quantita; }
         }
         public double CarboidratiPreviewPercentuale
         {
@@ -104,9 +104,12 @@ namespace DietManager_new.ViewModel
         public string StatoCalorie { 
            
             get {
-                if (CaloriePreview >= this.db.MaxQntaCalorie)
+                if (CaloriePreview >= this.db.ValCalorie)
                 {
-                    return "Red";
+                    if (CaloriePreview >= this.db.MaxQntaCalorie)
+                        return "Red";
+                    else return "Yellow";
+
                 }
                 else
                     return "Green";
@@ -120,9 +123,11 @@ namespace DietManager_new.ViewModel
 
             get
             {
-                if (CarboidratiPreview >= this.db.MaxQntaCarboidrati)
+                if (CarboidratiPreview >= this.db.ValCarboidrati)
                 {
-                    return "Red";
+                    if (CarboidratiPreview >= this.db.MaxQntaCarboidrati)
+                        return "Red";
+                    else return "Yellow";
                 }
                 else
                     return "Green";
@@ -135,9 +140,11 @@ namespace DietManager_new.ViewModel
 
             get
             {
-                if (GrassiPreview >= this.db.MaxQntaGrassi)
+                if (GrassiPreview >= this.db.ValGrassi)
                 {
-                    return "Red";
+                    if (GrassiPreview >= this.db.MaxQntaGrassi)
+                        return "Red";
+                    else return "Yellow";
                 }
                 else
                     return "Green";
@@ -150,9 +157,11 @@ namespace DietManager_new.ViewModel
 
            get
            {
-               if (ProteinePreview >= this.db.MaxQntaProteine)
+               if (ProteinePreview >= this.db.ValProteine)
                {
-                   return "Red";
+                   if (ProteinePreview >= this.db.MaxQntaProteine)
+                       return "Red";
+                   else return "Yellow";
                }
                else
                    return "Green";
@@ -182,7 +191,7 @@ namespace DietManager_new.ViewModel
 
             this._carboidratiGiornata = this.db.CarboidratiDelGiorno(dataCorrente);
 
-           
+            MessageBox.Show(this.db.MaxQntaCalorie.ToString());
 
         }
 

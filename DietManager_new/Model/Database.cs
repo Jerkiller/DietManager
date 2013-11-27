@@ -161,17 +161,17 @@ namespace DietManager_new.Model
             valProteine = Double.Parse((appSettings["Proteine"].ToString()));
             valGrassi = Double.Parse((appSettings["Grassi"].ToString()));
 
-            maxQntaCalorie = valCalorie + (valCalorie * 0.5);
-            minQntaCalorie = valCalorie - (valCalorie * 0.5);
+            maxQntaCalorie = valCalorie + (valCalorie * 0.05);
+            minQntaCalorie = valCalorie - (valCalorie * 0.05);
 
-            maxQntaCarboidrati = valCarboidrati + (valCarboidrati * 0.5);
-            minQntaCarboidrati = valCarboidrati - (valCarboidrati * 0.5);
+            maxQntaCarboidrati = valCarboidrati + (valCarboidrati * 0.05);
+            minQntaCarboidrati = valCarboidrati - (valCarboidrati * 0.05);
 
-            maxQntaProteine = valProteine + (valProteine * 0.5);
-            minQntaProteine = valProteine - (valProteine * 0.5);
+            maxQntaProteine = valProteine + (valProteine * 0.05);
+            minQntaProteine = valProteine - (valProteine * 0.05);
 
-            maxQntaGrassi = valGrassi + (valGrassi * 0.5);
-            minQntaGrassi = valGrassi - (valGrassi * 0.5);
+            maxQntaGrassi = valGrassi + (valGrassi * 0.05);
+            minQntaGrassi = valGrassi - (valGrassi * 0.05);
 
 
          
