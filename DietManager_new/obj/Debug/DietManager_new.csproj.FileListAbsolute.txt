@@ -23,10 +23,11 @@ C:\Users\Francesco\Documents\GitHub\DietManager\DietManager_new\obj\Debug\DietMa
 C:\Users\Francesco\Documents\GitHub\DietManager\DietManager_new\obj\Debug\DietManager_new.dll
 C:\Users\Francesco\Documents\GitHub\DietManager\DietManager_new\obj\Debug\DietManager_new.pdb
 C:\Users\Francesco\Documents\GitHub\DietManager\DietManager_new\obj\Debug\XapCacheFile.xml
-C:\Users\Francesco\Documents\GitHub\DietManager\DietManager_new\obj\Debug\View\PaginaGiornata.g.cs
-C:\Users\Francesco\Documents\GitHub\DietManager\DietManager_new\obj\Debug\View\PaginaProdotto.g.cs
-C:\Users\Francesco\Documents\GitHub\DietManager\DietManager_new\obj\Debug\View\PaginaSceltaProdotto.g.cs
 C:\Users\Francesco\Documents\GitHub\DietManager\DietManager_new\Bin\Debug\Microsoft.Phone.Controls.dll
 C:\Users\Francesco\Documents\GitHub\DietManager\DietManager_new\Bin\Debug\Microsoft.Phone.Controls.xml
 C:\Users\Francesco\Documents\GitHub\DietManager\DietManager_new\obj\Debug\MainPage.g.cs
 C:\Users\Francesco\Documents\GitHub\DietManager\DietManager_new\obj\Debug\PaginaCategorie.g.cs
+C:\Users\Francesco\Documents\GitHub\DietManager\DietManager_new\obj\Debug\PaginaGiornata.g.cs
+C:\Users\Francesco\Documents\GitHub\DietManager\DietManager_new\obj\Debug\PaginaImpostaProfilo.g.cs
+C:\Users\Francesco\Documents\GitHub\DietManager\DietManager_new\obj\Debug\PaginaProdotto.g.cs
+C:\Users\Francesco\Documents\GitHub\DietManager\DietManager_new\obj\Debug\PaginaSceltaProdotto.g.cs

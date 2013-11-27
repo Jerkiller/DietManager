@@ -14,6 +14,7 @@ using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using DietManager_new.Model;
 using DietManager_new.ViewModel;
+using System.IO.IsolatedStorage;
 
 namespace DietManager_new
 {
@@ -23,6 +24,9 @@ namespace DietManager_new
         public static string PathDB = "Data Source=isostore:/database.sdf";
 
         public static CategoriaViewModel categoriaVM;
+
+        private IsolatedStorageSettings appSettings = IsolatedStorageSettings.ApplicationSettings;
+
 
         /// <summary>
         /// Provides easy access to the root frame of the Phone Application.
@@ -64,6 +68,12 @@ namespace DietManager_new
                 PhoneApplicationService.Current.UserIdleDetectionMode = IdleDetectionMode.Disabled;
             }
 
+
+            appSettings.Add("Calorie", 2000);
+            appSettings.Add("Carboidrati", 2000);
+            appSettings.Add("Grassi", 2000);
+            appSettings.Add("Proteine", 2000);
+            appSettings.Add("DataCorrente", DateTime.Now);
 
           
 

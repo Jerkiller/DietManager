@@ -20,6 +20,60 @@ namespace DietManager_new.Model
 
         private IsolatedStorageSettings appSettings = IsolatedStorageSettings.ApplicationSettings;
 
+        private double valCalorie;
+        public double ValCalorie {
+            get { return this.valCalorie; }
+        }
+
+        private double valCarboidrati;
+        public double ValCarboidrati
+        {
+            get { return this.valCarboidrati; }
+        }
+
+        private double valProteine;
+        public double ValProteine
+        {
+            get { return this.valProteine; }
+        }
+
+        private double valGrassi;
+        public double ValGrassi
+        {
+            get { return this.valGrassi; }
+        }
+
+
+        private double maxQntaCalorie;
+        public double MaxQntaCalorie { get { return this.maxQntaCalorie; } }
+
+        private double minQntaCalorie ;
+        public double MinxQntaCalorie { get { return this.minQntaCalorie; } }
+
+        private double maxQntaCarboidrati;
+        public double MaxQntaCarboidrati { get { return this.maxQntaCarboidrati; } }
+
+        
+        private double minQntaCarboidrati ;
+        public double MinQntaCarboidrati { get { return this.MinQntaCarboidrati; } }
+
+        
+        private double maxQntaProteine ;
+        public double MaxQntaProteine { get { return this.maxQntaProteine; } }
+
+        
+        private double minQntaProteine ;
+        public double MinQntaProteine { get { return this.minQntaProteine; } }
+
+        
+        private double maxQntaGrassi;
+        public double MaxQntaGrassi { get { return this.maxQntaGrassi; } }
+
+
+        private double minQntaGrassi;
+        public double MinQntaGrassi { get { return this.minQntaGrassi; } }
+
+
         private ObservableCollection<Prodotto> prodottiTotali;
         public ObservableCollection<Prodotto> ProdottiTotali
         {
@@ -99,9 +153,27 @@ namespace DietManager_new.Model
 
 
 
-        // Pass the connection string to the base class.
+        //COSTRUTTORE Pass the connection string to the base class.
         public Database(string dbconnection) : base(dbconnection)
         {
+             valCalorie = Double.Parse((appSettings["Calorie"].ToString()));
+            valCarboidrati = Double.Parse((appSettings["Carboidrati"].ToString()));
+            valProteine = Double.Parse((appSettings["Proteine"].ToString()));
+            valGrassi = Double.Parse((appSettings["Grassi"].ToString()));
+
+            maxQntaCalorie = valCalorie + (valCalorie * 0.5);
+            minQntaCalorie = valCalorie - (valCalorie * 0.5);
+
+            maxQntaCarboidrati = valCarboidrati + (valCarboidrati * 0.5);
+            minQntaCarboidrati = valCarboidrati - (valCarboidrati * 0.5);
+
+            maxQntaProteine = valProteine + (valProteine * 0.5);
+            minQntaProteine = valProteine - (valProteine * 0.5);
+
+            maxQntaGrassi = valGrassi + (valGrassi * 0.5);
+            minQntaGrassi = valGrassi - (valGrassi * 0.5);
+
+
          
         }
        
@@ -144,6 +216,18 @@ namespace DietManager_new.Model
            
         }
 
+        //METODO ritorna il prodotto con determinato id
+        public Prodotto RitornaProdotto(int id) {
+
+            foreach (Prodotto p in this.prodottiTotali) {
+
+                if (p.ProdottoId == id)
+                     return p;         
+            }
+            return null;
+        
+        }
+
         //METODO ritorna la lista di pasti data una data
         public ObservableCollection<Pasto> PastiDelGiorno(DateTime data)
         {
@@ -164,10 +248,12 @@ namespace DietManager_new.Model
         }
 
         //METODO ritorna le calorie totali di un giorno
-        public double CalorieDelGiorno()
+        public double CalorieDelGiorno(DateTime data)
         {
 
             double calorieTot = 0;
+
+            this.PastiDelGiorno(data);
 
             foreach (Pasto p in pastiGiornata)
             {
@@ -178,10 +264,12 @@ namespace DietManager_new.Model
         }
 
         //METODO ritorna i grassi totali di un giorno
-        public double GrassiDelGiorno()
+        public double GrassiDelGiorno(DateTime data)
         {
 
             double grassiTot = 0;
+
+            this.PastiDelGiorno(data);
 
             foreach (Pasto p in pastiGiornata)
             {
@@ -192,10 +280,12 @@ namespace DietManager_new.Model
         }
 
         //METODO ritorna le proteine totali di un giorno
-        public double ProteineDelGiorno()
+        public double ProteineDelGiorno(DateTime data)
         {
 
             double proteineTot = 0;
+
+            this.PastiDelGiorno(data);
 
             foreach (Pasto p in pastiGiornata)
             {
@@ -206,10 +296,12 @@ namespace DietManager_new.Model
         }
 
         //METODO ritorna i carboidrati totali di un giorno
-        public double CarboidratiDelGiorno()
+        public double CarboidratiDelGiorno(DateTime data)
         {
 
             double carboidratiTot = 0;
+
+            this.PastiDelGiorno(data);
 
             foreach (Pasto p in pastiGiornata)
             {
@@ -240,14 +332,14 @@ namespace DietManager_new.Model
                 data = new DateTime(anno, mese, i);
 
                 PastiDelGiorno(data);
-                tempCalorie = CalorieDelGiorno();
+                tempCalorie = CalorieDelGiorno(data);
                 if (tempCalorie == 0)
                     giorni.Add(new Giornata(anno, mese, i, "White"));
                 else
                 {
-                    tempGrassi = GrassiDelGiorno();
-                    tempCarboidrati = CarboidratiDelGiorno();
-                    tempProteine = ProteineDelGiorno();
+                    tempGrassi = GrassiDelGiorno(data);
+                    tempCarboidrati = CarboidratiDelGiorno(data);
+                    tempProteine = ProteineDelGiorno(data);
                     if (RISPETTALADIETA(tempCalorie, tempCarboidrati, tempGrassi, tempProteine))
                         giorni.Add(new Giornata(anno, mese, i, "Green"));
                     else
@@ -263,24 +355,7 @@ namespace DietManager_new.Model
         private bool RISPETTALADIETA(double qntaCalorie, double qntaCarboidrati, double qntaGrassi, double qntaProteine)
         {
 
-            double valCalorie = (double)(appSettings["Calorie"]);
-            double valCarboidrati = (double)(appSettings["Carboidrati"]);
-            double valProteine = (double)(appSettings["Proteine"]);
-            double valGrassi = (double)(appSettings["Grassi"]);
-
-            double maxQntaCalorie = valCalorie + (valCalorie * 0.5);
-            double minQntaCalorie = valCalorie - (valCalorie * 0.5);
-
-            double maxQntaCarboidrati = valCarboidrati + (valCarboidrati * 0.5);
-            double minQntaCarboidrati = valCarboidrati - (valCarboidrati * 0.5);
-
-            double maxQntaProteine = valProteine + (valProteine * 0.5);
-            double minQntaProteine = valProteine - (valProteine * 0.5);
-
-            double maxQntaGrassi = valGrassi + (valGrassi * 0.5);
-            double minQntaGrassi = valGrassi - (valGrassi * 0.5);
-
-
+           
             if ((qntaCalorie >= minQntaCalorie && qntaCalorie <= maxQntaCalorie) && (qntaCarboidrati >= minQntaCarboidrati && qntaCarboidrati <= maxQntaCarboidrati) && (qntaProteine >= minQntaProteine && qntaProteine <= maxQntaProteine) && (qntaGrassi >= minQntaGrassi && qntaGrassi <= maxQntaGrassi))
 
                 return true;

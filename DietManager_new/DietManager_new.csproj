@@ -71,19 +71,22 @@
     <Compile Include="Model\Giornata.cs" />
     <Compile Include="Model\Pasto.cs" />
     <Compile Include="Model\Prodotto.cs" />
+    <Compile Include="PaginaImpostaProfilo.xaml.cs">
+      <DependentUpon>PaginaImpostaProfilo.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModel\CategoriaViewModel.cs" />
     <Compile Include="ViewModel\GiornataViewModel.cs" />
     <Compile Include="ViewModel\ProdottoViewModel.cs" />
     <Compile Include="PaginaCategorie.xaml.cs">
       <DependentUpon>PaginaCategorie.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\PaginaGiornata.xaml.cs">
+    <Compile Include="PaginaGiornata.xaml.cs">
       <DependentUpon>PaginaGiornata.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\PaginaProdotto.xaml.cs">
+    <Compile Include="PaginaProdotto.xaml.cs">
       <DependentUpon>PaginaProdotto.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\PaginaSceltaProdotto.xaml.cs">
+    <Compile Include="PaginaSceltaProdotto.xaml.cs">
       <DependentUpon>PaginaSceltaProdotto.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -101,15 +104,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\PaginaGiornata.xaml">
+    <Page Include="PaginaGiornata.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\PaginaProdotto.xaml">
+    <Page Include="PaginaImpostaProfilo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\PaginaSceltaProdotto.xaml">
+    <Page Include="PaginaProdotto.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PaginaSceltaProdotto.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

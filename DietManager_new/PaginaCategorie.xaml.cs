@@ -11,6 +11,7 @@ using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using Microsoft.Phone.Controls;
 using DietManager_new.ViewModel;
+using DietManager_new.Model;
 
 namespace DietManager_new
 {
@@ -21,6 +22,34 @@ namespace DietManager_new
             InitializeComponent();
             this.DataContext = App.categoriaVM;
         }
+
+        private void VaiAProdotto(string tagProd)
+        {
+
+            //string tagProd = ((Button)sender).Tag.ToString();
+          
+        }
+
+        private void listaPanini_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+          string tagProd=((Prodotto)listaPanini.SelectedItem).ProdottoId.ToString();
+
+            NavigationService.Navigate(new Uri("/PaginaProdotto.xaml?id=" + tagProd, UriKind.Relative));
+
+          /*  if (((ListBoxItem)sender).Tag == null)
+                MessageBox.Show("ciao null");
+            else
+                MessageBox.Show("dio");*/
+
+           // string str= ((ListBoxItem)sender).Tag.ToString();
+            
+            //VaiAProdotto(lbi.Tag.ToString());
+
+
+
+        }
+
 
 
 
