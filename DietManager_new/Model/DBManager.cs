@@ -6,10 +6,11 @@ using System.ComponentModel;
 using System.IO.IsolatedStorage;
 using System.Linq;
 using System.Text;
+using System.Windows;
 
 namespace DietManager_new.Model
 {
-    public class DBManager : INotifyPropertyChanged
+    public class DBManager : INotifyPropertyChanged, INotifyPropertyChanging
     {
 
         private Database db;
@@ -25,7 +26,9 @@ namespace DietManager_new.Model
             get { return this.prodotti; }
 
             set {
+
                 if (prodotti != value) {
+                    NotifyPropertyChanging("Prodotti");
 
                     prodotti = value;
 
@@ -44,7 +47,7 @@ namespace DietManager_new.Model
             {
                 if (categoriaPanini != value)
                 {
-
+                    NotifyPropertyChanging("CategoriaPanini");
                     categoriaPanini = value;
 
                     NotifyPropertyChanged("CategoriaPanini");
@@ -62,6 +65,7 @@ namespace DietManager_new.Model
             {
                 if (categoriaBevande != value)
                 {
+                    NotifyPropertyChanging("CategoriaBevande");
 
                     categoriaBevande = value;
 
@@ -80,6 +84,7 @@ namespace DietManager_new.Model
             {
                 if (pasti != value)
                 {
+                    NotifyPropertyChanging("Pasti");
 
                     pasti = value;
 
@@ -94,7 +99,7 @@ namespace DietManager_new.Model
             this.db = dbase;
 
             this.LoadCollectionsFromDatabase();
-        
+            
 
         }
 
@@ -111,12 +116,12 @@ namespace DietManager_new.Model
 
             
             var categorieInDB = from Categoria cat in db.Categorie
-                                     select cat;
-
-
+                                     select cat; 
+            
             // Query the database and load all associated items to their respective collections.
             foreach (Categoria cat in categorieInDB)
             {
+               
                 switch (cat.NomeCategoria)
                 {
                     case "Panini":
@@ -131,7 +136,7 @@ namespace DietManager_new.Model
                         break;
                 }
             }
-
+            
         }
 
         //METODO ritorna la lista di pasti data una data
@@ -243,7 +248,7 @@ namespace DietManager_new.Model
     
         }
 
-        //METODO controlla se il valore passato e entro i limiti 
+        //DA METHOD controlla se il valore passato e entro i limiti 
         private bool RISPETTALADIETA(double qntaCalorie, double qntaCarboidrati, double qntaGrassi, double qntaProteine ) { 
             
            double valCalorie = (double)(appSettings["Calorie"]);
@@ -310,6 +315,23 @@ namespace DietManager_new.Model
             }
         }
         #endregion
+
+
+        #region INotifyPropertyChanging Members
+
+        public event PropertyChangingEventHandler PropertyChanging;
+
+        // Used to notify that a property is about to change
+        private void NotifyPropertyChanging(string propertyName)
+        {
+            if (PropertyChanging != null)
+            {
+                PropertyChanging(this, new PropertyChangingEventArgs(propertyName));
+            }
+        }
+
+        #endregion
+
 
     }
 }

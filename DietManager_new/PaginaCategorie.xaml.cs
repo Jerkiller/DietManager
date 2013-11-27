@@ -12,7 +12,7 @@ using System.Windows.Shapes;
 using Microsoft.Phone.Controls;
 using DietManager_new.ViewModel;
 
-namespace DietManager_new.View
+namespace DietManager_new
 {
     public partial class PaginaCategorie : PhoneApplicationPage
     {
@@ -20,6 +20,10 @@ namespace DietManager_new.View
         {
             InitializeComponent();
             this.DataContext = new CategoriaViewModel();
+
+
+
+
         
         }
     }

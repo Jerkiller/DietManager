@@ -1,5 +1,5 @@
 ﻿<phone:PhoneApplicationPage 
-    x:Class="DietManager_new.View.PaginaCategorie"
+    x:Class="DietManager_new.PaginaCategorie"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
@@ -21,9 +21,9 @@
             <!--Pivot item one-->
             <controls:PivotItem Header="Paninassi">
                 
-                <Grid >
+                <StackPanel >
 
-                    <ListBox ItemsSource="{Binding CategoriaPanini }">
+                    <ListBox Name="lista" ItemsSource="{Binding CategoriaBevande}">
                         
                         <DataTemplate>
                             <Button Content="{Binding NomeProdotto}" />
@@ -32,7 +32,7 @@
                     </ListBox>
                     
                     
-                </Grid>
+                </StackPanel>
                 
                 
             </controls:PivotItem>

@@ -15,7 +15,7 @@ namespace DietManager_new.Model
         
         private int _idCategoria;
 
-        [Column(DbType = "INT NOT NULL IDENTITY", IsDbGenerated = true, IsPrimaryKey = true, AutoSync = AutoSync.OnInsert)]
+        [Column(DbType = "INT NOT NULL IDENTITY", IsDbGenerated = true, IsPrimaryKey = true)]
         public int IdCategoria
         {
             get { return _idCategoria; }
@@ -59,9 +59,28 @@ namespace DietManager_new.Model
 
         public Categoria() {
 
-            this._prodottiFK = new EntitySet<Prodotto>();
-        
+                 this._prodottiFK = new EntitySet<Prodotto>(
+                new Action<Prodotto>(this.attach_ToDo),
+                new Action<Prodotto>(this.detach_ToDo)
+                );
         }
+
+        // Called during an add operation
+        private void attach_ToDo(Prodotto toDo)
+        {
+            NotifyPropertyChanging("Prodotto");
+            toDo.CategoriaFK = this;
+        }
+
+        // Called during a remove operation
+        private void detach_ToDo(Prodotto toDo)
+        {
+            NotifyPropertyChanging("Prodotto");
+            toDo.CategoriaFK = null;
+        }
+
+
+    
 
 
         #region INotifyPropertyChanged Members
@@ -95,6 +114,7 @@ namespace DietManager_new.Model
         #endregion
     }
 
+}
 
-    }
+    
 

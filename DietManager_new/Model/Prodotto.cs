@@ -181,22 +181,18 @@ namespace DietManager_new.Model
 
         
         // Internal column for the associated ToDoCategory ID value
-        [Column]
         private int _categoriaFKInternal;
+        [Column]
         public int CategoriaFKInternal
         { get { return this._categoriaFKInternal; }
             set { this._categoriaFKInternal = value; }
         }
-
-        
-
+           
         // Entity reference, to identify the ToDoCategory "storage" table
         private EntityRef<Categoria> _categoriaFK;
-
-       
-
+               
         // Association, to describe the relationship between this key and that "storage" table
-        [Association(Storage = "_categoriaFK", ThisKey = "_categoriaFKInternal", OtherKey = "IdCategoria", IsForeignKey = true)]
+        [Association(Storage = "_categoriaFK", OtherKey = "IdCategoria", ThisKey = "CategoriaFKInternal", IsForeignKey = true)]
         public Categoria CategoriaFK
         {
             get { return _categoriaFK.Entity; }
@@ -213,9 +209,7 @@ namespace DietManager_new.Model
                 NotifyPropertyChanged("CategoriaFK");
             }
         }
-
-      
-
+            
         //FOREIGN KEY
         private EntitySet<Pasto> _pastiFK;
 
@@ -225,7 +219,7 @@ namespace DietManager_new.Model
             get { return this._pastiFK; }
             set { this._pastiFK.Assign(value); }
         }
-
+       
         //COSTRUTTORE
         public Prodotto() { this._pastiFK = new EntitySet<Pasto>(); }
 

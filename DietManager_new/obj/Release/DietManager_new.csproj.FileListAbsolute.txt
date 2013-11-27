@@ -19,7 +19,6 @@ C:\Users\Francesco\Documents\GitHub\DietManager\DietManager_new\Bin\Release\AppM
 C:\Users\Francesco\Documents\GitHub\DietManager\DietManager_new\Bin\Release\DietManager_new.xap
 C:\Users\Francesco\Documents\GitHub\DietManager\DietManager_new\Bin\Release\Microsoft.Phone.Controls.dll
 C:\Users\Francesco\Documents\GitHub\DietManager\DietManager_new\Bin\Release\Microsoft.Phone.Controls.xml
-C:\Users\Francesco\Documents\GitHub\DietManager\DietManager_new\obj\Release\DietManager_new.csprojResolveAssemblyReference.cache
 C:\Users\Francesco\Documents\GitHub\DietManager\DietManager_new\obj\Release\App.g.cs
 C:\Users\Francesco\Documents\GitHub\DietManager\DietManager_new\obj\Release\MainPage.g.cs
 C:\Users\Francesco\Documents\GitHub\DietManager\DietManager_new\obj\Release\View\PaginaGiornata.g.cs
@@ -29,4 +28,5 @@ C:\Users\Francesco\Documents\GitHub\DietManager\DietManager_new\obj\Release\Diet
 C:\Users\Francesco\Documents\GitHub\DietManager\DietManager_new\obj\Release\DietManager_new.dll
 C:\Users\Francesco\Documents\GitHub\DietManager\DietManager_new\obj\Release\DietManager_new.pdb
 C:\Users\Francesco\Documents\GitHub\DietManager\DietManager_new\obj\Release\XapCacheFile.xml
-C:\Users\Francesco\Documents\GitHub\DietManager\DietManager_new\obj\Release\View\PaginaCategorie.g.cs
+C:\Users\Francesco\Documents\GitHub\DietManager\DietManager_new\obj\Release\PaginaCategorie.g.cs
+C:\Users\Francesco\Documents\GitHub\DietManager\DietManager_new\obj\Release\DietManager_new.csprojResolveAssemblyReference.cache

@@ -67,9 +67,31 @@ namespace DietManager_new.Model
                         Piccola = 500,
                         Grande = 1000
                     };
+                 
+                    /*
+
+                      Prodotto p2 = new Prodotto
+                      {
+                          NomeProdotto = "medoemedo",
+                          CategoriaFK = catBevande,
+                          Quantita = 69,
+                          PathFoto = "cocacoea.jpg",
+                          UnitaDiMisura = "ml",
+                          Carboidrati = 10,
+                          Grassi = 10,
+                          Proteine = 11,
+                          Calorie = 200,
+                          Media = 250,
+                          Piccola = 500,
+                          Grande = 1000
+                      };*/
+
                       this.Prodotti.InsertOnSubmit(p);
 
-                      this.Pasti.InsertOnSubmit(new Pasto
+
+
+
+                   /*   this.Pasti.InsertOnSubmit(new Pasto
                         {
                             Quantita = 10,
                             Data = DateTime.Now,
@@ -94,7 +116,7 @@ namespace DietManager_new.Model
                             Carboidrati = p.Carboidrati * 10,
                             Proteine = p.Proteine * 10
 
-                        });
+                        });*/
                     this.SubmitChanges();
                 }
             }
