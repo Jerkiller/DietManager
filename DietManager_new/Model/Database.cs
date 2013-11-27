@@ -17,22 +17,31 @@ namespace DietManager_new.Model
         // Pass the connection string to the base class.
         public Database(string dbconnection) : base(dbconnection)
         {
+
+
+
                 if (this.DatabaseExists() == false)
                 {
                     // Create the local database.
-             
+
+                    System.Diagnostics.Debug.WriteLine("--> STO CREANDO IL DATABASE");
             
                     this.CreateDatabase();
-
+                    
                     Categoria catPanini = new Categoria { NomeCategoria = "Panini" };
                     Categoria catBevande = new Categoria { NomeCategoria = "Bevande" };
                     Categoria catPanificati = new Categoria { NomeCategoria = "Panificati" };
+
+                   
 
                     // Prepopulate the categories.
                     this.Categorie.InsertOnSubmit(catPanini);
                     this.Categorie.InsertOnSubmit(catBevande);
                     this.Categorie.InsertOnSubmit(catPanificati);
+
                     
+
+
                     // Create a new to-do item.
                     this.Prodotti.InsertOnSubmit(new Prodotto
                     {
@@ -67,8 +76,8 @@ namespace DietManager_new.Model
                         Piccola = 500,
                         Grande = 1000
                     };
-                 
-                    /*
+                  this.Prodotti.InsertOnSubmit(p);
+                    
 
                       Prodotto p2 = new Prodotto
                       {
@@ -84,14 +93,14 @@ namespace DietManager_new.Model
                           Media = 250,
                           Piccola = 500,
                           Grande = 1000
-                      };*/
-
-                      this.Prodotti.InsertOnSubmit(p);
+                      };
 
 
+                      this.Prodotti.InsertOnSubmit(p2);
 
+                      System.Diagnostics.Debug.WriteLine("--> INSERITE LE DUE BEVANDE");
 
-                   /*   this.Pasti.InsertOnSubmit(new Pasto
+                     this.Pasti.InsertOnSubmit(new Pasto
                         {
                             Quantita = 10,
                             Data = DateTime.Now,
@@ -116,10 +125,21 @@ namespace DietManager_new.Model
                             Carboidrati = p.Carboidrati * 10,
                             Proteine = p.Proteine * 10
 
-                        });*/
+                        });
                     this.SubmitChanges();
+
+
+
+                   
+
+
                 }
             }
+
+       
+        
+        
+        
 
      
           

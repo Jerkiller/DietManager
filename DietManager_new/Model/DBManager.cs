@@ -114,16 +114,23 @@ namespace DietManager_new.Model
             
             this.prodotti = new ObservableCollection<Prodotto>(prodottiInDB);
 
+            System.Diagnostics.Debug.WriteLine("--> SONO DB MANAGER, DB PRONTO, HO CARICATO I PRODOTTI e LA LUNGHEZZA E "+ this.prodotti.Count.ToString());
             
             var categorieInDB = from Categoria cat in db.Categorie
-                                     select cat; 
-            
+                                     select cat;
+
+
+            System.Diagnostics.Debug.WriteLine("--> SONO DB MANAGER, ho caricato le categorie ecco cosa ho tirato su" + categorieInDB.ToString());
+      
+            System.Diagnostics.Debug.WriteLine("--> SONO DB MANAGER, ho caricato le categorie sono " + ((List<Categoria>)(categorieInDB.ToList())).Count.ToString());
+         
+
             // Query the database and load all associated items to their respective collections.
             foreach (Categoria cat in categorieInDB)
             {
-               
+    
                 switch (cat.NomeCategoria)
-                {
+                {   
                     case "Panini":
                         this.categoriaPanini = new ObservableCollection<Prodotto>(cat.ProdottiFK);
                         break;
@@ -136,7 +143,12 @@ namespace DietManager_new.Model
                         break;
                 }
             }
-            
+
+            System.Diagnostics.Debug.WriteLine("--> SONO DB MANAGER, ho caricato le bevande la lunghezza e " + this.categoriaBevande.Count.ToString());
+            System.Diagnostics.Debug.WriteLine("--> SONO DB MANAGER, ho caricato i panini la lunghezza e " + this.categoriaPanini.Count.ToString());
+          
+
+           
         }
 
         //METODO ritorna la lista di pasti data una data

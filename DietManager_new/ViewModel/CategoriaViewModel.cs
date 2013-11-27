@@ -22,9 +22,9 @@ namespace DietManager_new.ViewModel
            set {
                    
                if(this._categoriaBevande!=value){
-                    NotifyPropertyChanged("CategoriaBevande");
+              
                    this._categoriaBevande=value;
-               
+                   NotifyPropertyChanged("CategoriaBevande");
                }
             
            }
@@ -39,27 +39,34 @@ namespace DietManager_new.ViewModel
            set {
                    
                if(this._categoriaPanini!=value){
-                    NotifyPropertyChanged("CategoriaPanini");
+               
                    this._categoriaPanini=value;
+                   NotifyPropertyChanged("CategoriaPanini");
                
                }
        }
        }
 
        public CategoriaViewModel() {
+           //this.db = App.dbManager;
+
            this.db = App.dbManager;
+
+
+
            this._categoriaBevande = db.CategoriaBevande;
            this._categoriaPanini = db.CategoriaPanini;
 
-           MessageBox.Show(_categoriaBevande.Count.ToString());
-           MessageBox.Show(_categoriaPanini.Count.ToString());
-       
-       
+          /* MessageBox.Show("bevande che ha VM "+ _categoriaBevande.Count.ToString());
+           MessageBox.Show("bevande che ha db "+ db.CategoriaBevande.Count.ToString());
+           MessageBox.Show("panini che ha VM "+ _categoriaPanini.Count.ToString());*/
+
+
+            // MessageBox.Show(_categoriaBevande[0].NomeProdotto);
+           //  MessageBox.Show(_categoriaBevande[1].NomeProdotto);
        
        }
 
-         //  MessageBox.Show(_categoriaBevande[0].NomeProdotto);
-   //        MessageBox.Show(_categoriaBevande[1].NomeProdotto);
 
 
            
@@ -77,6 +84,7 @@ namespace DietManager_new.ViewModel
         }
 
         #endregion
+
 
         
        }

@@ -23,7 +23,7 @@
                 
                 <StackPanel >
 
-                    <ListBox Name="lista" ItemsSource="{Binding CategoriaBevande}">
+                    <ListBox Name="lista" ItemsSource="{Binding CategoriaPanini}">
                         
                         <DataTemplate>
                             <Button Content="{Binding NomeProdotto}" />
@@ -39,9 +39,23 @@
 
             <!--Pivot item two-->
             <controls:PivotItem Header="Bevande">
-                <Grid/>
+
+                <StackPanel >
+
+                    <ListBox Name="lista2" ItemsSource="{Binding CategoriaBevande}">
+
+                        <DataTemplate>
+                            <Button Content="{Binding NomeProdotto}" />
+                        </DataTemplate>
+
+                    </ListBox>
+
+
+                </StackPanel>
+
+
             </controls:PivotItem>
         </controls:Pivot>
-    </Grid>
+</Grid>
     
 </phone:PhoneApplicationPage>

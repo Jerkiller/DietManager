@@ -19,7 +19,7 @@ namespace DietManager_new
     public partial class App : Application
     {
 
-        private static Database db ;
+        //private static Database db ;
 
         public static DBManager dbManager;
 
@@ -64,11 +64,11 @@ namespace DietManager_new
             }
 
 
+            
 
+            //db = new Database("Data Source=isostore:/database.sdf");
 
-            db = new Database("Data Source=isostore:/database.sdf");
-
-            dbManager = new DBManager(db);
+            dbManager = new DBManager(new Database("Data Source=isostore:/database.sdf"));
 
 
 
@@ -78,6 +78,8 @@ namespace DietManager_new
         // This code will not execute when the application is reactivated
         private void Application_Launching(object sender, LaunchingEventArgs e)
         {
+
+
         }
 
         // Code to execute when the application is activated (brought to foreground)
