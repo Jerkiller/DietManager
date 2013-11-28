@@ -126,7 +126,7 @@ namespace DietManager_new.ViewModel
 
         }
 
-       new public string StatoGrassi
+        new public string StatoGrassi
         {
 
             get
@@ -143,7 +143,7 @@ namespace DietManager_new.ViewModel
 
         }
 
-       new public string StatoProteine
+        new public string StatoProteine
        {
 
            get
@@ -171,27 +171,32 @@ namespace DietManager_new.ViewModel
 
         }
 
+        //METODO setta la quantita al valore piccolo del prodotto corrente
         public void Piccola() {
             Quantita = this._prodotto.Piccola;
         }
 
+        //METODO setta la quantita al valore medio del prodotto corrente
         public void Media()
         {
             Quantita = this._prodotto.Media;
         }
 
+        //METODO setta la quantita al valore grande del prodotto corrente
         public void Grande()
         {
             Quantita = this._prodotto.Grande;
         }
 
+        //METODO aggiunge il pasto creato in base al prodotto corrente
         public void AggiungiPasto()
         {
             Pasto p = new Pasto
             {
+                // quantità media prodotto : calorie prodotto = quantità assunta : calorie assunte
                 ProdottoFK = _prodotto,
                 Quantita = _quantita,
-                Calorie = Math.Round(((_quantita * _prodotto.Calorie) / _prodotto.Quantita), 2),  // quantità media prodotto : calorie prodotto = quantità assunta : calorie assunte
+                Calorie = Math.Round(((_quantita * _prodotto.Calorie) / _prodotto.Quantita), 2),  
                 Grassi = Math.Round(((_quantita * _prodotto.Grassi) / _prodotto.Quantita), 2),
                 Carboidrati = Math.Round(((_quantita * _prodotto.Carboidrati) / _prodotto.Quantita), 2),
                 Proteine = Math.Round(((_quantita * _prodotto.Proteine) / _prodotto.Quantita), 2),

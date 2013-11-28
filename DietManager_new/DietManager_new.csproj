@@ -70,6 +70,9 @@
     <Compile Include="Model\Database.cs" />
     <Compile Include="Model\Giornata.cs" />
     <Compile Include="Model\Pasto.cs" />
+    <Compile Include="PaginaRicerca.xaml.cs">
+      <DependentUpon>PaginaRicerca.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModel\PreviewGiornataVM.cs" />
     <Compile Include="Model\Prodotto.cs" />
     <Compile Include="PaginaImpostaProfilo.xaml.cs">
@@ -117,6 +120,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="PaginaRicerca.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="PaginaSceltaProdotto.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -133,6 +140,10 @@
     <Content Include="Background.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Immagini\appbarAggiungi.png" />
+    <Content Include="Immagini\appbar.cancel.rest.png" />
+    <Content Include="Immagini\appbar.check.rest.png" />
+    <Content Include="Immagini\appbar.delete.rest.png" />
     <Content Include="Immagini\cocacoea.jpg" />
     <Content Include="Immagini\crispy.png" />
     <Content Include="SplashScreenImage.jpg" />

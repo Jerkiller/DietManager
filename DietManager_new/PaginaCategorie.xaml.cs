@@ -23,33 +23,26 @@ namespace DietManager_new
             this.DataContext = App.categoriaVM;
         }
 
-        private void VaiAProdotto(string tagProd)
-        {
 
-            //string tagProd = ((Button)sender).Tag.ToString();
-          
-        }
+
 
         private void lista_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
-          //string tagProd=((Prodotto)listaPanini.SelectedItem).ProdottoId.ToString();
+          MessageBox.Show(((Prodotto)(((ListBox)sender).SelectedItem)).ProdottoId.ToString());
+
             string tagProd = ((Prodotto)(((ListBox)sender).SelectedItem)).ProdottoId.ToString();
 
             NavigationService.Navigate(new Uri("/PaginaProdotto.xaml?id=" + tagProd, UriKind.Relative));
 
-          /*  if (((ListBoxItem)sender).Tag == null)
-                MessageBox.Show("ciao null");
-            else
-                MessageBox.Show("dio");*/
-
-           // string str= ((ListBoxItem)sender).Tag.ToString();
-            
-            //VaiAProdotto(lbi.Tag.ToString());
-
-
 
         }
+
+        private void vaiARicerca(object sender, EventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/PaginaRicerca.xaml", UriKind.Relative));
+        }
+
 
 
 

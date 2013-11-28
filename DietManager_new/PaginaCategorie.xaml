@@ -60,7 +60,32 @@
 
 
             </controls:PivotItem>
+
         </controls:Pivot>
 </Grid>
-    
+
+
+
+
+
+
+
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
+
+            <shell:ApplicationBarIconButton 
+                IconUri="/Immagini/appbarAggiungi.png" 
+                Text="cerca" 
+                x:Name="newTaskAppBarButton" 
+                Click="vaiARicerca"
+                />
+
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>
+
+
+
+
+
+
 </phone:PhoneApplicationPage>

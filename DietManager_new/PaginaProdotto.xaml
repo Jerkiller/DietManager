@@ -17,80 +17,84 @@
     <!--LayoutRoot è la griglia radice in cui viene inserito tutto il contenuto della pagina-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
         <!--Controllo Pivot-->
+        
         <controls:Pivot Title="MANAGE YOUR DIET">
             <!--Elemento Pivot uno-->
             <controls:PivotItem Header="Prodotto">
-                <Grid x:Name="Main1" Background="Transparent" >
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="3*" />
-                        <RowDefinition Height="1*"/>
-                        <RowDefinition Height="1*"/>
-                        <RowDefinition Height="2*"/>
-                        <RowDefinition Height="1*"/>
-                    </Grid.RowDefinitions>
-                    <Grid Grid.Row="0">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                        <Image Grid.Column="0" HorizontalAlignment="Center" Width="180"  Source="{Binding Prodotto.PathFoto, StringFormat ='Immagini/{0}'}" VerticalAlignment="Center" />
-                        <Grid Grid.Column="1">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="1*" />
-                                <RowDefinition Height="1*"/>
-                                <RowDefinition Height="1*"/>
-                            </Grid.RowDefinitions>
+                <StackPanel>
+                    <TextBlock Name="giorno" Grid.Row="0" Text="{Binding Prodotto.NomeProdotto}" />
 
-                            <Button Grid.Row="0" Name="Small" Content="Porzione piccola" Click="Small_Click" />
-                            <Button Grid.Row="1" Name="Medium" Content="Porzione media" Click="Medium_Click" />
-                            <Button Grid.Row="2" Name="Big" Content="Porzione grande" Click="Big_Click" />
+                    <Grid x:Name="Main1" Background="Transparent" >
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="3*" />
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="2*"/>
+                            <RowDefinition Height="1*"/>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Image Grid.Column="0" HorizontalAlignment="Center" Width="180"  Source="{Binding Prodotto.PathFoto, StringFormat ='Immagini/{0}'}" VerticalAlignment="Center" />
+                            <Grid Grid.Column="1">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="1*" />
+                                    <RowDefinition Height="1*"/>
+                                    <RowDefinition Height="1*"/>
+                                </Grid.RowDefinitions>
+
+                                <Button Grid.Row="0" Name="Small" Content="Porzione piccola" Click="Small_Click" />
+                                <Button Grid.Row="1" Name="Medium" Content="Porzione media" Click="Medium_Click" />
+                                <Button Grid.Row="2" Name="Big" Content="Porzione grande" Click="Big_Click" />
+                            </Grid>
+                        </Grid>
+                        <Grid Grid.Row="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="3*" />
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock  VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="0" Text="Quantità assunta" TextWrapping="NoWrap"  Style="{StaticResource PhoneTextLargeStyle}"/>
+                            <TextBox  TextChanged="controllaVuota" VerticalAlignment="Center" HorizontalAlignment="Left" Width="150" Grid.Column="1" Text="{Binding Quantita, Mode=TwoWay}" TextWrapping="NoWrap"  />
+                            <TextBlock  VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="2" Text="{Binding Prodotto.UnitaDiMisura}" TextWrapping="NoWrap"  Style="{StaticResource PhoneTextNormalStyle}"/>
+                        </Grid>
+                        <TextBlock VerticalAlignment="Center"  HorizontalAlignment="Left" Grid.Row="2"  Text="Preview Situazione" TextWrapping="NoWrap"  Style="{StaticResource PhoneTextLargeStyle}"/>
+                        <Grid Grid.Row="3" x:Name="Situazione" >
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+
+                            <TextBlock VerticalAlignment="Center" Grid.Row="0" Text="Calorie" TextWrapping="NoWrap"  Style="{StaticResource PhoneTextNormalStyle}"/>
+                            <ProgressBar VerticalAlignment="Center" Grid.Row="0" Grid.Column="1" Height="10" Width="100" Value="{Binding CaloriePreviewPercentuale}" Foreground="{Binding StatoCalorie}" />
+                            <TextBlock VerticalAlignment="Center" Grid.Row="0" Grid.Column="2" Text="{Binding CaloriePreview, StringFormat ='/100 {0}'}" TextWrapping="NoWrap" Margin="12,-6,0,0" Style="{StaticResource PhoneTextNormalStyle}" Foreground="{Binding StatoCalorie}" />
+
+                            <TextBlock VerticalAlignment="Center" Grid.Row="1" Text="Carboidrati" TextWrapping="NoWrap"  Style="{StaticResource PhoneTextNormalStyle}"/>
+                            <ProgressBar VerticalAlignment="Center" Grid.Row="1" Grid.Column="1" Height="10" Width="100" Value="{Binding CarboidratiPreviewPercentuale}" Foreground="{Binding StatoCarboidrati}" />
+                            <TextBlock VerticalAlignment="Center" Grid.Row="1" Grid.Column="2" Text="{Binding CarboidratiPreview, StringFormat ='/100 {0}'}" TextWrapping="NoWrap" Margin="12,-6,0,0" Style="{StaticResource PhoneTextNormalStyle}" Foreground="{Binding StatoCarboidrati}" />
+
+                            <TextBlock VerticalAlignment="Center" Grid.Row="2" Text="Grassi" TextWrapping="NoWrap"  Style="{StaticResource PhoneTextNormalStyle}"/>
+                            <ProgressBar VerticalAlignment="Center" Grid.Row="2" Grid.Column="1" Height="10" Width="100" Value="{Binding GrassiPreviewPercentuale}" Foreground="{Binding StatoGrassi}"  />
+                            <TextBlock VerticalAlignment="Center" Grid.Row="2" Grid.Column="2" Text="{Binding GrassiPreview, StringFormat ='/100 {0}'}" TextWrapping="NoWrap" Margin="12,-6,0,0" Style="{StaticResource PhoneTextNormalStyle}" Foreground="{Binding StatoGrassi}" />
+
+                            <TextBlock VerticalAlignment="Center" Grid.Row="3" Text="Proteine" TextWrapping="NoWrap"  Style="{StaticResource PhoneTextNormalStyle}"/>
+                            <ProgressBar VerticalAlignment="Center" Grid.Row="3" Grid.Column="1" Height="10" Width="100" Value="{Binding ProteinePreviewPercentuale}" Foreground="{Binding StatoProteine}" />
+                            <TextBlock VerticalAlignment="Center" Grid.Row="3" Grid.Column="2" Text="{Binding ProteinePreview, StringFormat ='/100 {0}'}" TextWrapping="NoWrap" Margin="12,-6,0,0" Style="{StaticResource PhoneTextNormalStyle}" Foreground="{Binding StatoProteine}" />
+
+
                         </Grid>
                     </Grid>
-                    <Grid Grid.Row="1">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="3*" />
-                            <ColumnDefinition Width="1*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                        <TextBlock  VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="0" Text="Quantità assunta" TextWrapping="NoWrap"  Style="{StaticResource PhoneTextLargeStyle}"/>
-                        <TextBox  TextChanged="controllaVuota" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="1" Text="{Binding Quantita, Mode=TwoWay}" TextWrapping="NoWrap"  />
-                        <TextBlock  VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="2" Text="{Binding Prodotto.UnitaDiMisura}" TextWrapping="NoWrap"  Style="{StaticResource PhoneTextNormalStyle}"/>
-                    </Grid>
-                    <TextBlock VerticalAlignment="Center"  HorizontalAlignment="Left" Grid.Row="2"  Text="Preview Situazione" TextWrapping="NoWrap"  Style="{StaticResource PhoneTextLargeStyle}"/>
-                    <Grid Grid.Row="3" x:Name="Situazione" >
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="*"/>
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-
-
-                        <TextBlock VerticalAlignment="Center" Grid.Row="0" Text="Calorie" TextWrapping="NoWrap"  Style="{StaticResource PhoneTextNormalStyle}"/>
-                        <ProgressBar VerticalAlignment="Center" Grid.Row="0" Grid.Column="1" Height="10" Width="100" Value="{Binding CaloriePreviewPercentuale}" Foreground="{Binding StatoCalorie}" />
-                        <TextBlock VerticalAlignment="Center" Grid.Row="0" Grid.Column="2" Text="{Binding CaloriePreview, StringFormat ='/100 {0}'}" TextWrapping="NoWrap" Margin="12,-6,0,0" Style="{StaticResource PhoneTextNormalStyle}" Foreground="{Binding StatoCalorie}" />
-
-                        <TextBlock VerticalAlignment="Center" Grid.Row="1" Text="Carboidrati" TextWrapping="NoWrap"  Style="{StaticResource PhoneTextNormalStyle}"/>
-                        <ProgressBar VerticalAlignment="Center" Grid.Row="1" Grid.Column="1" Height="10" Width="100" Value="{Binding CarboidratiPreviewPercentuale}" Foreground="{Binding StatoCarboidrati}" />
-                        <TextBlock VerticalAlignment="Center" Grid.Row="1" Grid.Column="2" Text="{Binding CarboidratiPreview, StringFormat ='/100 {0}'}" TextWrapping="NoWrap" Margin="12,-6,0,0" Style="{StaticResource PhoneTextNormalStyle}" Foreground="{Binding StatoCarboidrati}" />
-
-                        <TextBlock VerticalAlignment="Center" Grid.Row="2" Text="Grassi" TextWrapping="NoWrap"  Style="{StaticResource PhoneTextNormalStyle}"/>
-                        <ProgressBar VerticalAlignment="Center" Grid.Row="2" Grid.Column="1" Height="10" Width="100" Value="{Binding GrassiPreviewPercentuale}" Foreground="{Binding StatoGrassi}"  />
-                        <TextBlock VerticalAlignment="Center" Grid.Row="2" Grid.Column="2" Text="{Binding GrassiPreview, StringFormat ='/100 {0}'}" TextWrapping="NoWrap" Margin="12,-6,0,0" Style="{StaticResource PhoneTextNormalStyle}" Foreground="{Binding StatoGrassi}" />
-
-                        <TextBlock VerticalAlignment="Center" Grid.Row="3" Text="Proteine" TextWrapping="NoWrap"  Style="{StaticResource PhoneTextNormalStyle}"/>
-                        <ProgressBar VerticalAlignment="Center" Grid.Row="3" Grid.Column="1" Height="10" Width="100" Value="{Binding ProteinePreviewPercentuale}" Foreground="{Binding StatoProteine}" />
-                        <TextBlock VerticalAlignment="Center" Grid.Row="3" Grid.Column="2" Text="{Binding ProteinePreview, StringFormat ='/100 {0}'}" TextWrapping="NoWrap" Margin="12,-6,0,0" Style="{StaticResource PhoneTextNormalStyle}" Foreground="{Binding StatoProteine}" />
-
-
-                    </Grid>
-                    <Button Content="Aggiungi alimento" VerticalAlignment="Center" Grid.Row="4" Click="Button_Click_1" />
-                </Grid>
+                </StackPanel>
             </controls:PivotItem>
 
             <!--Elemento Pivot due-->
@@ -151,6 +155,27 @@
                 </Grid>
             </controls:PivotItem>
         </controls:Pivot>
+        
+        
+        
     </Grid>
+
+    
+      <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
+
+            <shell:ApplicationBarIconButton 
+                IconUri="/Immagini/appbarAggiungi.png" 
+                Text="aggiungi" 
+                x:Name="newTaskAppBarButton" 
+                Click="aggiungiPasto"
+                />
+
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>
+
+
+
+
 
 </phone:PhoneApplicationPage>

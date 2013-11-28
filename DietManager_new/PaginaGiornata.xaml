@@ -21,15 +21,18 @@
             <!--Elemento Pivot uno-->
             <controls:PivotItem Header="Giorno">
                 <StackPanel>
+                    <TextBlock Name="giorno" Grid.Row="0" Text="{Binding Data}" />
                     <Grid x:Name="Add" Background="Transparent">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*" />
+                            
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="1*"/>
                             <ColumnDefinition Width="2*"/>
                         </Grid.ColumnDefinitions>
-                        <Button  VerticalAlignment="Center"  HorizontalAlignment="Center" Grid.Row="0" Grid.Column="0" Content="+" Click="Button_Click_1"/>
+                        
+                        <Button  VerticalAlignment="Center"  HorizontalAlignment="Center" Grid.Row="0" Grid.Column="0" Content="+"   Click="scegliProdotto"/>
                         <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="1" Text="Aggiungi alimento" TextWrapping="NoWrap"  Style="{StaticResource PhoneTextLargeStyle}"/>
                     </Grid>
                     <TextBlock VerticalAlignment="Center" Grid.Row="0" Grid.Column="2" Text="Elenco alimenti:" TextWrapping="NoWrap" Margin="12,-6,0,0" Style="{StaticResource PhoneTextExtraLargeStyle}"/>
@@ -50,7 +53,7 @@
 
                                         <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="0" Text="{Binding NomeProdotto}" TextWrapping="NoWrap"  Style="{StaticResource PhoneTextNormalStyle}"/>
                                         <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="1" Text="{Binding Quantita}" TextWrapping="NoWrap"  Style="{StaticResource PhoneTextNormalStyle}"/>
-                                        <Button Tag="{Binding IdPasto}" VerticalAlignment="Center"  HorizontalAlignment="Center" Grid.Row="0" Grid.Column="2" Content="-" Click="Button_Click_2"/>
+                                        <Button Tag="{Binding IdPasto}" VerticalAlignment="Center"  HorizontalAlignment="Center" Grid.Row="0" Grid.Column="2" Content="-" Click="rimuoviPasto" />
                                     </Grid>
                                     <!--<TextBlock Text="{Binding LineOne}" TextWrapping="Wrap" Style="{StaticResource PhoneTextExtraLargeStyle}"/>
                               <TextBlock Text="{Binding LineTwo}" TextWrapping="Wrap" Margin="12,-6,12,0" Style="{StaticResource PhoneTextSubtleStyle}"/>-->

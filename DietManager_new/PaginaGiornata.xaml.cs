@@ -22,12 +22,14 @@ namespace DietManager_new
             this.DataContext = new GiornataViewModel();
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        //METODO  manda alla scelta del prodotto
+        private void scegliProdotto(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new Uri("/PaginaCategorie.xaml", UriKind.Relative));
         }
 
-        private void Button_Click_2(object sender, RoutedEventArgs e)
+        //METODO rimuove il pasto consumato
+        private void rimuoviPasto(object sender, RoutedEventArgs e)
         {
             string cod=((Button)sender).Tag.ToString();
             int id = Convert.ToInt32(cod);

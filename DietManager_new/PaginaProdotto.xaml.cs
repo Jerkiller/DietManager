@@ -13,16 +13,22 @@ using Microsoft.Phone.Controls;
 using System.Windows.Navigation;
 using DietManager_new.ViewModel;
 
+
+
+
 namespace DietManager_new
 {
     public partial class PaginaProdotto : PhoneApplicationPage
     {
+
+        //COSTRUTTORE
         public PaginaProdotto()
         {
             InitializeComponent();
-
             
         }
+
+        
 
 
 
@@ -46,34 +52,54 @@ namespace DietManager_new
 
         }
 
+        //METODO setta i campi ai valori dell alimento in porzione piccola
         private void Small_Click(object sender, RoutedEventArgs e)
         {
             ((ProdottoViewModel)this.DataContext).Piccola();
         }
 
+        //METODO setta i campi ai valori dell alimento in porzione media
         private void Medium_Click(object sender, RoutedEventArgs e)
         {
             ((ProdottoViewModel)this.DataContext).Media();
         }
 
+        //METODO setta i campi ai valori dell alimento in porzione grande
         private void Big_Click(object sender, RoutedEventArgs e)
         {
             ((ProdottoViewModel)this.DataContext).Grande();
         }
 
+        //METODO setta la cella a 0 se si cancella il valore
         private void controllaVuota(object sender, TextChangedEventArgs e)
         {
             if(((TextBox)sender).Text =="")
                 ((TextBox)sender).Text="0";
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+       
+
+        private void aggiungiPasto(object sender, EventArgs e)
         {
-            ((ProdottoViewModel)this.DataContext).AggiungiPasto();
+
+             ((ProdottoViewModel)this.DataContext).AggiungiPasto();
             MessageBox.Show("Pasto inserito correttamente");
             NavigationService.Navigate(new Uri("/PaginaGiornata.xaml?Refresh=true", UriKind.Relative));
+        
+        }
+
+        //METODO Premendo il Back button voglio tornare alla main page e non nella pagina prima
+        protected override void OnBackKeyPress(System.ComponentModel.CancelEventArgs e)
+        {
+            MessageBox.Show(NavigationService.Source.ToString() + "&Refresh=true");
+
+            NavigationService.Navigate(new Uri("/PaginaRicerca.xaml?Refresh=true", UriKind.Relative));
+            e.Cancel = true;
+
+        }
+
+
         }
 
 
     }
-}

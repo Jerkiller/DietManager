@@ -392,9 +392,20 @@ namespace DietManager_new.Model
 
         }
 
+        //METODO ritorna tutti i prodotti che nel nome contengono una certa stringa
+        public ObservableCollection<Prodotto> cercaProdotto(string nome) {
 
-           
+            ObservableCollection<Prodotto> trovati = new ObservableCollection<Prodotto>();
 
+            foreach (Prodotto p in this.prodottiTotali) {
+
+                if (p.NomeProdotto.Contains(nome))
+                    trovati.Add(p);
+            }
+
+            return trovati;
+
+        }
 
         #region INotifyPropertyChanged Members
 

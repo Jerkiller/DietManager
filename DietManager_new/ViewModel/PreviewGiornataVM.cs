@@ -102,9 +102,6 @@ namespace DietManager_new.ViewModel
             get { return (_proteineGiornata * 100) / this.db.ValProteine; }
         }
 
-
-       
-
         public string StatoProteine
         {
 
@@ -140,7 +137,6 @@ namespace DietManager_new.ViewModel
 
         }
 
-
         public string StatoCarboidrati
         {
 
@@ -156,9 +152,7 @@ namespace DietManager_new.ViewModel
                     return "Green";
             }
 
-        }
-
-        
+        }        
 
         public string StatoGrassi
         {
@@ -177,8 +171,7 @@ namespace DietManager_new.ViewModel
 
         }
 
-
-
+        //COSTRUTTORE
         public PreviewGiornataVM() {
             this.db = new Database(App.PathDB);
 
