@@ -236,7 +236,6 @@ namespace DietManager_new.Model
         //METODO ritorna la lista di pasti data una data
         public ObservableCollection<Pasto> PastiDelGiorno(DateTime data)
         {
-
             this.pastiGiornata = new ObservableCollection<Pasto>();
 
             foreach (Pasto p in pastiTotali)
@@ -370,7 +369,7 @@ namespace DietManager_new.Model
         }
 
         //METODO aggiunge un pasto nuovo
-        private void aggiungiPasto(Pasto p)
+        public void aggiungiPasto(Pasto p)
         {
 
             this.pastiTotali.Add(p);
@@ -382,7 +381,7 @@ namespace DietManager_new.Model
         }
 
         //METODO elimina un pasto esistente
-        private void rimuoviPasto(Pasto p)
+        public void rimuoviPasto(Pasto p)
         {
 
             this.pastiTotali.Remove(p);

@@ -46,9 +46,9 @@ namespace DietManager_new.Model
 
 
         //VAR: Quantita del prodotto del pasto (perchè l'item ha una quantità?????)
-        private int _quantita;
+        private double _quantita;
         [Column]
-        public int Quantita
+        public double Quantita
         {
 
             get { return this._quantita; }
@@ -143,6 +143,10 @@ namespace DietManager_new.Model
 
                 NotifyPropertyChanged("ProdottoFK");
             }
+        }
+
+        public string NomeProdotto {
+            get { return ProdottoFK.NomeProdotto; }
         }
 
         #region INotifyPropertyChanged Members

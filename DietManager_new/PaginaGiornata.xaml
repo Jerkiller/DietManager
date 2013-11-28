@@ -29,12 +29,12 @@
                             <ColumnDefinition Width="1*"/>
                             <ColumnDefinition Width="2*"/>
                         </Grid.ColumnDefinitions>
-                        <Button  VerticalAlignment="Center"  HorizontalAlignment="Center" Grid.Row="0" Grid.Column="0" Content="+"/>
+                        <Button  VerticalAlignment="Center"  HorizontalAlignment="Center" Grid.Row="0" Grid.Column="0" Content="+" Click="Button_Click_1"/>
                         <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="1" Text="Aggiungi alimento" TextWrapping="NoWrap"  Style="{StaticResource PhoneTextLargeStyle}"/>
                     </Grid>
                     <TextBlock VerticalAlignment="Center" Grid.Row="0" Grid.Column="2" Text="Elenco alimenti:" TextWrapping="NoWrap" Margin="12,-6,0,0" Style="{StaticResource PhoneTextExtraLargeStyle}"/>
                     <!--Elenco a doppia riga con testo a capo-->
-                    <ListBox x:Name="FirstListBox" Margin="0,0,-12,0" ItemsSource="{Binding Items}">
+                    <ListBox x:Name="FirstListBox" Margin="0,0,-12,0" ItemsSource="{Binding PastiGiorno}">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel Margin="0,0,0,17" Width="432" Height="78">
@@ -48,9 +48,9 @@
                                             <ColumnDefinition Width="1*"/>
                                         </Grid.ColumnDefinitions>
 
-                                        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="0" Text="Pasta al pomodoro" TextWrapping="NoWrap"  Style="{StaticResource PhoneTextNormalStyle}"/>
-                                        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="1" Text="800r" TextWrapping="NoWrap"  Style="{StaticResource PhoneTextNormalStyle}"/>
-                                        <Button VerticalAlignment="Center"  HorizontalAlignment="Center" Grid.Row="0" Grid.Column="2" Content="-" />
+                                        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="0" Text="{Binding NomeProdotto}" TextWrapping="NoWrap"  Style="{StaticResource PhoneTextNormalStyle}"/>
+                                        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="1" Text="{Binding Quantita}" TextWrapping="NoWrap"  Style="{StaticResource PhoneTextNormalStyle}"/>
+                                        <Button Tag="{Binding IdPasto}" VerticalAlignment="Center"  HorizontalAlignment="Center" Grid.Row="0" Grid.Column="2" Content="-" Click="Button_Click_2"/>
                                     </Grid>
                                     <!--<TextBlock Text="{Binding LineOne}" TextWrapping="Wrap" Style="{StaticResource PhoneTextExtraLargeStyle}"/>
                               <TextBlock Text="{Binding LineTwo}" TextWrapping="Wrap" Margin="12,-6,12,0" Style="{StaticResource PhoneTextSubtleStyle}"/>-->
@@ -86,20 +86,20 @@
 
 
                         <TextBlock VerticalAlignment="Center" Grid.Row="0" Text="Calorie" TextWrapping="NoWrap"  Style="{StaticResource PhoneTextNormalStyle}"/>
-                        <ProgressBar VerticalAlignment="Center" Grid.Row="0" Grid.Column="1" Height="10" Width="100" Value="10"  />
-                        <TextBlock VerticalAlignment="Center" Grid.Row="0" Grid.Column="2" Text="10/100" TextWrapping="NoWrap" Margin="12,-6,0,0" Style="{StaticResource PhoneTextNormalStyle}"/>
+                        <ProgressBar VerticalAlignment="Center" Grid.Row="0" Grid.Column="1" Height="10" Width="100" Value="{Binding CaloriePreviewPercentuale}" Foreground="{Binding StatoCalorie}" />
+                        <TextBlock VerticalAlignment="Center" Grid.Row="0" Grid.Column="2" Text="{Binding CalorieGiornata, StringFormat='Kcal {0}'}" TextWrapping="NoWrap" Margin="12,-6,0,0" Style="{StaticResource PhoneTextNormalStyle}"/>
 
                         <TextBlock VerticalAlignment="Center" Grid.Row="1" Text="Carboidrati" TextWrapping="NoWrap"  Style="{StaticResource PhoneTextNormalStyle}"/>
-                        <ProgressBar VerticalAlignment="Center" Grid.Row="1" Grid.Column="1" Height="10" Width="100" Value="10"  />
-                        <TextBlock VerticalAlignment="Center" Grid.Row="1" Grid.Column="2" Text="10/100" TextWrapping="NoWrap" Margin="12,-6,0,0" Style="{StaticResource PhoneTextNormalStyle}"/>
+                        <ProgressBar VerticalAlignment="Center" Grid.Row="1" Grid.Column="1" Height="10" Width="100" Value="{Binding CarboidratiPreviewPercentuale}" Foreground="{Binding StatoCarboidrati}" />
+                        <TextBlock VerticalAlignment="Center" Grid.Row="1" Grid.Column="2" Text="{Binding CarboidratiGiornata, StringFormat='gr {0}'}" TextWrapping="NoWrap" Margin="12,-6,0,0" Style="{StaticResource PhoneTextNormalStyle}"/>
 
                         <TextBlock VerticalAlignment="Center" Grid.Row="2" Text="Grassi" TextWrapping="NoWrap"  Style="{StaticResource PhoneTextNormalStyle}"/>
-                        <ProgressBar VerticalAlignment="Center" Grid.Row="2" Grid.Column="1" Height="10" Width="100" Value="10"  />
-                        <TextBlock VerticalAlignment="Center" Grid.Row="2" Grid.Column="2" Text="10/100" TextWrapping="NoWrap" Margin="12,-6,0,0" Style="{StaticResource PhoneTextNormalStyle}"/>
+                        <ProgressBar VerticalAlignment="Center" Grid.Row="2" Grid.Column="1" Height="10" Width="100" Value="{Binding GrassiPreviewPercentuale}" Foreground="{Binding StatoGrassi}" />
+                        <TextBlock VerticalAlignment="Center" Grid.Row="2" Grid.Column="2" Text="{Binding GrassiGiornata, StringFormat='gr {0}'}" TextWrapping="NoWrap" Margin="12,-6,0,0" Style="{StaticResource PhoneTextNormalStyle}"/>
 
                         <TextBlock VerticalAlignment="Center" Grid.Row="3" Text="Proteine" TextWrapping="NoWrap"  Style="{StaticResource PhoneTextNormalStyle}"/>
-                        <ProgressBar VerticalAlignment="Center" Grid.Row="3" Grid.Column="1" Height="10" Width="100" Value="10"  />
-                        <TextBlock VerticalAlignment="Center" Grid.Row="3" Grid.Column="2" Text="10/100" TextWrapping="NoWrap" Margin="12,-6,0,0" Style="{StaticResource PhoneTextNormalStyle}"/>
+                        <ProgressBar VerticalAlignment="Center" Grid.Row="3" Grid.Column="1" Height="10" Width="100" Value="{Binding ProteinePreviewPercentuale}"  Foreground="{Binding StatoProteine}"/>
+                        <TextBlock VerticalAlignment="Center" Grid.Row="3" Grid.Column="2" Text="{Binding ProteineGiornata, StringFormat='gr {0}'}" TextWrapping="NoWrap" Margin="12,-6,0,0" Style="{StaticResource PhoneTextNormalStyle}"/>
                     </Grid>
                     <Button Grid.Row="1"  Name="Calendario" Content="Vedi calendario" />
                 </Grid>

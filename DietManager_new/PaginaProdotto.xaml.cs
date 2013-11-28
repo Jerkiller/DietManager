@@ -67,6 +67,13 @@ namespace DietManager_new
                 ((TextBox)sender).Text="0";
         }
 
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            ((ProdottoViewModel)this.DataContext).AggiungiPasto();
+            MessageBox.Show("Pasto inserito correttamente");
+            NavigationService.Navigate(new Uri("/PaginaGiornata.xaml?Refresh=true", UriKind.Relative));
+        }
+
 
     }
 }

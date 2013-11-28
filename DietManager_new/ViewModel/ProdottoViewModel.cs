@@ -9,14 +9,9 @@ using System.Windows;
 
 namespace DietManager_new.ViewModel
 {
-    public class ProdottoViewModel : INotifyPropertyChanged
+    public class ProdottoViewModel : PreviewGiornataVM, INotifyPropertyChanged
     {
 
-        private Database db;
-
-        private DateTime dataCorrente;
-
-        private IsolatedStorageSettings appSettings = IsolatedStorageSettings.ApplicationSettings;
 
         private Prodotto _prodotto;
         public Prodotto Prodotto {
@@ -59,54 +54,50 @@ namespace DietManager_new.ViewModel
             }
         }
 
-        private double _calorieGiornata;
         public double CaloriePreview {
 
-            get { return this._calorieGiornata + (this._quantita * this._prodotto.Calorie)/this._prodotto.Quantita; }
+            get { return base.CalorieGiornata + (this._quantita * this._prodotto.Calorie)/this._prodotto.Quantita; }
         }
-        public double CaloriePreviewPercentuale {
-            get { return (CaloriePreview * 100) / this.db.ValCalorie; }
+        new public double CaloriePreviewPercentuale {
+            get { return (CaloriePreview * 100) / base.Db.ValCalorie; }
         }
 
-        private double _grassiGiornata;
         public double GrassiPreview
         {
 
-            get { return this._grassiGiornata + (this._quantita * this._prodotto.Grassi) / this._prodotto.Quantita; }
+            get { return base.GrassiGiornata + (this._quantita * this._prodotto.Grassi) / this._prodotto.Quantita; }
         }
-        public double GrassiPreviewPercentuale
+        new public double GrassiPreviewPercentuale
         {
-            get { return (GrassiPreview * 100) / this.db.ValGrassi; }
+            get { return (GrassiPreview * 100) / base.Db.ValGrassi; }
         }
 
-        private double _proteineGiornata;
         public double ProteinePreview
         {
 
-            get { return this._proteineGiornata + (this._quantita * this._prodotto.Proteine) / this._prodotto.Quantita; }
+            get { return base.ProteineGiornata + (this._quantita * this._prodotto.Proteine) / this._prodotto.Quantita; }
         }
-        public double ProteinePreviewPercentuale
+        new public double ProteinePreviewPercentuale
         {
-            get { return (ProteinePreview * 100) / this.db.ValProteine; }
+            get { return (ProteinePreview * 100) / base.Db.ValProteine; }
         }
 
-        private double _carboidratiGiornata;
         public double CarboidratiPreview
         {
 
-            get { return this._carboidratiGiornata + (this._quantita * this._prodotto.Carboidrati) / this._prodotto.Quantita; }
+            get { return base.CarboidratiGiornata + (this._quantita * this._prodotto.Carboidrati) / this._prodotto.Quantita; }
         }
-        public double CarboidratiPreviewPercentuale
+        new public double CarboidratiPreviewPercentuale
         {
-            get { return (CarboidratiPreview * 100) / this.db.ValCarboidrati; }
+            get { return (CarboidratiPreview * 100) / base.Db.ValCarboidrati; }
         }
 
-        public string StatoCalorie { 
+        new public string StatoCalorie { 
            
             get {
-                if (CaloriePreview >= this.db.ValCalorie)
+                if (CaloriePreview >= base.Db.ValCalorie)
                 {
-                    if (CaloriePreview >= this.db.MaxQntaCalorie)
+                    if (CaloriePreview >= base.Db.MaxQntaCalorie)
                         return "Red";
                     else return "Yellow";
 
@@ -118,14 +109,14 @@ namespace DietManager_new.ViewModel
         }
 
        
-        public string StatoCarboidrati
+        new public string StatoCarboidrati
         {
 
             get
             {
-                if (CarboidratiPreview >= this.db.ValCarboidrati)
+                if (CarboidratiPreview >= base.Db.ValCarboidrati)
                 {
-                    if (CarboidratiPreview >= this.db.MaxQntaCarboidrati)
+                    if (CarboidratiPreview >= base.Db.MaxQntaCarboidrati)
                         return "Red";
                     else return "Yellow";
                 }
@@ -135,14 +126,14 @@ namespace DietManager_new.ViewModel
 
         }
 
-       public string StatoGrassi
+       new public string StatoGrassi
         {
 
             get
             {
-                if (GrassiPreview >= this.db.ValGrassi)
+                if (GrassiPreview >= base.Db.ValGrassi)
                 {
-                    if (GrassiPreview >= this.db.MaxQntaGrassi)
+                    if (GrassiPreview >= base.Db.MaxQntaGrassi)
                         return "Red";
                     else return "Yellow";
                 }
@@ -152,14 +143,14 @@ namespace DietManager_new.ViewModel
 
         }
 
-       public string StatoProteine
+       new public string StatoProteine
        {
 
            get
            {
-               if (ProteinePreview >= this.db.ValProteine)
+               if (ProteinePreview >= base.Db.ValProteine)
                {
-                   if (ProteinePreview >= this.db.MaxQntaProteine)
+                   if (ProteinePreview >= base.Db.MaxQntaProteine)
                        return "Red";
                    else return "Yellow";
                }
@@ -172,26 +163,11 @@ namespace DietManager_new.ViewModel
 
 
         //COSTRUTTORE
-        public ProdottoViewModel(int id) {
-        
-            this.db = new Database(App.PathDB);
+        public ProdottoViewModel(int id) : base() {
 
-            this.db.LoadCollectionsFromDatabase();
-
-            this.dataCorrente = (DateTime)appSettings["DataCorrente"];
-
-            this._prodotto = this.db.RitornaProdotto(id);
-
-            this._calorieGiornata = this.db.CalorieDelGiorno(dataCorrente);
+            this._prodotto = base.Db.RitornaProdotto(id);
 
 
-            this._grassiGiornata = this.db.GrassiDelGiorno(dataCorrente);
-
-            this._proteineGiornata = this.db.ProteineDelGiorno(dataCorrente);
-
-            this._carboidratiGiornata = this.db.CarboidratiDelGiorno(dataCorrente);
-
-            MessageBox.Show(this.db.MaxQntaCalorie.ToString());
 
         }
 
@@ -207,6 +183,24 @@ namespace DietManager_new.ViewModel
         public void Grande()
         {
             Quantita = this._prodotto.Grande;
+        }
+
+        public void AggiungiPasto()
+        {
+            Pasto p = new Pasto
+            {
+                ProdottoFK = _prodotto,
+                Quantita = _quantita,
+                Calorie = Math.Round(((_quantita * _prodotto.Calorie) / _prodotto.Quantita), 2),  // quantità media prodotto : calorie prodotto = quantità assunta : calorie assunte
+                Grassi = Math.Round(((_quantita * _prodotto.Grassi) / _prodotto.Quantita), 2),
+                Carboidrati = Math.Round(((_quantita * _prodotto.Carboidrati) / _prodotto.Quantita), 2),
+                Proteine = Math.Round(((_quantita * _prodotto.Proteine) / _prodotto.Quantita), 2),
+                Data = base.DataCorrente
+
+            };
+            base.Db.aggiungiPasto(p);
+            NotifyPropertyChanged("PastiGiorno");
+            
         }
 
         #region INotifyPropertyChanged Members

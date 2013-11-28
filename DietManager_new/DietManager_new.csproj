@@ -70,6 +70,7 @@
     <Compile Include="Model\Database.cs" />
     <Compile Include="Model\Giornata.cs" />
     <Compile Include="Model\Pasto.cs" />
+    <Compile Include="ViewModel\PreviewGiornataVM.cs" />
     <Compile Include="Model\Prodotto.cs" />
     <Compile Include="PaginaImpostaProfilo.xaml.cs">
       <DependentUpon>PaginaImpostaProfilo.xaml</DependentUpon>

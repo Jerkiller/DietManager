@@ -89,7 +89,7 @@
 
 
                     </Grid>
-                    <Button Content="Aggiungi alimento" VerticalAlignment="Center" Grid.Row="4" />
+                    <Button Content="Aggiungi alimento" VerticalAlignment="Center" Grid.Row="4" Click="Button_Click_1" />
                 </Grid>
             </controls:PivotItem>
 

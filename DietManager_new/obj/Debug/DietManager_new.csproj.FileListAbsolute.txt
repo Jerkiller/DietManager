@@ -50,4 +50,3 @@ C:\Users\pc\Documents\GitHub\DietManager\DietManager_new\obj\Debug\DietManager_n
 C:\Users\pc\Documents\GitHub\DietManager\DietManager_new\obj\Debug\DietManager_new.dll
 C:\Users\pc\Documents\GitHub\DietManager\DietManager_new\obj\Debug\DietManager_new.pdb
 C:\Users\pc\Documents\GitHub\DietManager\DietManager_new\obj\Debug\XapCacheFile.xml
-C:\Users\pc\Documents\GitHub\DietManager\DietManager_new\obj\Debug\DietManager_new.csprojResolveAssemblyReference.cache

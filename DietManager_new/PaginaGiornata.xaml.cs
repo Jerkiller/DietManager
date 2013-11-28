@@ -10,6 +10,7 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using Microsoft.Phone.Controls;
+using DietManager_new.ViewModel;
 
 namespace DietManager_new
 {
@@ -18,6 +19,19 @@ namespace DietManager_new
         public PaginaGiornata()
         {
             InitializeComponent();
+            this.DataContext = new GiornataViewModel();
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/PaginaCategorie.xaml", UriKind.Relative));
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            string cod=((Button)sender).Tag.ToString();
+            int id = Convert.ToInt32(cod);
+            ((GiornataViewModel)this.DataContext).RimuoviPasto(id);
         }
     }
 }
