@@ -104,7 +104,7 @@
                         <ProgressBar VerticalAlignment="Center" Grid.Row="3" Grid.Column="1" Height="10" Width="100" Value="{Binding ProteinePreviewPercentuale}"  Foreground="{Binding StatoProteine}"/>
                         <TextBlock VerticalAlignment="Center" Grid.Row="3" Grid.Column="2" Text="{Binding ProteineGiornata, StringFormat='gr {0}'}" TextWrapping="NoWrap" Margin="12,-6,0,0" Style="{StaticResource PhoneTextNormalStyle}"/>
                     </Grid>
-                    <Button Grid.Row="1"  Name="Calendario" Content="Vedi calendario" />
+                    <Button Grid.Row="1"  Name="Calendario" Content="Vedi calendario" Click="VediCalendario"/>
                 </Grid>
 
 

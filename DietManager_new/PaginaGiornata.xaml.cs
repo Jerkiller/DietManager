@@ -35,5 +35,11 @@ namespace DietManager_new
             int id = Convert.ToInt32(cod);
             ((GiornataViewModel)this.DataContext).RimuoviPasto(id);
         }
+
+        private void VediCalendario(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/PaginaCalendario.xaml?Refresh=true", UriKind.Relative));
+
+        }
     }
 }

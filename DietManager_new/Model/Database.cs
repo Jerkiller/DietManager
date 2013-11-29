@@ -16,6 +16,7 @@ namespace DietManager_new.Model
         public Table<Categoria> Categorie;
         public Table<Pasto> Pasti;
 
+
         private ObservableCollection<Pasto> pastiGiornata;
 
         private IsolatedStorageSettings appSettings = IsolatedStorageSettings.ApplicationSettings;
@@ -172,6 +173,7 @@ namespace DietManager_new.Model
 
             maxQntaGrassi = valGrassi + (valGrassi * 0.05);
             minQntaGrassi = valGrassi - (valGrassi * 0.05);
+
 
 
          
@@ -337,19 +339,24 @@ namespace DietManager_new.Model
 
                 PastiDelGiorno(data);
                 tempCalorie = CalorieDelGiorno(data);
-                if (tempCalorie == 0)
-                    giorni.Add(new Giornata(anno, mese, i, "White"));
+                if (data == DateTime.Today)
+                    giorni.Add(new Giornata(anno, mese, i, "Yellow"));
                 else
                 {
-                    tempGrassi = GrassiDelGiorno(data);
-                    tempCarboidrati = CarboidratiDelGiorno(data);
-                    tempProteine = ProteineDelGiorno(data);
-                    if (RISPETTALADIETA(tempCalorie, tempCarboidrati, tempGrassi, tempProteine))
-                        giorni.Add(new Giornata(anno, mese, i, "Green"));
+                    if (tempCalorie == 0)
+                        giorni.Add(new Giornata(anno, mese, i, "Black"));
                     else
-                        giorni.Add(new Giornata(anno, mese, i, "Red"));
-                }
+                    {
+                        tempGrassi = GrassiDelGiorno(data);
+                        tempCarboidrati = CarboidratiDelGiorno(data);
+                        tempProteine = ProteineDelGiorno(data);
+                        if (RISPETTALADIETA(tempCalorie, tempCarboidrati, tempGrassi, tempProteine))
+                            giorni.Add(new Giornata(anno, mese, i, "Green"));
+                        else
+                            giorni.Add(new Giornata(anno, mese, i, "Red"));
+                    }
 
+                }
             }
             return giorni;
 

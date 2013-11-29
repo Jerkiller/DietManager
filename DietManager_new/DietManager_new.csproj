@@ -50,6 +50,7 @@
   <ItemGroup>
     <Reference Include="Microsoft.Phone" />
     <Reference Include="Microsoft.Phone.Controls, Version=7.0.0.0, Culture=neutral, PublicKeyToken=24eec0d8c86cda1e, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.Phone.Controls.Toolkit, Version=1.0.0.0, Culture=neutral, PublicKeyToken=b772ad94eb9ca604, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.Phone.Interop" />
     <Reference Include="system.data.linq" />
     <Reference Include="System.Windows" />
@@ -70,9 +71,13 @@
     <Compile Include="Model\Database.cs" />
     <Compile Include="Model\Giornata.cs" />
     <Compile Include="Model\Pasto.cs" />
+    <Compile Include="PaginaCalendario.xaml.cs">
+      <DependentUpon>PaginaCalendario.xaml</DependentUpon>
+    </Compile>
     <Compile Include="PaginaRicerca.xaml.cs">
       <DependentUpon>PaginaRicerca.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModel\CalendarioViewModel.cs" />
     <Compile Include="ViewModel\PreviewGiornataVM.cs" />
     <Compile Include="Model\Prodotto.cs" />
     <Compile Include="PaginaImpostaProfilo.xaml.cs">
@@ -101,6 +106,10 @@
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
     <Page Include="MainPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PaginaCalendario.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -140,6 +149,9 @@
     <Content Include="Background.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="dll\Microsoft.Phone.Controls.Toolkit.dll" />
+    <Content Include="Immagini\appbar.back.png" />
+    <Content Include="Immagini\appbar.next.png" />
     <Content Include="Immagini\appbarAggiungi.png" />
     <Content Include="Immagini\appbar.cancel.rest.png" />
     <Content Include="Immagini\appbar.check.rest.png" />
