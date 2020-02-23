@@ -7,6 +7,8 @@ using System.IO.IsolatedStorage;
 using System.Linq;
 using System.Text;
 using System.Windows;
+using System.Windows.Input;
+using System.Windows.Navigation;
 
 namespace DietManager_new.ViewModel
 {
@@ -75,11 +77,41 @@ namespace DietManager_new.ViewModel
             }
         }
 
+        private ICommand prossimoMese;
+        public ICommand ProssimoMese
+        {
+            get
+            {
+                return prossimoMese;
+            }
+        }
+
+        private ICommand mesePrecedente;
+        public ICommand MesePrecedente
+        {
+            get
+            {
+                return mesePrecedente;
+            }
+        }
+
+        private ICommand settaGiorno;
+        public ICommand SettaGiorno
+        {
+            get
+            {
+                return settaGiorno;
+            }
+        }
+
+        //COSTRUTTORE
         public CalendarioViewModel() {
-            this.db = new Database(App.PathDB);
+            this.db = new Database();
             this.db.LoadCollectionsFromDatabase();
             DateTime d = (DateTime)appSettings["DataCorrente"];
-
+            prossimoMese = new DelegateCommand(_prossimoMese);
+            mesePrecedente = new DelegateCommand(_mesePrecedente);
+            settaGiorno = new DelegateCommand(_settaGiorno);
             this._anno = d.Year;
             this._mese = d.Month;
             _giorniAttuali = this.db.GiornateDelMese(this._mese, this._anno);
@@ -101,47 +133,59 @@ namespace DietManager_new.ViewModel
             
         }
 
-        public void ProssimoMese() { 
-            DateTime d=DateTime.Today;
-            if (this._anno != d.Year || this._mese != d.Month) {
+        public void _prossimoMese(object o)
+        {
+            DateTime d = DateTime.Today;
+
+            if (this._anno != d.Year || this._mese != d.Month)
+            {
                 if (this._mese == 12)
                 {
                     this._mese = 1;
+
                     this._anno += 1;
-                }
-                else {
-                    this._mese += 1;
-                }
-                calcolaStringaData();
-                GiorniAttuali = this.db.GiornateDelMese(this._mese, this._anno);
-
-            }
-        
-        }
-
-        public void MesePrecedente()
-        {
-
-                if (this._mese == 1)
-                {
-                    this._mese = 12;
-                    this._anno -= 1;
                 }
                 else
                 {
-                    this._mese -= 1;
+                    this._mese += 1;
                 }
 
                 calcolaStringaData();
+
                 GiorniAttuali = this.db.GiornateDelMese(this._mese, this._anno);
-                
+
+            }
 
         }
 
-        public void SettaGiorno(int giorno) {
-            DateTime d = new DateTime(this._anno, this._mese, giorno);
-                appSettings.Remove("DataCorrente");
-                appSettings.Add("DataCorrente", d);
+        public void _mesePrecedente(object o)
+        {
+
+            if (this._mese == 1)
+            {
+                this._mese = 12;
+                this._anno -= 1;
+            }
+            else
+            {
+                this._mese -= 1;
+            }
+
+            calcolaStringaData();
+            GiorniAttuali = this.db.GiornateDelMese(this._mese, this._anno);
+
+
+        }
+
+        public void _settaGiorno(object o)
+        {
+
+            Giornata giorno = (Giornata)o;
+            DateTime d = new DateTime(this._anno, this._mese, giorno.Numero);
+            appSettings.Remove("DataCorrente");
+            appSettings.Add("DataCorrente", d);
+            var rootFrame = (App.Current as App).RootFrame;
+            rootFrame.Navigate(new Uri("/PaginaGiornata.xaml?Refresh=true", UriKind.Relative));
         }
 
         #region INotifyPropertyChanged Members

@@ -7,6 +7,8 @@
     xmlns:controls="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:bar="clr-namespace:BindableApplicationBar;assembly=BindableApplicationBar"
+    xmlns:chart="clr-namespace:AmCharts.Windows.QuickCharts;assembly=AmCharts.Windows.QuickCharts.WP"
     mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="768"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
@@ -17,27 +19,27 @@
     <!--LayoutRoot è la griglia radice in cui viene inserito tutto il contenuto della pagina-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
         <!--Controllo Pivot-->
-        
-        <controls:Pivot Title="MANAGE YOUR DIET">
+
+        <controls:Pivot Title="{Binding Prodotto.NomeProdotto}">
             <!--Elemento Pivot uno-->
             <controls:PivotItem Header="Prodotto">
                 <StackPanel>
-                    <TextBlock Name="giorno" Grid.Row="0" Text="{Binding Prodotto.NomeProdotto}" />
+
 
                     <Grid x:Name="Main1" Background="Transparent" >
                         <Grid.RowDefinitions>
                             <RowDefinition Height="3*" />
                             <RowDefinition Height="1*"/>
                             <RowDefinition Height="1*"/>
-                            <RowDefinition Height="2*"/>
-                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="5*"/>
+
                         </Grid.RowDefinitions>
                         <Grid Grid.Row="0">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
-                            <Image Grid.Column="0" HorizontalAlignment="Center" Width="180"  Source="{Binding Prodotto.PathFoto, StringFormat ='Immagini/{0}'}" VerticalAlignment="Center" />
+                            <Image Grid.Column="0" HorizontalAlignment="Center" Width="180"  Source="{Binding Prodotto.PathFoto, StringFormat ='Foto/{0}'}" VerticalAlignment="Center" />
                             <Grid Grid.Column="1">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="1*" />
@@ -45,9 +47,13 @@
                                     <RowDefinition Height="1*"/>
                                 </Grid.RowDefinitions>
 
-                                <Button Grid.Row="0" Name="Small" Content="Porzione piccola" Click="Small_Click" />
-                                <Button Grid.Row="1" Name="Medium" Content="Porzione media" Click="Medium_Click" />
-                                <Button Grid.Row="2" Name="Big" Content="Porzione grande" Click="Big_Click" />
+                                <Button Grid.Row="0" Name="Small" Content="Piccola" Command="{Binding Piccola}" Visibility="{Binding NonPezzi}" />
+                                <Button Grid.Row="0" Name="One" Content="1 pezzo" Command="{Binding Piccola}" Visibility="{Binding Pezzi}" />
+                                <Button Grid.Row="1" Name="Medium" Content="Media" Command="{Binding Media}" Visibility="{Binding NonPezzi}"/>
+                                <Button Grid.Row="1" Name="Two" Content="2 pezzi" Command="{Binding Media}" Visibility="{Binding Pezzi}"/>
+                                <Button Grid.Row="2" Name="Big" Content="Grande" Command="{Binding Grande}" Visibility="{Binding NonPezzi}" />
+                                <Button Grid.Row="2" Name="three" Content="3 pezzi" Command="{Binding Grande}" Visibility="{Binding Pezzi}" />
+
                             </Grid>
                         </Grid>
                         <Grid Grid.Row="1">
@@ -57,125 +63,98 @@
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
                             <TextBlock  VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="0" Text="Quantità assunta" TextWrapping="NoWrap"  Style="{StaticResource PhoneTextLargeStyle}"/>
-                            <TextBox  TextChanged="controllaVuota" VerticalAlignment="Center" HorizontalAlignment="Left" Width="150" Grid.Column="1" Text="{Binding Quantita, Mode=TwoWay}" TextWrapping="NoWrap"  />
+                            <TextBox VerticalAlignment="Center" HorizontalAlignment="Left" Width="150" Grid.Column="1" Text="{Binding Quantita, Mode=TwoWay}" TextWrapping="NoWrap" InputScope="CurrencyAmount" GotFocus="DisabilitaAppBar" LostFocus="AbilitaAppBar"/>
+
                             <TextBlock  VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="2" Text="{Binding Prodotto.UnitaDiMisura}" TextWrapping="NoWrap"  Style="{StaticResource PhoneTextNormalStyle}"/>
                         </Grid>
                         <TextBlock VerticalAlignment="Center"  HorizontalAlignment="Left" Grid.Row="2"  Text="Preview Situazione" TextWrapping="NoWrap"  Style="{StaticResource PhoneTextLargeStyle}"/>
-                        <Grid Grid.Row="3" x:Name="Situazione" >
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="*"/>
-                                <RowDefinition Height="*"/>
-                                <RowDefinition Height="*"/>
-                                <RowDefinition Height="*"/>
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Row="3" >
+                            <Grid Grid.Row="0" Height="200">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="3*"/>
+                                    <ColumnDefinition Width="3*"/>
 
+                                </Grid.ColumnDefinitions>
+                                <TextBlock VerticalAlignment="Center" Grid.Row="0" Grid.Column="0" Text="Calorie" TextWrapping="NoWrap"  Style="{StaticResource PhoneTextNormalStyle}"/>
+                                <TextBlock FontSize="35" VerticalAlignment="Center" Grid.Row="0" Grid.Column="1" Foreground="{Binding StatoCalorie}" Text="{Binding CaloriePreview, StringFormat='+{0}'}" TextWrapping="NoWrap"  Style="{StaticResource PhoneTextNormalStyle}"/>
+                                <TextBlock VerticalAlignment="Center" Grid.Row="1" Grid.Column="0" Text="Carboidrati" TextWrapping="NoWrap"  Style="{StaticResource PhoneTextNormalStyle}"/>
+                                <TextBlock FontSize="35" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1" Foreground="{Binding StatoCarboidrati}" Text="{Binding CarboidratiPreview, StringFormat='+{0}'}" TextWrapping="NoWrap"  Style="{StaticResource PhoneTextNormalStyle}"/>
+                                <TextBlock VerticalAlignment="Center" Grid.Row="2" Grid.Column="0" Text="Grassi" TextWrapping="NoWrap"  Style="{StaticResource PhoneTextNormalStyle}"/>
+                                <TextBlock FontSize="35" VerticalAlignment="Center" Grid.Row="2" Grid.Column="1" Foreground="{Binding StatoGrassi}" Text="{Binding GrassiPreview, StringFormat='+{0}'}" TextWrapping="NoWrap"  Style="{StaticResource PhoneTextNormalStyle}"/>
+                                <TextBlock VerticalAlignment="Center" Grid.Row="3" Grid.Column="0" Text="Proteine" TextWrapping="NoWrap"  Style="{StaticResource PhoneTextNormalStyle}"/>
+                                <TextBlock FontSize="35" VerticalAlignment="Center" Grid.Row="3" Grid.Column="1" Foreground="{Binding StatoProteine}" Text="{Binding ProteinePreview, StringFormat='+{0}'}" TextWrapping="NoWrap"  Style="{StaticResource PhoneTextNormalStyle}"/>
 
-                            <TextBlock VerticalAlignment="Center" Grid.Row="0" Text="Calorie" TextWrapping="NoWrap"  Style="{StaticResource PhoneTextNormalStyle}"/>
-                            <ProgressBar VerticalAlignment="Center" Grid.Row="0" Grid.Column="1" Height="10" Width="100" Value="{Binding CaloriePreviewPercentuale}" Foreground="{Binding StatoCalorie}" />
-                            <TextBlock VerticalAlignment="Center" Grid.Row="0" Grid.Column="2" Text="{Binding CaloriePreview, StringFormat ='/100 {0}'}" TextWrapping="NoWrap" Margin="12,-6,0,0" Style="{StaticResource PhoneTextNormalStyle}" Foreground="{Binding StatoCalorie}" />
-
-                            <TextBlock VerticalAlignment="Center" Grid.Row="1" Text="Carboidrati" TextWrapping="NoWrap"  Style="{StaticResource PhoneTextNormalStyle}"/>
-                            <ProgressBar VerticalAlignment="Center" Grid.Row="1" Grid.Column="1" Height="10" Width="100" Value="{Binding CarboidratiPreviewPercentuale}" Foreground="{Binding StatoCarboidrati}" />
-                            <TextBlock VerticalAlignment="Center" Grid.Row="1" Grid.Column="2" Text="{Binding CarboidratiPreview, StringFormat ='/100 {0}'}" TextWrapping="NoWrap" Margin="12,-6,0,0" Style="{StaticResource PhoneTextNormalStyle}" Foreground="{Binding StatoCarboidrati}" />
-
-                            <TextBlock VerticalAlignment="Center" Grid.Row="2" Text="Grassi" TextWrapping="NoWrap"  Style="{StaticResource PhoneTextNormalStyle}"/>
-                            <ProgressBar VerticalAlignment="Center" Grid.Row="2" Grid.Column="1" Height="10" Width="100" Value="{Binding GrassiPreviewPercentuale}" Foreground="{Binding StatoGrassi}"  />
-                            <TextBlock VerticalAlignment="Center" Grid.Row="2" Grid.Column="2" Text="{Binding GrassiPreview, StringFormat ='/100 {0}'}" TextWrapping="NoWrap" Margin="12,-6,0,0" Style="{StaticResource PhoneTextNormalStyle}" Foreground="{Binding StatoGrassi}" />
-
-                            <TextBlock VerticalAlignment="Center" Grid.Row="3" Text="Proteine" TextWrapping="NoWrap"  Style="{StaticResource PhoneTextNormalStyle}"/>
-                            <ProgressBar VerticalAlignment="Center" Grid.Row="3" Grid.Column="1" Height="10" Width="100" Value="{Binding ProteinePreviewPercentuale}" Foreground="{Binding StatoProteine}" />
-                            <TextBlock VerticalAlignment="Center" Grid.Row="3" Grid.Column="2" Text="{Binding ProteinePreview, StringFormat ='/100 {0}'}" TextWrapping="NoWrap" Margin="12,-6,0,0" Style="{StaticResource PhoneTextNormalStyle}" Foreground="{Binding StatoProteine}" />
-
-
+                            </Grid>
+                        </StackPanel>
+                        
                         </Grid>
-                    </Grid>
                 </StackPanel>
             </controls:PivotItem>
 
             <!--Elemento Pivot due-->
             <controls:PivotItem Header="Info">
-                <Grid x:Name="Main2" Background="Transparent" >
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="1*" />
-                        <RowDefinition Height="1*" />
-                        <RowDefinition Height="2*"/>
-                        <RowDefinition Height="1*" />
-                    </Grid.RowDefinitions>
-                    <Grid Grid.Row="0" x:Name="Categoria" Background="Transparent" >
+                <StackPanel>
+                    <TextBlock Text="Valori medi per 100 gr:"/>
+                    <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="1*" />
-                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
-                        <TextBlock  VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="0"  Text="Categoria" TextWrapping="NoWrap"  Style="{StaticResource PhoneTextLargeStyle}"/>
-                        <TextBlock  VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="1"  Text="{Binding Prodotto.Categoria.NomeCategoria}" TextWrapping="NoWrap"  Style="{StaticResource PhoneTextNormalStyle}"/>
-                    </Grid>
-                    <Grid Grid.Row="1" Background="Transparent" >
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="4*" />
-                            <ColumnDefinition Width="2*" />
-                            <ColumnDefinition Width="1*" />
-                        </Grid.ColumnDefinitions>
-                        <TextBlock  VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="0"  Text="Valori medi per " TextWrapping="NoWrap"  Style="{StaticResource PhoneTextLargeStyle}"/>
-                        <TextBlock  VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="1"  Text="{Binding Prodotto.Quantita}" TextWrapping="NoWrap"  Style="{StaticResource PhoneTextLargeStyle}"/>
-                        <TextBlock  VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="2"  Text="{Binding Prodotto.UnitaDiMisura}" TextWrapping="NoWrap"  Style="{StaticResource PhoneTextLargeStyle}"/>
+                        <TextBlock VerticalAlignment="Center" Grid.Column="0" FontSize="40" Text="Calorie"/>
+
+                        <TextBlock Grid.Column="1" Text="{Binding Prodotto.Calorie, StringFormat=' {0} kcal'}" FontSize="70"/>
 
                     </Grid>
-                    <Grid Grid.Row="2" x:Name="Valori" Background="Transparent" >
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="2*" />
-                            <ColumnDefinition Width="1*" />
-                     
+                    <chart:PieChart
+                    	Height="500"
+                    	Width="300"
+                        VerticalContentAlignment="Bottom"
+                        VerticalAlignment="Bottom"
+                        HorizontalContentAlignment="Left"
+                    	x:Name="pie1"
+                    	TitleMemberPath="title"
+                    	ValueMemberPath="value"
+                        DataSource="{Binding DatiGrafico}"
+                        IsHitTestVisible="False">
+                        <chart:PieChart.Brushes>
+                            <SolidColorBrush Color="#106188" />
+                            <SolidColorBrush Color="#1681b5" />
+                            <SolidColorBrush Color="#1ba1e2" />
 
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="1*" />
-                            <RowDefinition Height="1*" />
-                            <RowDefinition Height="1*" />
-                            <RowDefinition Height="1*" />
-                        </Grid.RowDefinitions>
-                        <TextBlock  VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Row="0" Grid.Column="0"  Text="Calorie" TextWrapping="NoWrap"  Style="{StaticResource PhoneTextLargeStyle}"/>
-                        <TextBlock  VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="1"  Text="{Binding Prodotto.Calorie, StringFormat='kcal {0}'}" TextWrapping="NoWrap"  Style="{StaticResource PhoneTextNormalStyle}"/>
+                        </chart:PieChart.Brushes>
+                    </chart:PieChart>
 
-                        <TextBlock  VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Row="1" Grid.Column="0"  Text="Carboidrati" TextWrapping="NoWrap"  Style="{StaticResource PhoneTextLargeStyle}"/>
-                        <TextBlock  VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="1" Grid.Column="1"  Text="{Binding Prodotto.Carboidrati, StringFormat='gr {0}'}" TextWrapping="NoWrap"  Style="{StaticResource PhoneTextNormalStyle}"/>
-
-                        <TextBlock  VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Row="2" Grid.Column="0"  Text="Grassi" TextWrapping="NoWrap"  Style="{StaticResource PhoneTextLargeStyle}"/>
-                        <TextBlock  VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="2" Grid.Column="1"  Text="{Binding Prodotto.Grassi, StringFormat='gr {0}'}" TextWrapping="NoWrap"  Style="{StaticResource PhoneTextNormalStyle}"/>
-
-                        <TextBlock  VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Row="3" Grid.Column="0"  Text="Proteine" TextWrapping="NoWrap"  Style="{StaticResource PhoneTextLargeStyle}"/>
-                        <TextBlock  VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="3" Grid.Column="1"  Text="{Binding Prodotto.Proteine, StringFormat='gr {0}'}" TextWrapping="NoWrap"  Style="{StaticResource PhoneTextNormalStyle}"/>
-                    </Grid>
-                    <Button Content="Aggiungi alimento" VerticalAlignment="Center" Grid.Row="3" />
-
-                </Grid>
+                </StackPanel>
             </controls:PivotItem>
         </controls:Pivot>
-        
-        
-        
+
+
+
     </Grid>
 
-    
-      <phone:PhoneApplicationPage.ApplicationBar>
-        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
-
-            <shell:ApplicationBarIconButton 
-                IconUri="/Immagini/appbarAggiungi.png" 
-                Text="aggiungi" 
-                x:Name="newTaskAppBarButton" 
-                Click="aggiungiPasto"
-                />
-
-        </shell:ApplicationBar>
-    </phone:PhoneApplicationPage.ApplicationBar>
 
 
 
+    <bar:Bindable.ApplicationBar>
 
+        <bar:BindableApplicationBar>
+
+
+            <bar:BindableApplicationBarButton
+                Name="AppBar"
+              IconUri="/Immagini/aggiungi.png" 
+                Text="aggiungi alimento" 
+                Command="{Binding Aggiungi}"/>
+
+
+        </bar:BindableApplicationBar>
+
+    </bar:Bindable.ApplicationBar>
 
 </phone:PhoneApplicationPage>

@@ -31,90 +31,91 @@ namespace DietManager_new.ViewModel
         {
             get
             {
-                return this._calorieGiornata;
+                return Math.Round(this._calorieGiornata,1);
             }
             set
             {
                 if (value != this._calorieGiornata)
                 {
-                    this._calorieGiornata = value;
+                    if (value >= 0)
+                        this._calorieGiornata = value;
+                    else this._calorieGiornata = 0;
                 }
             }
         }
-        public double CaloriePreviewPercentuale
-        {
-            get { return (_calorieGiornata * 100) / this.db.ValCalorie; }
-        }
+
 
         private double _carboidratiGiornata;
         public double CarboidratiGiornata {
             get {
-                return this._carboidratiGiornata;
+                return Math.Round(this._carboidratiGiornata, 1);
             }
             set {
-                if (value != this._carboidratiGiornata) {
-                    this._carboidratiGiornata = value;
+                if (value != this._proteineGiornata)
+                {
+                    if (value >= 0)
+                        this._carboidratiGiornata = value;
+                    else this._carboidratiGiornata = 0;
                 }
+                
+                
             }
         }
-        public double CarboidratiPreviewPercentuale
-        {
-            get { return (_carboidratiGiornata * 100) / this.db.ValCarboidrati; }
-        }
+
+
 
         private double _grassiGiornata;
         public double GrassiGiornata
         {
             get
             {
-                return this._grassiGiornata;
+                return Math.Round(this._grassiGiornata, 1);
             }
             set
             {
-                if (value != this._grassiGiornata)
+                if (value != this._proteineGiornata)
                 {
-                    this._grassiGiornata = value;
+                    if (value >= 0)
+                        this._grassiGiornata = value;
+                    else this._grassiGiornata = 0;
                 }
+                
             }
         }
-        public double GrassiPreviewPercentuale
-        {
-            get { return (_grassiGiornata * 100) / this.db.ValGrassi; }
-        }
+
 
         private double _proteineGiornata;
         public double ProteineGiornata
         {
             get
             {
-                return this._proteineGiornata;
+                return Math.Round(this._proteineGiornata,1);
             }
             set
             {
                 if (value != this._proteineGiornata)
                 {
-                    this._proteineGiornata = value;
+                    if (value >= 0)
+                        this._proteineGiornata = value;
+                    else this._proteineGiornata = 0;
                 }
             }
         }
-        public double ProteinePreviewPercentuale
-        {
-            get { return (_proteineGiornata * 100) / this.db.ValProteine; }
-        }
+
 
         public string StatoProteine
         {
 
             get
             {
-                if (ProteineGiornata >= this.db.ValProteine)
+                if (ProteineGiornata < this.db.MinQntaProteine)
                 {
-                    if (ProteineGiornata >= this.db.MaxQntaProteine)
-                        return "Red";
-                    else return "Yellow";
+                    return "Blue";
                 }
-                else
-                    return "Green";
+                else if (ProteineGiornata > this.db.MaxQntaProteine)
+                    return "Red";
+                else return "Green";
+                    
             }
 
         }
@@ -124,15 +125,13 @@ namespace DietManager_new.ViewModel
 
             get
             {
-                if (CalorieGiornata >= this.db.ValCalorie)
+                if (CalorieGiornata < this.db.MinQntaCalorie)
                 {
-                    if (CalorieGiornata >= this.db.MaxQntaCalorie)
-                        return "Red";
-                    else return "Yellow";
-
+                    return "Blue";
                 }
-                else
-                    return "Green";
+                else if (CalorieGiornata > this.db.MaxQntaCalorie)
+                    return "Red";
+                else return "Green";
             }
 
         }
@@ -142,14 +141,13 @@ namespace DietManager_new.ViewModel
 
             get
             {
-                if (CarboidratiGiornata >= this.db.ValCarboidrati)
+                if (CarboidratiGiornata < this.db.MinQntaCarboidrati)
                 {
-                    if (CarboidratiGiornata >= this.db.MaxQntaCarboidrati)
-                        return "Red";
-                    else return "Yellow";
+                    return "Blue";
                 }
-                else
-                    return "Green";
+                else if (CarboidratiGiornata > this.db.MaxQntaCarboidrati)
+                    return "Red";
+                else return "Green";
             }
 
         }        
@@ -159,27 +157,62 @@ namespace DietManager_new.ViewModel
 
             get
             {
-                if (GrassiGiornata >= this.db.ValGrassi)
+                if (GrassiGiornata < this.db.MinQntaGrassi)
                 {
-                    if (GrassiGiornata >= this.db.MaxQntaGrassi)
-                        return "Red";
-                    else return "Yellow";
+                    return "Blue";
                 }
-                else
-                    return "Green";
+                else if (GrassiGiornata > this.db.MaxQntaGrassi)
+                    return "Red";
+                else return "Green";
             }
 
         }
 
+        private double maxQntaCalorie;
+        public double MaxQntaCalorie { get { return Math.Round(this.maxQntaCalorie, 1); } }
+
+        private double minQntaCalorie;
+        public double MinQntaCalorie { get { return Math.Round(this.minQntaCalorie, 1); } }
+
+        private double maxQntaCarboidrati;
+        public double MaxQntaCarboidrati { get { return Math.Round(this.maxQntaCarboidrati, 1); } }
+
+        private double minQntaCarboidrati;
+        public double MinQntaCarboidrati { get { return Math.Round(this.minQntaCarboidrati, 1); } }
+
+
+        private double maxQntaProteine;
+        public double MaxQntaProteine { get { return Math.Round(this.maxQntaProteine, 1); } }
+
+        private double minQntaProteine;
+        public double MinQntaProteine { get { return Math.Round(this.minQntaProteine, 1); } }
+
+
+        private double maxQntaGrassi;
+        public double MaxQntaGrassi { get { return Math.Round(this.maxQntaGrassi, 1); } }
+
+        private double minQntaGrassi;
+        public double MinQntaGrassi { get { return Math.Round(this.minQntaGrassi, 1); } }
+
+
         //COSTRUTTORE
         public PreviewGiornataVM() {
-            this.db = new Database(App.PathDB);
+            this.db = new Database();
 
             this.db.LoadCollectionsFromDatabase();
 
             this.dataCorrente = (DateTime)appSettings["DataCorrente"];
 
             this._calorieGiornata = this.db.CalorieDelGiorno(dataCorrente);
+            maxQntaCalorie = this.db.MaxQntaCalorie;
+            maxQntaCarboidrati = this.db.MaxQntaCarboidrati;
+            maxQntaGrassi = this.db.MaxQntaGrassi;
+            maxQntaProteine = this.db.MaxQntaProteine;
+
+            minQntaCalorie = this.db.MinQntaCalorie;
+            minQntaCarboidrati = this.db.MinQntaCarboidrati;
+            minQntaGrassi = this.db.MinQntaGrassi;
+            minQntaProteine = this.db.MinQntaProteine;
 
 
             this._grassiGiornata = this.db.GrassiDelGiorno(dataCorrente);
@@ -197,7 +230,7 @@ namespace DietManager_new.ViewModel
         public event PropertyChangedEventHandler PropertyChanged;
 
         // Used to notify that a property changed
-        private void NotifyPropertyChanged(string propertyName)
+        protected void NotifyPropertyChanged(string propertyName)
         {
             if (PropertyChanged != null)
             {

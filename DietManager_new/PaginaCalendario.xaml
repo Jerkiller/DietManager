@@ -12,7 +12,8 @@
     SupportedOrientations="Portrait" Orientation="Portrait"
         xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
     mc:Ignorable="d"
-    shell:SystemTray.IsVisible="True">
+    shell:SystemTray.IsVisible="True"
+    Name="This">
 
     <!--LayoutRoot è la griglia radice in cui viene inserito tutto il contenuto della pagina-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
@@ -23,8 +24,8 @@
 
         <!--TitlePanel contiene il nome dell'applicazione e il titolo della pagina-->
         <StackPanel Grid.Row="0" Margin="12,17,0,28">
-            <TextBlock Text="APPLICAZIONE" Style="{StaticResource PhoneTextNormalStyle}"/>
-            <TextBlock Text="calendario" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+            <TextBlock Text="DIET MANAGER" Style="{StaticResource PhoneTextNormalStyle}"/>
+            <TextBlock Text="Calendario" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
         </StackPanel>
 
         <!--ContentPanel - inserire ulteriore contenuto qui-->
@@ -32,25 +33,30 @@
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*" />
-                    <RowDefinition Height="5*" />
+                    <RowDefinition Height="6*" />
 
                 </Grid.RowDefinitions>
 
                 <Grid Grid.Row="0">
-                    <Button x:Name="BackBtn" VerticalAlignment="Top" HorizontalAlignment="Left" Height="72" Width="72" Margin="27,1,0,0" Click="MesePrecedente" BorderBrush="White">
-                        <Image Source="/Immagini/appbar.back.png" Height="42" Width="42" HorizontalAlignment="Center" />
+                   
+                    <Button x:Name="BackBtn" VerticalAlignment="Top" HorizontalAlignment="Left" Height="72" Width="72" Margin="27,1,0,0" Command="{Binding MesePrecedente}" BorderThickness="0" >
+                        <Image Source="/Immagini/back.png" Height="42" Width="42" HorizontalAlignment="Center" />
                     </Button>
-                    <TextBlock x:Name="MonthYear" Text="{Binding DataCorrente}" Style="{StaticResource PhoneTextLargeStyle}" Margin="101,14,124,0" HorizontalAlignment="Center" VerticalAlignment="Top" Width="231" TextAlignment="Center" Foreground="White"/>
-                    <Button x:Name="NextBtn" VerticalAlignment="Top" HorizontalAlignment="Right"  Height="72" Width="74" Margin="0,0,45,0" Click="MeseSuccessivo" Foreground="White" BorderBrush="White">
-                        <Image Source="/Immagini/appbar.next.png" Height="42" Width="42" HorizontalAlignment="Center" />
+                    <TextBlock x:Name="MonthYear" Text="{Binding DataCorrente}" Style="{StaticResource PhoneTextLargeStyle}" Margin="101,14,124,0" HorizontalAlignment="Center" VerticalAlignment="Top" Width="231" TextAlignment="Center" />
+                    <Button x:Name="NextBtn" VerticalAlignment="Top" HorizontalAlignment="Right"  Height="72" Width="74" Margin="0,0,45,0" Command="{Binding ProssimoMese}" BorderThickness="0" >
+                        <Image Source="/Immagini/next.png" Height="42" Width="42" HorizontalAlignment="Center" />
                     </Button>
                 </Grid>
-                <ListBox  Grid.Row="1" Height="Auto" Width="Auto" ItemsSource="{Binding GiorniAttuali}" ScrollViewer.VerticalScrollBarVisibility="Disabled" >
+                <StackPanel Grid.Row="1">
+                    <toolkit:GestureService.GestureListener>
+                        <toolkit:GestureListener Flick="GestureListener_Flick" />
+                    </toolkit:GestureService.GestureListener>
+                    <ListBox   Height="Auto" Width="Auto" ItemsSource="{Binding GiorniAttuali}" ScrollViewer.VerticalScrollBarVisibility="Disabled" >
 
                     <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <Button Content="{Binding Numero}" Background="{Binding Stato}" BorderThickness="0" Height="60" Width="100" FontFamily="/Lights Out;component/Fonts/Fonts.zip#Buxton Sketch" Click="SettaGiorno" >
-                        </Button>
+                            <Button  Content="{Binding Numero}" BorderThickness="0"  Foreground="{Binding Stato}"  Height="65" Width="114"  Command="{Binding ElementName=This, Path=DataContext.SettaGiorno}" CommandParameter="{Binding}" IsEnabled="{Binding Avaiable}" />
+                       
 
                     </DataTemplate>
                 </ListBox.ItemTemplate>
@@ -61,6 +67,7 @@
                     </ItemsPanelTemplate>
                 </ListBox.ItemsPanel>
                 </ListBox>
+                </StackPanel>
             </Grid>
         </Grid>
     </Grid>

@@ -8,6 +8,7 @@ using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using DietManager_new.Model;
+using DietManager_new.ViewModel;
 
 namespace DietManager_new
 {
@@ -17,7 +18,7 @@ namespace DietManager_new
         {
             InitializeComponent();
 
-            this.DataContext = App.categoriaVM;
+            this.DataContext = new CategoriaViewModel();
         }
 
 
@@ -25,8 +26,6 @@ namespace DietManager_new
          //METODO Premendo il Back button voglio tornare alla main page e non nella pagina prima
          protected override void OnBackKeyPress(System.ComponentModel.CancelEventArgs e)
          {
-          MessageBox.Show(NavigationService.Source.ToString() + "&Refresh=true");
-
             NavigationService.Navigate(new Uri("/PaginaCategorie.xaml?Refresh=true", UriKind.Relative));
 
          }
@@ -36,13 +35,36 @@ namespace DietManager_new
          private void lista_SelectionChanged(object sender, SelectionChangedEventArgs e)
          {
 
-             MessageBox.Show(((Prodotto)(((ListBox)sender).SelectedItem)).ProdottoId.ToString());
 
              string tagProd = ((Prodotto)(((ListBox)sender).SelectedItem)).ProdottoId.ToString();
 
              NavigationService.Navigate(new Uri("/PaginaProdotto.xaml?id=" + tagProd, UriKind.Relative));
 
 
+         }
+
+         protected override void OnNavigatedTo(NavigationEventArgs e)
+         {
+             if (e.NavigationMode == NavigationMode.Back) {
+                 this.DataContext = new CategoriaViewModel();
+             }
+         }
+
+         private void TextBox_KeyUp(object sender, System.Windows.Input.KeyEventArgs e)
+         {
+             CategoriaViewModel c = (CategoriaViewModel)(this.DataContext);
+             c.Ricerca.Execute(sender) ;
+         }
+
+         private void TextBox_GotFocus(object sender, RoutedEventArgs e)
+         {
+             ((TextBox)sender).Text = "";
+             listaCerca.IsEnabled = false;
+         }
+
+         private void TextBox_LostFocus(object sender, RoutedEventArgs e)
+         {
+             listaCerca.IsEnabled = true;
          }
 
 

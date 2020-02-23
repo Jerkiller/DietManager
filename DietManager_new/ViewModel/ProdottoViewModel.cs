@@ -1,11 +1,13 @@
 ﻿using DietManager_new.Model;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO.IsolatedStorage;
 using System.Linq;
 using System.Text;
 using System.Windows;
+using System.Windows.Input;
 
 namespace DietManager_new.ViewModel
 {
@@ -14,114 +16,112 @@ namespace DietManager_new.ViewModel
 
 
         private Prodotto _prodotto;
-        public Prodotto Prodotto {
+        public Prodotto Prodotto
+        {
 
             get { return this._prodotto; }
-            set {
+            set
+            {
 
-                if (this._prodotto != value) {
-                    this._prodotto=value;
+                if (this._prodotto != value)
+                {
+                    this._prodotto = value;
                     NotifyPropertyChanged("Prodotto");
-                
+
                 }
-                
-            
+
+
             }
         }
 
         private double _quantita;
-        public double Quantita {
+        public string Quantita
+        {
 
-            get { return this._quantita; }
-            set {
-                if (this._quantita != value) {
-                        this._quantita = value;
-                        NotifyPropertyChanged("Quantita");
-                        NotifyPropertyChanged("CaloriePreview");
-                        NotifyPropertyChanged("CaloriePreviewPercentuale");
-                        NotifyPropertyChanged("GrassiPreview");
-                        NotifyPropertyChanged("GrassiPreviewPercentuale");
-                        NotifyPropertyChanged("CarboidratiPreview");
-                        NotifyPropertyChanged("CarboidratiPreviewPercentuale");
-                        NotifyPropertyChanged("ProteinePreview");
-                        NotifyPropertyChanged("ProteinePreviewPercentuale");
-                        NotifyPropertyChanged("StatoCalorie");
-                        NotifyPropertyChanged("StatoCarboidrati");
-                        NotifyPropertyChanged("StatoGrassi");
-                        NotifyPropertyChanged("StatoProteine");
-                    }
-                    
+            get { return this._quantita.ToString(); }
+            set
+            {
+                if (!this._quantita.ToString().Equals(value))
+                {
+                    if (!value.Equals(""))
+                        this._quantita = Convert.ToDouble(value);
+                    else this._quantita = 0;
+                    NotifyAll();
+
+                }
+
             }
         }
 
-        public double CaloriePreview {
+        public void NotifyAll()
+        {
+            NotifyPropertyChanged("Quantita");
+            NotifyPropertyChanged("CaloriePreview");
+            NotifyPropertyChanged("GrassiPreview");
+            NotifyPropertyChanged("CarboidratiPreview");
+            NotifyPropertyChanged("ProteinePreview");
+            NotifyPropertyChanged("StatoCalorie");
+            NotifyPropertyChanged("StatoCarboidrati");
+            NotifyPropertyChanged("StatoGrassi");
+            NotifyPropertyChanged("StatoProteine");
+        }
 
-            get { return base.CalorieGiornata + (this._quantita * this._prodotto.Calorie)/this._prodotto.Quantita; }
+        public double CaloriePreview
+        {
+
+            get { return Math.Round((this._quantita * this._prodotto.Calorie) / this._prodotto.Quantita, 2); }
         }
-        new public double CaloriePreviewPercentuale {
-            get { return (CaloriePreview * 100) / base.Db.ValCalorie; }
-        }
+
 
         public double GrassiPreview
         {
 
-            get { return base.GrassiGiornata + (this._quantita * this._prodotto.Grassi) / this._prodotto.Quantita; }
+            get { return Math.Round((this._quantita * this._prodotto.Grassi) / this._prodotto.Quantita,2); }
         }
-        new public double GrassiPreviewPercentuale
-        {
-            get { return (GrassiPreview * 100) / base.Db.ValGrassi; }
-        }
+
 
         public double ProteinePreview
         {
 
-            get { return base.ProteineGiornata + (this._quantita * this._prodotto.Proteine) / this._prodotto.Quantita; }
+            get { return Math.Round((this._quantita * this._prodotto.Proteine) / this._prodotto.Quantita,2); }
         }
-        new public double ProteinePreviewPercentuale
-        {
-            get { return (ProteinePreview * 100) / base.Db.ValProteine; }
-        }
+
 
         public double CarboidratiPreview
         {
 
-            get { return base.CarboidratiGiornata + (this._quantita * this._prodotto.Carboidrati) / this._prodotto.Quantita; }
-        }
-        new public double CarboidratiPreviewPercentuale
-        {
-            get { return (CarboidratiPreview * 100) / base.Db.ValCarboidrati; }
+            get { return Math.Round((this._quantita * this._prodotto.Carboidrati) / this._prodotto.Quantita, 2); }
         }
 
-        new public string StatoCalorie { 
-           
-            get {
-                if (CaloriePreview >= base.Db.ValCalorie)
+
+        new public string StatoCalorie
+        {
+
+            get
+            {
+                if (CaloriePreview + base.CalorieGiornata < base.MinQntaCalorie)
                 {
-                    if (CaloriePreview >= base.Db.MaxQntaCalorie)
-                        return "Red";
-                    else return "Yellow";
+                    return "Blue";
 
                 }
-                else
-                    return "Green";
+                else if (CaloriePreview + base.CalorieGiornata > base.MaxQntaCalorie)
+                    return "Red";
+                else return "Green";
             }
 
         }
 
-       
+
         new public string StatoCarboidrati
         {
 
             get
             {
-                if (CarboidratiPreview >= base.Db.ValCarboidrati)
-                {
-                    if (CarboidratiPreview >= base.Db.MaxQntaCarboidrati)
-                        return "Red";
-                    else return "Yellow";
-                }
-                else
-                    return "Green";
+                if (CarboidratiPreview + base.CarboidratiGiornata < base.Db.MinQntaCarboidrati)
+                    return "Blue";
+                else if (CarboidratiPreview + base.CarboidratiGiornata > base.Db.MaxQntaCarboidrati)
+                    return "Red";
+                else return "Green";
             }
 
         }
@@ -131,97 +131,181 @@ namespace DietManager_new.ViewModel
 
             get
             {
-                if (GrassiPreview >= base.Db.ValGrassi)
+                if (GrassiPreview + base.GrassiGiornata < base.Db.MinQntaGrassi)
                 {
-                    if (GrassiPreview >= base.Db.MaxQntaGrassi)
-                        return "Red";
-                    else return "Yellow";
+                    return "Blue";
                 }
-                else
-                    return "Green";
+                else if (GrassiPreview + base.GrassiGiornata > base.Db.MaxQntaGrassi)
+                    return "Red";
+                else return "Green";
             }
 
         }
 
         new public string StatoProteine
-       {
-
-           get
-           {
-               if (ProteinePreview >= base.Db.ValProteine)
-               {
-                   if (ProteinePreview >= base.Db.MaxQntaProteine)
-                       return "Red";
-                   else return "Yellow";
-               }
-               else
-                   return "Green";
-           }
-
-       }
-
-
-
-        //COSTRUTTORE
-        public ProdottoViewModel(int id) : base() {
-
-            this._prodotto = base.Db.RitornaProdotto(id);
-
-
-
-        }
-
-        //METODO setta la quantita al valore piccolo del prodotto corrente
-        public void Piccola() {
-            Quantita = this._prodotto.Piccola;
-        }
-
-        //METODO setta la quantita al valore medio del prodotto corrente
-        public void Media()
         {
-            Quantita = this._prodotto.Media;
-        }
 
-        //METODO setta la quantita al valore grande del prodotto corrente
-        public void Grande()
-        {
-            Quantita = this._prodotto.Grande;
-        }
-
-        //METODO aggiunge il pasto creato in base al prodotto corrente
-        public void AggiungiPasto()
-        {
-            Pasto p = new Pasto
+            get
             {
-                // quantità media prodotto : calorie prodotto = quantità assunta : calorie assunte
-                ProdottoFK = _prodotto,
-                Quantita = _quantita,
-                Calorie = Math.Round(((_quantita * _prodotto.Calorie) / _prodotto.Quantita), 2),  
-                Grassi = Math.Round(((_quantita * _prodotto.Grassi) / _prodotto.Quantita), 2),
-                Carboidrati = Math.Round(((_quantita * _prodotto.Carboidrati) / _prodotto.Quantita), 2),
-                Proteine = Math.Round(((_quantita * _prodotto.Proteine) / _prodotto.Quantita), 2),
-                Data = base.DataCorrente
+                if (ProteinePreview + base.ProteineGiornata < base.Db.MinQntaProteine)
+                {
+                    return "Blue";
+                }
+                else if (ProteinePreview + base.ProteineGiornata > base.Db.MaxQntaProteine)
+                    return "Red";
+                else return "Green";
+            }
 
-            };
-            base.Db.aggiungiPasto(p);
-            NotifyPropertyChanged("PastiGiorno");
+        }
+
+        private string pezzi;
+        public string Pezzi {
+            get {
+                return pezzi;
+            }
+            set {
+                if (pezzi != value) {
+                    pezzi = value;
+                }
             
-        }
-
-        #region INotifyPropertyChanged Members
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        // Used to notify that a property changed
-        private void NotifyPropertyChanged(string propertyName)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
         }
 
-        #endregion
+        private string nonPezzi;
+        public string NonPezzi
+        {
+            get
+            {
+                return nonPezzi;
+            }
+            set
+            {
+                if (nonPezzi != value)
+                {
+                    nonPezzi = value;
+                }
+
+            }
+        }
+
+        private ICommand piccola;
+        public ICommand Piccola
+        {
+            get { return piccola; }
+        }
+
+        
+
+        private ICommand media;
+        public ICommand Media
+        {
+            get { return media; }
+        }
+
+        private ICommand grande;
+        public ICommand Grande
+        {
+            get { return grande; }
+        }
+
+        private ICommand aggiungi;
+        public ICommand Aggiungi
+        {
+            get { return aggiungi; }
+        }
+
+        private ObservableCollection<PData> datiGrafico;
+        public ObservableCollection<PData> DatiGrafico {
+            get {
+                return datiGrafico;
+            }
+        }
+
+
+        //COSTRUTTORE
+        public ProdottoViewModel(int id)
+            : base()
+        {
+
+            this._prodotto = base.Db.RitornaProdotto(id);
+            cambiaPezzi(_prodotto.UnitaDiMisura);
+            piccola = new DelegateCommand(_piccola);
+            media = new DelegateCommand(_media);
+            grande = new DelegateCommand(_grande);
+            _quantita = 0;
+            aggiungi = new DelegateCommand(_aggiungi);
+
+            double prodCarboidrati = _prodotto.Carboidrati;
+            double prodGrassi = _prodotto.Grassi;
+            double prodProteine = _prodotto.Proteine;
+
+            datiGrafico = new ObservableCollection<PData>()
+        {
+            new PData() { title = "Carboidrati: "+prodCarboidrati.ToString()+"gr", value = prodCarboidrati },
+            new PData() { title = "Grassi: "+prodGrassi.ToString()+"gr", value = prodGrassi },
+            new PData() { title = "Proteine: "+prodProteine.ToString()+"gr", value = prodProteine },
+        };
+
+        }
+
+        private void cambiaPezzi(string val) {
+            if (val.Equals("pz")){
+                Pezzi = "Visible";
+                NonPezzi="Collapsed";
+            }
+            else
+            {
+                NonPezzi = "Visible";
+                Pezzi = "Collapsed";
+            }
+        }
+
+        //METODO setta la quantita al valore piccolo del prodotto corrente
+        public void _piccola(object o)
+        {
+            Quantita = this._prodotto.Piccola.ToString();
+        }
+
+        //METODO setta la quantita al valore medio del prodotto corrente
+        public void _media(object o)
+        {
+            Quantita = this._prodotto.Media.ToString();
+        }
+
+        //METODO setta la quantita al valore grande del prodotto corrente
+        public void _grande(object o)
+        {
+            Quantita = this._prodotto.Grande.ToString();
+        }
+
+        //METODO aggiunge il pasto creato in base al prodotto corrente
+        public void _aggiungi(object o)
+        {
+            if (_quantita == 0)
+                MessageBox.Show("Quantità cibo errata");
+            else
+            {
+                Pasto p = new Pasto
+                {
+                    // quantità media prodotto : calorie prodotto = quantità assunta : calorie assunte
+                    ProdottoFK = _prodotto,
+                    Quantita = _quantita,
+                    Calorie = CaloriePreview,
+                    Grassi = GrassiPreview,
+                    Carboidrati = CarboidratiPreview,
+                    Proteine =ProteinePreview,
+                    Data = base.DataCorrente,
+                    UtenteFK=this.Db.UtenteAttuale
+
+                };
+                base.Db.aggiungiPasto(p);
+                NotifyPropertyChanged("PastiGiorno");
+                var rootFrame = (App.Current as App).RootFrame;
+                rootFrame.Navigate(new Uri("/PaginaGiornata.xaml?Refresh=true", UriKind.Relative));
+
+            }
+        }
+
 
 
     }

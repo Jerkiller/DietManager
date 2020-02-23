@@ -55,32 +55,10 @@ namespace DietManager_new.Model
             set { this._prodottiFK.Assign(value); }
         }
 
-
-
         public Categoria() {
 
-                 this._prodottiFK = new EntitySet<Prodotto>(
-                new Action<Prodotto>(this.attach_ToDo),
-                new Action<Prodotto>(this.detach_ToDo)
-                );
+                 this._prodottiFK = new EntitySet<Prodotto>();
         }
-
-        // Called during an add operation
-        private void attach_ToDo(Prodotto toDo)
-        {
-            NotifyPropertyChanging("Prodotto");
-            toDo.CategoriaFK = this;
-        }
-
-        // Called during a remove operation
-        private void detach_ToDo(Prodotto toDo)
-        {
-            NotifyPropertyChanging("Prodotto");
-            toDo.CategoriaFK = null;
-        }
-
-
-    
 
 
         #region INotifyPropertyChanged Members

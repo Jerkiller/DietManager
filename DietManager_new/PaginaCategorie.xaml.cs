@@ -12,6 +12,7 @@ using System.Windows.Shapes;
 using Microsoft.Phone.Controls;
 using DietManager_new.ViewModel;
 using DietManager_new.Model;
+using System.Windows.Navigation;
 
 namespace DietManager_new
 {
@@ -20,32 +21,31 @@ namespace DietManager_new
         public PaginaCategorie()
         {
             InitializeComponent();
-            this.DataContext = App.categoriaVM;
+            this.DataContext = new CategoriaViewModel();
         }
 
-
-
-
-        private void lista_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        /// METODO: risolve il problema lasagne NP completo =) hahaha
+        protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            base.OnNavigatedTo(e);
 
-          MessageBox.Show(((Prodotto)(((ListBox)sender).SelectedItem)).ProdottoId.ToString());
-
-            string tagProd = ((Prodotto)(((ListBox)sender).SelectedItem)).ProdottoId.ToString();
-
-            NavigationService.Navigate(new Uri("/PaginaProdotto.xaml?id=" + tagProd, UriKind.Relative));
-
-
+            listaCereali.SelectedIndex = -1;
+            listaBevande.SelectedIndex = -1;
+            listaFrutta.SelectedIndex = -1;
+            listaVerdura.SelectedIndex = -1;
+            listaCarne.SelectedIndex = -1;
+            listaDolci.SelectedIndex = -1;
+            listaVarie.SelectedIndex = -1;
+            listaFastFood.SelectedIndex = -1;
+            listaLatticini.SelectedIndex = -1;
+            listaPesce.SelectedIndex = -1;
         }
 
-        private void vaiARicerca(object sender, EventArgs e)
+        protected override void OnBackKeyPress(System.ComponentModel.CancelEventArgs e)
         {
-            NavigationService.Navigate(new Uri("/PaginaRicerca.xaml", UriKind.Relative));
+            e.Cancel = true;
+            NavigationService.Navigate(new Uri("/PaginaGiornata.xaml", UriKind.Relative));
         }
-
-
-
-
 
     }
 }

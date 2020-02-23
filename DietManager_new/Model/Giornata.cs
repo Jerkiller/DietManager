@@ -26,6 +26,11 @@ namespace DietManager_new.Model
             get { return this._numero; }
         }
 
+        private bool _avaiable;
+        public bool Avaiable {
+            get { return this._avaiable; }
+        }
+
  
 
         //COSTRUTTORE
@@ -34,6 +39,10 @@ namespace DietManager_new.Model
             this._data = new DateTime(an, mes, num);
             this._stato = stat;
             _numero = num;
+            if (this._data.CompareTo(DateTime.Today) <= 0)
+                _avaiable = true;
+            else _avaiable = false;
+
         
         }
     }

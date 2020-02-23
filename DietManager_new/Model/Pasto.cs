@@ -9,8 +9,17 @@ using System.Data.Linq.Mapping;
 namespace DietManager_new.Model
 {
     [Table]
-    public class Pasto : INotifyPropertyChanged, INotifyPropertyChanging
+    public class Pasto : INotifyPropertyChanged, INotifyPropertyChanging,IComparable<Pasto>
     {
+        public int CompareTo(Pasto p) {
+            if (p.IdPasto < IdPasto)
+                return 1;
+            else return -1;
+        }
+
+
+
+
         //VAR: id
         private int _idPasto;
         [Column(IsPrimaryKey = true, IsDbGenerated = true, DbType = "INT NOT NULL Identity", CanBeNull = false)]
@@ -31,8 +40,8 @@ namespace DietManager_new.Model
         }
 
         //VAR: (performance)
-        [Column(IsVersion = true)]
-        private Binary _version;
+       /* [Column(IsVersion = true)]
+        private Binary _version;*/
 
         //VAR: data
         private DateTime _data;
@@ -53,8 +62,16 @@ namespace DietManager_new.Model
 
             get { return this._quantita; }
 
-            set { this._quantita = value; }
+            set
+            {
+                this._quantita = value;
+                NotifyPropertyChanged("Quantita");
+                /*Calorie = Math.Round(((_quantita * ProdottoFK.Calorie) / ProdottoFK.Quantita), 2);
+                Grassi = Math.Round(((_quantita * ProdottoFK.Grassi) / ProdottoFK.Quantita), 2);
+                Carboidrati = Math.Round(((_quantita * ProdottoFK.Carboidrati) / ProdottoFK.Quantita), 2);
+                Proteine = Math.Round(((_quantita * ProdottoFK.Proteine) / ProdottoFK.Quantita), 2);*/
 
+            }
         }
 
 
@@ -144,6 +161,43 @@ namespace DietManager_new.Model
                 NotifyPropertyChanged("ProdottoFK");
             }
         }
+
+        // Internal column for the associated ToDoCategory ID value
+
+        private int _utenteFKInternal;
+        [Column]
+        public int UtenteFKInternal
+        {
+            get { return this._utenteFKInternal; }
+            set { this._utenteFKInternal = value; }
+        }
+
+
+        // Entity reference, to identify the ToDoCategory "storage" table
+        private EntityRef<Utente> _utenteFK;
+
+
+
+        // Association, to describe the relationship between this key and that "storage" table
+        [Association(Storage = "_utenteFK", ThisKey = "UtenteFKInternal", OtherKey = "IdUtente", IsForeignKey = true, DeleteRule="Cascade", DeleteOnNull=true)]
+        public Utente UtenteFK
+        {
+            get { return _utenteFK.Entity; }
+            set
+            {
+                NotifyPropertyChanging("UtenteFK");
+                _utenteFK.Entity = value;
+
+                if (value != null)
+                {
+                    _prodottoFKInternal = value.IdUtente;
+                }
+
+                NotifyPropertyChanged("UtenteFK");
+            }
+        }
+
+
 
         public string NomeProdotto {
             get { return ProdottoFK.NomeProdotto; }

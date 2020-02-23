@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Express 2012 for Windows Phone
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DietManager_new", "DietManager_new\DietManager_new.csproj", "{EA89379B-4F8E-4F69-9958-55F9C991A3AC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BindableApplicationBar", "BindableApplicationBar\BindableApplicationBar.csproj", "{4BE7F5D8-A46B-4FB8-AB58-11C9C425960E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{EA89379B-4F8E-4F69-9958-55F9C991A3AC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EA89379B-4F8E-4F69-9958-55F9C991A3AC}.Release|Any CPU.Build.0 = Release|Any CPU
 		{EA89379B-4F8E-4F69-9958-55F9C991A3AC}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{4BE7F5D8-A46B-4FB8-AB58-11C9C425960E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4BE7F5D8-A46B-4FB8-AB58-11C9C425960E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4BE7F5D8-A46B-4FB8-AB58-11C9C425960E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4BE7F5D8-A46B-4FB8-AB58-11C9C425960E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -13,12 +13,10 @@ namespace DietManager_new.Model
     public class Database : DataContext, INotifyPropertyChanged, INotifyPropertyChanging
     {
         public Table<Prodotto> Prodotti;
+        public Table<Utente> TabellaUtenti;
         public Table<Categoria> Categorie;
         public Table<Pasto> Pasti;
-
-
         private ObservableCollection<Pasto> pastiGiornata;
-
         private IsolatedStorageSettings appSettings = IsolatedStorageSettings.ApplicationSettings;
 
         private double valCalorie;
@@ -26,37 +24,19 @@ namespace DietManager_new.Model
             get { return this.valCalorie; }
         }
 
-        private double valCarboidrati;
-        public double ValCarboidrati
-        {
-            get { return this.valCarboidrati; }
-        }
-
-        private double valProteine;
-        public double ValProteine
-        {
-            get { return this.valProteine; }
-        }
-
-        private double valGrassi;
-        public double ValGrassi
-        {
-            get { return this.valGrassi; }
-        }
-
 
         private double maxQntaCalorie;
         public double MaxQntaCalorie { get { return this.maxQntaCalorie; } }
 
         private double minQntaCalorie ;
-        public double MinxQntaCalorie { get { return this.minQntaCalorie; } }
+        public double MinQntaCalorie { get { return this.minQntaCalorie; } }
 
         private double maxQntaCarboidrati;
         public double MaxQntaCarboidrati { get { return this.maxQntaCarboidrati; } }
 
         
         private double minQntaCarboidrati ;
-        public double MinQntaCarboidrati { get { return this.MinQntaCarboidrati; } }
+        public double MinQntaCarboidrati { get { return this.minQntaCarboidrati; } }
 
         
         private double maxQntaProteine ;
@@ -95,20 +75,20 @@ namespace DietManager_new.Model
             }
         }
 
-        private ObservableCollection<Prodotto> categoriaPanini;
-        public ObservableCollection<Prodotto> CategoriaPanini
+        private ObservableCollection<Prodotto> categoriaCereali;
+        public ObservableCollection<Prodotto> CategoriaCereali
         {
 
-            get { return this.categoriaPanini; }
+            get { return this.categoriaCereali; }
 
             set
             {
-                if (categoriaPanini != value)
+                if (categoriaCereali != value)
                 {
-                    NotifyPropertyChanging("CategoriaPanini");
-                    categoriaPanini = value;
+                    NotifyPropertyChanging("CategoriaCereali");
+                    categoriaCereali = value;
 
-                    NotifyPropertyChanged("CategoriaPanini");
+                    NotifyPropertyChanged("CategoriaCereali");
                 }
             }
         }
@@ -116,18 +96,130 @@ namespace DietManager_new.Model
         private ObservableCollection<Prodotto> categoriaBevande;
         public ObservableCollection<Prodotto> CategoriaBevande
         {
-
             get { return this.categoriaBevande; }
-
             set
             {
                 if (categoriaBevande != value)
                 {
                     NotifyPropertyChanging("CategoriaBevande");
-
                     categoriaBevande = value;
-
                     NotifyPropertyChanged("CategoriaBevande");
+                }
+            }
+        }
+
+        private ObservableCollection<Prodotto> categoriaPesce;
+        public ObservableCollection<Prodotto> CategoriaPesce
+        {
+            get { return this.categoriaPesce; }
+            set
+            {
+                if (this.categoriaPesce != value)
+                {
+                    this.categoriaPesce = value;
+                    NotifyPropertyChanged("CategoriaPesce");
+                }
+            }
+        }
+
+        private ObservableCollection<Prodotto> categoriaLatticini;
+        public ObservableCollection<Prodotto> CategoriaLatticini
+        {
+            get { return this.categoriaLatticini; }
+            set
+            {
+                if (this.categoriaLatticini != value)
+                {
+                    this.categoriaLatticini = value;
+                    NotifyPropertyChanged("CategoriaLatticini");
+                }
+            }
+        }
+
+        private ObservableCollection<Prodotto> categoriaFastFood;
+        public ObservableCollection<Prodotto> CategoriaFastFood
+        {
+            get { return this.categoriaFastFood; }
+            set
+            {
+                if (this.categoriaFastFood != value)
+                {
+                    this.categoriaFastFood = value;
+                    NotifyPropertyChanged("CategoriaFastFood");
+                }
+            }
+        }
+
+        private ObservableCollection<Prodotto> categoriaVarie;
+        public ObservableCollection<Prodotto> CategoriaVarie
+        {
+            get { return this.categoriaVarie; }
+            set
+            {
+                if (categoriaVarie != value)
+                {
+                    NotifyPropertyChanging("CategoriaVarie");
+                    categoriaVarie = value;
+                    NotifyPropertyChanged("CategoriaVarie");
+                }
+            }
+        }
+        private ObservableCollection<Prodotto> categoriaFrutta;
+        public ObservableCollection<Prodotto> CategoriaFrutta
+        {
+            get { return this.categoriaFrutta; }
+            set
+            {
+                if (categoriaFrutta != value)
+                {
+                    NotifyPropertyChanging("CategoriaFrutta");
+                    categoriaFrutta = value;
+                    NotifyPropertyChanged("CategoriaFrutta");
+                }
+            }
+        }
+
+        private ObservableCollection<Prodotto> categoriaVerdura;
+        public ObservableCollection<Prodotto> CategoriaVerdura
+        {
+            get { return this.categoriaVerdura; }
+            set
+            {
+                if (categoriaVerdura != value)
+                {
+                    NotifyPropertyChanging("CategoriaVerdura");
+                    categoriaVerdura = value;
+                    NotifyPropertyChanged("CategoriaVerdura");
+                }
+            }
+        }
+
+        private ObservableCollection<Prodotto> categoriaCarne;
+        public ObservableCollection<Prodotto> CategoriaCarne
+        {
+            get { return this.categoriaCarne; }
+            set
+            {
+                if (categoriaCarne != value)
+                {
+                    NotifyPropertyChanging("CategoriaCarne");
+                    categoriaCarne = value;
+                    NotifyPropertyChanged("CategoriaCarne");
+                }
+            }
+        }
+
+        private ObservableCollection<Prodotto> categoriaDolci;
+        public ObservableCollection<Prodotto> CategoriaDolci
+        {
+            get { return this.categoriaDolci; }
+            set
+            {
+                if (categoriaDolci != value)
+                {
+                    NotifyPropertyChanging("CategoriaDolci");
+                    categoriaDolci = value;
+                    NotifyPropertyChanged("CategoriaDolci");
                 }
             }
         }
@@ -151,48 +243,63 @@ namespace DietManager_new.Model
             }
         }
 
+        private Utente utenteAttuale;
+        public Utente UtenteAttuale {
+            get {
+                return utenteAttuale;
+            }
+            set {
+                if (value != utenteAttuale)
+                {
+                    utenteAttuale = value;
+                    NotifyPropertyChanged("UtenteAttuale");
+                }
+            }
+        }
+
 
 
 
         //COSTRUTTORE Pass the connection string to the base class.
-        public Database(string dbconnection) : base(dbconnection)
-        {
-             valCalorie = Double.Parse((appSettings["Calorie"].ToString()));
-            valCarboidrati = Double.Parse((appSettings["Carboidrati"].ToString()));
-            valProteine = Double.Parse((appSettings["Proteine"].ToString()));
-            valGrassi = Double.Parse((appSettings["Grassi"].ToString()));
-
-            maxQntaCalorie = valCalorie + (valCalorie * 0.05);
-            minQntaCalorie = valCalorie - (valCalorie * 0.05);
-
-            maxQntaCarboidrati = valCarboidrati + (valCarboidrati * 0.05);
-            minQntaCarboidrati = valCarboidrati - (valCarboidrati * 0.05);
-
-            maxQntaProteine = valProteine + (valProteine * 0.05);
-            minQntaProteine = valProteine - (valProteine * 0.05);
-
-            maxQntaGrassi = valGrassi + (valGrassi * 0.05);
-            minQntaGrassi = valGrassi - (valGrassi * 0.05);
-
-
-
-         
+        public Database() : base(App.PathDB)
+        {   
+            
         }
        
         
         //METODO carica le collezioni dal database
         public void LoadCollectionsFromDatabase()
         {
+            var utente = from Utente ut in this.TabellaUtenti
+                                where ut.IdUtente == App.idUtenteAttuale
+                                select ut;
+
+            utenteAttuale = (Utente)(utente.Single());
+
+            maxQntaCalorie = utenteAttuale.MaxCalorieUtente;
+            minQntaCalorie = utenteAttuale.MinCalorieUtente;
+
+
+            maxQntaCarboidrati = utenteAttuale.MaxCarboidratiUtente;
+            minQntaCarboidrati = utenteAttuale.MinCarboidratiUtente;
+
+            maxQntaProteine = utenteAttuale.MaxProteineUtente;
+            minQntaProteine = utenteAttuale.MinProteineUtente;
+
+            maxQntaGrassi = utenteAttuale.MaxGrassiUtente;
+            minQntaGrassi = utenteAttuale.MinGrassiUtente;
 
             
-            var prodottiInDB = from Prodotto prod in this.Prodotti
+            var prodottiInDB = from Prodotto prod in this.Prodotti 
                                 select prod;
 
             
             this.prodottiTotali = new ObservableCollection<Prodotto>(prodottiInDB);
 
             var pastiInDB = from Pasto pa in this.Pasti
+                            where pa.UtenteFKInternal == App.idUtenteAttuale
                                select pa;
+
 
 
             this.pastiTotali = new ObservableCollection<Pasto>(pastiInDB);
@@ -208,24 +315,47 @@ namespace DietManager_new.Model
     
                 switch (cat.NomeCategoria)
                 {   
-                    case "Panini":
-                        this.categoriaPanini = new ObservableCollection<Prodotto>(cat.ProdottiFK);
+                    case "Cereali":
+                        this.categoriaCereali = new ObservableCollection<Prodotto>(cat.ProdottiFK);
                         break;
-
                     case "Bevande":
                         this.categoriaBevande = new ObservableCollection<Prodotto>(cat.ProdottiFK);
                         break;
-
-                    default:
+                    case "Varie":
+                        this.categoriaVarie = new ObservableCollection<Prodotto>(cat.ProdottiFK);
                         break;
+                    case "Dolci":
+                        this.categoriaDolci = new ObservableCollection<Prodotto>(cat.ProdottiFK);
+                        break;
+                    case "Verdura":
+                        this.categoriaVerdura = new ObservableCollection<Prodotto>(cat.ProdottiFK);
+                        break;
+                    case "Carne":
+                        this.categoriaCarne = new ObservableCollection<Prodotto>(cat.ProdottiFK);
+                        break;
+                    case "Pesce":
+                        this.categoriaPesce = new ObservableCollection<Prodotto>(cat.ProdottiFK);
+                        break;
+                    case "Latticini":
+                        this.categoriaLatticini = new ObservableCollection<Prodotto>(cat.ProdottiFK);
+                        break;
+                    case "Fast Food":
+                        this.categoriaFastFood = new ObservableCollection<Prodotto>(cat.ProdottiFK);
+                        break;
+                    case "Frutta":
+                        this.categoriaFrutta = new ObservableCollection<Prodotto>(cat.ProdottiFK);
+                        break;
+                    default: break;
                 }
             }
 
-           
+
+            this.PastiDelGiorno((DateTime)appSettings["DataCorrente"]);
         }
 
         //METODO ritorna il prodotto con determinato id
         public Prodotto RitornaProdotto(int id) {
+
             foreach (Prodotto p in this.prodottiTotali) {
 
                 if (p.ProdottoId == id)
@@ -242,10 +372,8 @@ namespace DietManager_new.Model
 
             foreach (Pasto p in pastiTotali)
             {
-
                 if ((p.Data).Equals(data))
                 {
-
                     pastiGiornata.Add(p);
                 }
             }
@@ -258,8 +386,7 @@ namespace DietManager_new.Model
         {
 
             double calorieTot = 0;
-
-            this.PastiDelGiorno(data);
+            if (PastiDelGiorno(data).Count == 0) return 0;
 
             foreach (Pasto p in pastiGiornata)
             {
@@ -274,12 +401,10 @@ namespace DietManager_new.Model
         {
 
             double grassiTot = 0;
-
-            this.PastiDelGiorno(data);
+            if (PastiDelGiorno(data).Count == 0) return 0;
 
             foreach (Pasto p in pastiGiornata)
             {
-
                 grassiTot += p.Grassi;
             }
             return grassiTot;
@@ -290,12 +415,10 @@ namespace DietManager_new.Model
         {
 
             double proteineTot = 0;
-
-            this.PastiDelGiorno(data);
+            if (PastiDelGiorno(data).Count == 0) return 0;
 
             foreach (Pasto p in pastiGiornata)
             {
-
                 proteineTot += p.Proteine;
             }
             return proteineTot;
@@ -304,14 +427,11 @@ namespace DietManager_new.Model
         //METODO ritorna i carboidrati totali di un giorno
         public double CarboidratiDelGiorno(DateTime data)
         {
-
             double carboidratiTot = 0;
-
-            this.PastiDelGiorno(data);
+            if (PastiDelGiorno(data).Count == 0) return 0;
 
             foreach (Pasto p in pastiGiornata)
             {
-
                 carboidratiTot += p.Carboidrati;
             }
             return carboidratiTot;
@@ -320,7 +440,6 @@ namespace DietManager_new.Model
         //METODO ritorna una lista di giorni dato un mese ed un anno
         public ObservableCollection<Giornata> GiornateDelMese(int mese, int anno)
         {
-
             int numGiorniDelMese = System.DateTime.DaysInMonth(anno, mese);
 
             ObservableCollection<Giornata> giorni = new ObservableCollection<Giornata>();
@@ -337,10 +456,10 @@ namespace DietManager_new.Model
 
                 data = new DateTime(anno, mese, i);
 
-                PastiDelGiorno(data);
+              PastiDelGiorno(data);
                 tempCalorie = CalorieDelGiorno(data);
                 if (data == DateTime.Today)
-                    giorni.Add(new Giornata(anno, mese, i, "Yellow"));
+                    giorni.Add(new Giornata(anno, mese, i, "Blue"));
                 else
                 {
                     if (tempCalorie == 0)
@@ -350,7 +469,7 @@ namespace DietManager_new.Model
                         tempGrassi = GrassiDelGiorno(data);
                         tempCarboidrati = CarboidratiDelGiorno(data);
                         tempProteine = ProteineDelGiorno(data);
-                        if (RISPETTALADIETA(tempCalorie, tempCarboidrati, tempGrassi, tempProteine))
+                        if (Dietologo.RISPETTALADIETA(tempCalorie, tempCarboidrati, tempGrassi, tempProteine))
                             giorni.Add(new Giornata(anno, mese, i, "Green"));
                         else
                             giorni.Add(new Giornata(anno, mese, i, "Red"));
@@ -362,42 +481,33 @@ namespace DietManager_new.Model
 
         }
 
-        //DA METHOD controlla se il valore passato e entro i limiti 
-        private bool RISPETTALADIETA(double qntaCalorie, double qntaCarboidrati, double qntaGrassi, double qntaProteine)
-        {
 
-           
-            if ((qntaCalorie >= minQntaCalorie && qntaCalorie <= maxQntaCalorie) && (qntaCarboidrati >= minQntaCarboidrati && qntaCarboidrati <= maxQntaCarboidrati) && (qntaProteine >= minQntaProteine && qntaProteine <= maxQntaProteine) && (qntaGrassi >= minQntaGrassi && qntaGrassi <= maxQntaGrassi))
-
-                return true;
-
-            return false;
-
-        }
 
         //METODO aggiunge un pasto nuovo
         public void aggiungiPasto(Pasto p)
         {
-
-            this.pastiTotali.Add(p);
-
+            int index = 0;
+            foreach (Pasto pa in pastiTotali)
+            {
+                if (pa.CompareTo(p) < 0)
+                    index++;
+                else { pastiTotali.Insert(index, p); break; }
+            }
+            if(!pastiTotali.Contains(p))
+                this.pastiTotali.Add(p);
             this.Pasti.InsertOnSubmit(p);
-
             this.SubmitChanges();
-
         }
 
         //METODO elimina un pasto esistente
         public void rimuoviPasto(Pasto p)
         {
-
             this.pastiTotali.Remove(p);
-
             this.Pasti.DeleteOnSubmit(p);
-
             this.SubmitChanges();
-
         }
+
+        
 
         //METODO ritorna tutti i prodotti che nel nome contengono una certa stringa
         public ObservableCollection<Prodotto> cercaProdotto(string nome) {
@@ -406,12 +516,10 @@ namespace DietManager_new.Model
 
             foreach (Prodotto p in this.prodottiTotali) {
 
-                if (p.NomeProdotto.Contains(nome))
+                if (p.NomeProdotto.IndexOf(nome,StringComparison.OrdinalIgnoreCase)>=0)
                     trovati.Add(p);
             }
-
             return trovati;
-
         }
 
         #region INotifyPropertyChanged Members
@@ -446,13 +554,4 @@ namespace DietManager_new.Model
 
 
     }
-
-        }
-
-
-    
-
-    
-
-
-
+}

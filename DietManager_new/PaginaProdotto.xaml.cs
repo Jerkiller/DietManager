@@ -13,6 +13,10 @@ using Microsoft.Phone.Controls;
 using System.Windows.Navigation;
 using DietManager_new.ViewModel;
 
+//piechart
+using System.Collections.ObjectModel;
+using DietManager_new.Model;
+
 
 
 
@@ -25,10 +29,15 @@ namespace DietManager_new
         public PaginaProdotto()
         {
             InitializeComponent();
-            
+
+
         }
 
-        
+
+
+
+
+
 
 
 
@@ -47,59 +56,30 @@ namespace DietManager_new
 
                 /// crea un nuovo DataContext con il LivelloVM(id) per il binding
                 this.DataContext = new ProdottoViewModel(prod);
+
+
+
             }
 
+           
+
 
         }
 
-        //METODO setta i campi ai valori dell alimento in porzione piccola
-        private void Small_Click(object sender, RoutedEventArgs e)
+        //METODO: riabilita la appbar dopo l inserimento della quantita del prodotto
+        private void AbilitaAppBar(object sender, RoutedEventArgs e)
         {
-            ((ProdottoViewModel)this.DataContext).Piccola();
+            ApplicationBar.IsVisible = true;
         }
 
-        //METODO setta i campi ai valori dell alimento in porzione media
-        private void Medium_Click(object sender, RoutedEventArgs e)
-        {
-            ((ProdottoViewModel)this.DataContext).Media();
-        }
-
-        //METODO setta i campi ai valori dell alimento in porzione grande
-        private void Big_Click(object sender, RoutedEventArgs e)
-        {
-            ((ProdottoViewModel)this.DataContext).Grande();
-        }
-
-        //METODO setta la cella a 0 se si cancella il valore
-        private void controllaVuota(object sender, TextChangedEventArgs e)
-        {
-            if(((TextBox)sender).Text =="")
-                ((TextBox)sender).Text="0";
-        }
-
-       
-
-        private void aggiungiPasto(object sender, EventArgs e)
+        //METODO: disabilita l appbar durante l inserimento della quantita del prodotto
+        private void DisabilitaAppBar(object sender, RoutedEventArgs e)
         {
 
-             ((ProdottoViewModel)this.DataContext).AggiungiPasto();
-            MessageBox.Show("Pasto inserito correttamente");
-            NavigationService.Navigate(new Uri("/PaginaGiornata.xaml?Refresh=true", UriKind.Relative));
-        
+            ApplicationBar.IsVisible = false;
         }
-
-        //METODO Premendo il Back button voglio tornare alla main page e non nella pagina prima
-        protected override void OnBackKeyPress(System.ComponentModel.CancelEventArgs e)
-        {
-            MessageBox.Show(NavigationService.Source.ToString() + "&Refresh=true");
-
-            NavigationService.Navigate(new Uri("/PaginaRicerca.xaml?Refresh=true", UriKind.Relative));
-            e.Cancel = true;
-
-        }
-
-
-        }
-
 
     }
+
+
+}

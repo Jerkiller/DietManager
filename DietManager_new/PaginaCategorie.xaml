@@ -6,6 +6,8 @@
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:controls="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:bar="clr-namespace:BindableApplicationBar;assembly=BindableApplicationBar"
+
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="768"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
@@ -17,75 +19,130 @@
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
         <!--Pivot Control-->
-        <controls:Pivot Title="MY APPLICATION">
-            <!--Pivot item one-->
-            <controls:PivotItem Header="Paninassi">
-                
-                <StackPanel >
-
-                    <ListBox Name="listaPanini" ItemsSource="{Binding CategoriaPanini}" SelectionChanged="lista_SelectionChanged" >
-                        
+        <controls:Pivot Title="DIET MANAGER">
+            
+            <!--Pivot item 1-->
+            <controls:PivotItem Header="Cereali">
+                <StackPanel>
+                    <ListBox Name="listaCereali" ItemsSource="{Binding CategoriaCereali}" SelectedItem="{Binding ProdottoSelezionato, Mode=TwoWay}" FontSize="30" Height="540"  >
                         <DataTemplate>
                             <ListBoxItem Content="{Binding NomeProdotto}" Tag="{Binding ProdottoId}" />
                         </DataTemplate>
-                        
                     </ListBox>
-                    
-                    
                 </StackPanel>
-                
-                
             </controls:PivotItem>
 
-            <!--Pivot item two-->
+            <!--Pivot item 2-->
             <controls:PivotItem Header="Bevande">
-
                 <StackPanel >
-
-                    <StackPanel >
-
-                        <ListBox Name="listaBevande" ItemsSource="{Binding CategoriaBevande}" SelectionChanged="lista_SelectionChanged" >
-
+                    <ListBox Name="listaBevande" ItemsSource="{Binding CategoriaBevande}" SelectedItem="{Binding ProdottoSelezionato, Mode=TwoWay}" FontSize="30" Height="540" >
                             <DataTemplate>
-                                <ListBoxItem Content="{Binding NomeProdotto}" Tag="{Binding ProdottoId}" />
+                            <ListBoxItem Content="{Binding NomeProdotto}" Tag="{Binding ProdottoId}" />
                             </DataTemplate>
-
                         </ListBox>
-
-
                     </StackPanel>
-
-
-                </StackPanel>
-
-
             </controls:PivotItem>
 
-        </controls:Pivot>
+            <!--Pivot item 3-->
+            <controls:PivotItem Header="Frutta">
+                <StackPanel >
+                    <ListBox Name="listaFrutta" ItemsSource="{Binding CategoriaFrutta}" SelectedItem="{Binding ProdottoSelezionato, Mode=TwoWay}" FontSize="30" Height="540" >
+                            <DataTemplate>
+                            <ListBoxItem Content="{Binding NomeProdotto}" Tag="{Binding ProdottoId}" />
+                            </DataTemplate>
+                        </ListBox>
+                </StackPanel>
+            </controls:PivotItem>
+
+            <!--Pivot item 4-->
+            <controls:PivotItem Header="Verdura">
+                <StackPanel >
+                    <ListBox Name="listaVerdura" ItemsSource="{Binding CategoriaVerdura}" SelectedItem="{Binding ProdottoSelezionato, Mode=TwoWay}" FontSize="30" Height="540" >
+                            <DataTemplate>
+                            <ListBoxItem Content="{Binding NomeProdotto}" Tag="{Binding ProdottoId}" />
+                            </DataTemplate>
+                        </ListBox>
+                </StackPanel>
+            </controls:PivotItem>
+
+                <!--Pivot item 5-->
+                <controls:PivotItem Header="Carne">
+                    <StackPanel>
+                    <ListBox Name="listaCarne"  ItemsSource="{Binding CategoriaCarne}" SelectedItem="{Binding ProdottoSelezionato, Mode=TwoWay}" FontSize="30" Height="540" >
+                                <DataTemplate>
+                            <ListBoxItem Content="{Binding NomeProdotto}" Tag="{Binding ProdottoId}" />
+                                </DataTemplate>
+                            </ListBox>
+                    </StackPanel>
+                </controls:PivotItem>
+
+            <!--Pivot item 6-->
+            <controls:PivotItem Header="Pesce">
+                <StackPanel>
+                    <ListBox Name="listaPesce"  ItemsSource="{Binding CategoriaPesce}" SelectedItem="{Binding ProdottoSelezionato, Mode=TwoWay}" FontSize="30" Height="540" >
+                        <DataTemplate>
+                            <ListBoxItem Content="{Binding NomeProdotto}" Tag="{Binding ProdottoId}" />
+                        </DataTemplate>
+                    </ListBox>
+                </StackPanel>
+            </controls:PivotItem>
+
+            <!--Pivot item 7-->
+            <controls:PivotItem Header="Latticini">
+                <StackPanel>
+                    <ListBox Name="listaLatticini"  ItemsSource="{Binding CategoriaLatticini}" SelectedItem="{Binding ProdottoSelezionato, Mode=TwoWay}" FontSize="30" Height="540" >
+                        <DataTemplate>
+                            <ListBoxItem Content="{Binding NomeProdotto}" Tag="{Binding ProdottoId}" />
+                        </DataTemplate>
+                    </ListBox>
+                </StackPanel>
+            </controls:PivotItem>
+
+            <!--Pivot item 8-->
+                <controls:PivotItem Header="Dolci">
+                    <StackPanel >
+                    <ListBox Name="listaDolci" ItemsSource="{Binding CategoriaDolci}" SelectedItem="{Binding ProdottoSelezionato, Mode=TwoWay}" FontSize="30" Height="540" >
+                                <DataTemplate>
+                            <ListBoxItem Content="{Binding NomeProdotto}" Tag="{Binding ProdottoId}" />
+                                </DataTemplate>
+                            </ListBox>
+                    </StackPanel>
+                </controls:PivotItem>
+
+            <!--Pivot item 9-->
+            <controls:PivotItem Header="Fast-Food">
+                <StackPanel>
+                    <ListBox Name="listaFastFood"  ItemsSource="{Binding CategoriaFastFood}" SelectedItem="{Binding ProdottoSelezionato, Mode=TwoWay}" FontSize="30" Height="540" >
+                        <DataTemplate>
+                            <ListBoxItem Content="{Binding NomeProdotto}" Tag="{Binding ProdottoId}" />
+                        </DataTemplate>
+                    </ListBox>
+                </StackPanel>
+            </controls:PivotItem>
+
+            <!--Pivot item 10-->
+            <controls:PivotItem Header="Varie">
+                <StackPanel >
+                    <ListBox Name="listaVarie" ItemsSource="{Binding CategoriaVarie}" SelectedItem="{Binding ProdottoSelezionato, Mode=TwoWay}" FontSize="30" Height="540" >
+                        <DataTemplate>
+                            <ListBoxItem Content="{Binding NomeProdotto}" Tag="{Binding ProdottoId}" />
+                        </DataTemplate>
+                    </ListBox>
+                </StackPanel>
+            </controls:PivotItem>
+            <!--End of all pivot elements-->
+    </controls:Pivot>
 </Grid>
 
 
-
-
-
-
-
-    <phone:PhoneApplicationPage.ApplicationBar>
-        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
-
-            <shell:ApplicationBarIconButton 
-                IconUri="/Immagini/appbarAggiungi.png" 
-                Text="cerca" 
-                x:Name="newTaskAppBarButton" 
-                Click="vaiARicerca"
-                />
-
-        </shell:ApplicationBar>
-    </phone:PhoneApplicationPage.ApplicationBar>
-
-
-
-
+    <bar:Bindable.ApplicationBar>
+        <bar:BindableApplicationBar>
+            <bar:BindableApplicationBarButton
+            Text="cerca" 
+            IconUri="Immagini/search.png" 
+            Command="{Binding Cerca}"/>
+        </bar:BindableApplicationBar>
+    </bar:Bindable.ApplicationBar>
 
 
 </phone:PhoneApplicationPage>

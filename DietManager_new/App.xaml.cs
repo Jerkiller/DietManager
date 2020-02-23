@@ -23,7 +23,13 @@ namespace DietManager_new
 
         public static string PathDB = "Data Source=isostore:/database.sdf";
 
-        public static CategoriaViewModel categoriaVM;
+        public static DietologoViewModel dvm;
+
+        public static SimpleDatabase db;
+
+        public static Utente utenteAttuale;
+
+        public static int idUtenteAttuale;
 
         private IsolatedStorageSettings appSettings = IsolatedStorageSettings.ApplicationSettings;
 
@@ -48,11 +54,13 @@ namespace DietManager_new
             // Phone-specific initialization
             InitializePhoneApplication();
 
+            ThemeManager.ToLightTheme();
+
             // Show graphics profiling information while debugging.
             if (System.Diagnostics.Debugger.IsAttached)
             {
                 // Display the current frame rate counters.
-                Application.Current.Host.Settings.EnableFrameRateCounter = true;
+                Application.Current.Host.Settings.EnableFrameRateCounter = false;
 
                 // Show the areas of the app that are being redrawn in each frame.
                 //Application.Current.Host.Settings.EnableRedrawRegions = true;
@@ -68,110 +76,6 @@ namespace DietManager_new
                 PhoneApplicationService.Current.UserIdleDetectionMode = IdleDetectionMode.Disabled;
             }
 
-
-            appSettings.Add("Calorie", 2000);
-            appSettings.Add("Carboidrati", 2000);
-            appSettings.Add("Grassi", 2000);
-            appSettings.Add("Proteine", 2000);
-            appSettings.Add("DataCorrente", DateTime.Today);
-
-          
-
-           using(Database db = new Database(App.PathDB)){
-               if (db.DatabaseExists() == false)
-            {
-                // Create the local database.
-                db.CreateDatabase();
-
-                Categoria catPanini = new Categoria { NomeCategoria = "Panini" };
-                Categoria catBevande = new Categoria { NomeCategoria = "Bevande" };
-                Categoria catPanificati = new Categoria { NomeCategoria = "Panificati" };
-
-
-
-                // Prepopulate the categories.
-                db.Categorie.InsertOnSubmit(catPanini);
-                db.Categorie.InsertOnSubmit(catBevande);
-                db.Categorie.InsertOnSubmit(catPanificati);
-
-
-
-
-                // Create a new to-do item.
-                db.Prodotti.InsertOnSubmit(new Prodotto
-                {
-                    NomeProdotto = "crispy",
-                    CategoriaFK = catPanini,
-                    PathFoto = "crispy.png",
-                    Quantita = 1,
-                    Carboidrati = 70,
-                    UnitaDiMisura = "pz",
-                    Grassi = 20,
-                    Proteine = 10,
-                    Calorie = 150,
-                    Media = 1,
-                    Piccola = 1,
-                    Grande = 1
-
-                }
-                    );
-
-                Prodotto p = new Prodotto
-                {
-                    NomeProdotto = "coca coea",
-                    CategoriaFK = catBevande,
-                    Quantita = 100,
-                    PathFoto = "cocacoea.jpg",
-                    UnitaDiMisura = "ml",
-                    Carboidrati = 10,
-                    Grassi = 10,
-                    Proteine = 11,
-                    Calorie = 200,
-                    Media = 250,
-                    Piccola = 500,
-                    Grande = 1000
-                };
-                db.Prodotti.InsertOnSubmit(p);
-
-
-                Prodotto p2 = new Prodotto
-                {
-                    NomeProdotto = "medoemedo",
-                    CategoriaFK = catBevande,
-                    Quantita = 100,
-                    PathFoto = "cocacoea.jpg",
-                    UnitaDiMisura = "ml",
-                    Carboidrati = 10,
-                    Grassi = 10,
-                    Proteine = 11,
-                    Calorie = 200,
-                    Media = 250,
-                    Piccola = 500,
-                    Grande = 1000
-                };
-
-                db.Prodotti.InsertOnSubmit(p2);
-
-                db.Pasti.InsertOnSubmit(new Pasto
-                 {
-                     ProdottoFK=p2,
-                     Quantita=200,
-                     Calorie = Math.Round(((200 * p2.Calorie) / p2.Quantita),2),  // quantità media prodotto : calorie prodotto = quantità assunta : calorie assunte
-                     Grassi=Math.Round(((200*p2.Grassi)/p2.Quantita),2),
-                     Carboidrati = Math.Round(((200 * p2.Carboidrati) / p2.Quantita),2),
-                     Proteine = Math.Round(((200 * p2.Proteine) / p2.Quantita),2),
-                     Data=DateTime.Today
-                    });
-         
-                db.SubmitChanges();
-
-
-                 }
-        
-        }
-
-            categoriaVM = new CategoriaViewModel();
-
         
         }
 
@@ -180,7 +84,60 @@ namespace DietManager_new
         private void Application_Launching(object sender, LaunchingEventArgs e)
         {
 
+            if (!appSettings.Contains("DataCorrente"))
+                appSettings.Add("DataCorrente", DateTime.Today);
 
+            dvm = new DietologoViewModel();
+
+            creaSimpleDatabase();
+
+
+        }
+
+        public static void creaSimpleDatabase()
+        {
+            using (db = new SimpleDatabase())
+            {
+                if (db.DatabaseExists() == false)
+                {
+                    // Create the local database.
+                    db.CreateDatabase();
+                    List<Categoria> categorie = ProductLoader.caricaCategorie();
+                    List<Prodotto> prodotti = new List<Prodotto>();
+                    foreach (Categoria cat in categorie)
+                    {
+                        db.Categorie.InsertOnSubmit(cat);
+                    }
+
+                    foreach (Categoria cat in categorie)
+                    {
+                        prodotti.AddRange(ProductLoader.caricaProdotti(cat));
+                    }
+
+                    foreach (Prodotto p in prodotti)
+                    {
+                        db.Prodotti.InsertOnSubmit(p);
+                    }
+
+                    db.SubmitChanges();
+
+                }
+
+            }
+        }
+
+       public static void creaDatabase()
+        {
+            using (Database db = new Database())
+            {
+                if (db.DatabaseExists() == false)
+                    // Create the local database.
+                    db.CreateDatabase();
+                 
+                    
+
+
+            }
         }
 
         // Code to execute when the application is activated (brought to foreground)

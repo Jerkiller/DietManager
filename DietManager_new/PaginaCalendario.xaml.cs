@@ -19,22 +19,49 @@ namespace DietManager_new
             this.DataContext = new CalendarioViewModel();
         }
 
-        private void MeseSuccessivo(object sender, RoutedEventArgs e)
+        //per tornare in dietro
+        protected override void OnBackKeyPress(System.ComponentModel.CancelEventArgs e)
         {
-            ((CalendarioViewModel)this.DataContext).ProssimoMese();
+            e.Cancel = true;
+            NavigationService.Navigate(new Uri("/PaginaGiornata.xaml", UriKind.Relative));
         }
 
-        private void MesePrecedente(object sender, RoutedEventArgs e)
+        //gesture handler
+        private void GestureListener_Flick(object sender, FlickGestureEventArgs e)
         {
-            ((CalendarioViewModel)this.DataContext).MesePrecedente();
-        }
+            if (e.Direction == System.Windows.Controls.Orientation.Horizontal)
+            {
+                if (e.HorizontalVelocity < 0)
+                {
+                    // flick right
+                    ((CalendarioViewModel)this.DataContext).ProssimoMese.Execute(null);
 
-        private void SettaGiorno(object sender, RoutedEventArgs e)
-        {
-            string a = ((Button)sender).Content.ToString();
-            int giorno = Convert.ToInt32(a);
-            ((CalendarioViewModel)this.DataContext).SettaGiorno(giorno);
-            NavigationService.Navigate(new Uri("/PaginaGiornata.xaml?Refresh=true", UriKind.Relative));
+
+                }
+                else
+                {
+                    // flick left
+
+                    ((CalendarioViewModel)this.DataContext).MesePrecedente.Execute(null);
+
+
+                }
+            }
+            else
+            {
+                if (e.VerticalVelocity < 0)
+                {
+                    // flick up
+                    
+
+                }
+                else
+                {
+                    // flick down
+                   
+
+                }
+            }
         }
     }
 }

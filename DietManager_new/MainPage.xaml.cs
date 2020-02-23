@@ -11,6 +11,8 @@ using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using Microsoft.Phone.Controls;
 using System.IO.IsolatedStorage;
+using DietManager_new.ViewModel;
+
 
 namespace DietManager_new
 {
@@ -18,19 +20,27 @@ namespace DietManager_new
     {
 
 
-
         // Constructor
         public MainPage()
         {
             InitializeComponent();
-            
+            this.DataContext = new MainPageVM();
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        protected override void OnBackKeyPress(System.ComponentModel.CancelEventArgs e)
         {
-            NavigationService.Navigate(new Uri("/PaginaGiornata.xaml", UriKind.Relative));
-
-
+            MessageBoxResult conferma = MessageBox.Show("Sei sicuro di voler uscire?", "Uscire?", MessageBoxButton.OKCancel);
+            if (conferma == MessageBoxResult.OK)
+            {
+                while (NavigationService.CanGoBack)
+                {
+                    NavigationService.RemoveBackEntry();
+                }
+                base.OnBackKeyPress(e);
+                e.Cancel = false;
+            }
+            else { e.Cancel = true; }
         }
+        
     }
 }

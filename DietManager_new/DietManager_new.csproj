@@ -48,6 +48,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AmCharts.Windows.QuickCharts.WP">
+      <HintPath>..\packages\amChartsQuickCharts.1.1\lib\sl3-wp\AmCharts.Windows.QuickCharts.WP.dll</HintPath>
+    </Reference>
+    <Reference Include="JeffWilcox.PhoneThemeManager">
+      <HintPath>..\packages\PhoneThemeManager.2.0\lib\sl4-windowsphone71\JeffWilcox.PhoneThemeManager.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Phone" />
     <Reference Include="Microsoft.Phone.Controls, Version=7.0.0.0, Culture=neutral, PublicKeyToken=24eec0d8c86cda1e, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.Phone.Controls.Toolkit, Version=1.0.0.0, Culture=neutral, PublicKeyToken=b772ad94eb9ca604, processorArchitecture=MSIL" />
@@ -59,30 +65,75 @@
     <Reference Include="System.Net" />
     <Reference Include="System.Xml" />
     <Reference Include="mscorlib.extensions" />
+    <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GestioneUtenti.xaml.cs">
+      <DependentUpon>GestioneUtenti.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Info.xaml.cs">
+      <DependentUpon>Info.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Model\Categoria.cs" />
     <Compile Include="Model\Database.cs" />
+    <Compile Include="Model\DelegateCommand.cs" />
+    <Compile Include="Model\Dietologo.cs" />
     <Compile Include="Model\Giornata.cs" />
     <Compile Include="Model\Pasto.cs" />
+    <Compile Include="Model\PData.cs" />
+    <Compile Include="Model\ProductLoader.cs" />
+    <Compile Include="Model\SimpleDatabase.cs" />
+    <Compile Include="Model\Utente.cs" />
     <Compile Include="PaginaCalendario.xaml.cs">
       <DependentUpon>PaginaCalendario.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PaginaDietologo.xaml.cs">
+      <DependentUpon>PaginaDietologo.xaml</DependentUpon>
     </Compile>
     <Compile Include="PaginaRicerca.xaml.cs">
       <DependentUpon>PaginaRicerca.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Profilazione1.xaml.cs">
+      <DependentUpon>Profilazione1.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Profilazione2.xaml.cs">
+      <DependentUpon>Profilazione2.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Profilazione3.xaml.cs">
+      <DependentUpon>Profilazione3.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Profilazione4.xaml.cs">
+      <DependentUpon>Profilazione4.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Profilazione5.xaml.cs">
+      <DependentUpon>Profilazione5.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Profilazione6.xaml.cs">
+      <DependentUpon>Profilazione6.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Profilazione0.xaml.cs">
+      <DependentUpon>Profilazione0.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Tutorial.xaml.cs">
+      <DependentUpon>Tutorial.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Tutorial2.xaml.cs">
+      <DependentUpon>Tutorial2.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Tutorial3.xaml.cs">
+      <DependentUpon>Tutorial3.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModel\CalendarioViewModel.cs" />
+    <Compile Include="ViewModel\DietologoViewModel.cs" />
+    <Compile Include="ViewModel\MainPageVM.cs" />
     <Compile Include="ViewModel\PreviewGiornataVM.cs" />
     <Compile Include="Model\Prodotto.cs" />
-    <Compile Include="PaginaImpostaProfilo.xaml.cs">
-      <DependentUpon>PaginaImpostaProfilo.xaml</DependentUpon>
-    </Compile>
     <Compile Include="ViewModel\CategoriaViewModel.cs" />
     <Compile Include="ViewModel\GiornataViewModel.cs" />
     <Compile Include="ViewModel\ProdottoViewModel.cs" />
@@ -95,16 +146,22 @@
     <Compile Include="PaginaProdotto.xaml.cs">
       <DependentUpon>PaginaProdotto.xaml</DependentUpon>
     </Compile>
-    <Compile Include="PaginaSceltaProdotto.xaml.cs">
-      <DependentUpon>PaginaSceltaProdotto.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModel\UtentiVM.cs" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
+    <Page Include="GestioneUtenti.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Info.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -117,11 +174,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="PaginaGiornata.xaml">
+    <Page Include="PaginaDietologo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="PaginaImpostaProfilo.xaml">
+    <Page Include="PaginaGiornata.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -133,32 +190,362 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="PaginaSceltaProdotto.xaml">
+    <Page Include="Profilazione1.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Profilazione2.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Profilazione3.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Profilazione4.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Profilazione5.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Profilazione6.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Profilazione0.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Tutorial.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Tutorial2.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Tutorial3.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Properties\AppManifest.xml" />
-    <None Include="Properties\WMAppManifest.xml" />
+    <None Include="DietManager_new_2014_02_21_21_19_36.sap" />
+    <None Include="DietManager_new_2014_02_21_21_25_00.sap" />
+    <None Include="DietManager_new_2014_02_24_16_03_15.sap" />
+    <None Include="DietManager_new_2014_02_24_16_04_50.sap" />
+    <None Include="DietManager_new_2014_02_24_16_06_33.sap" />
+    <None Include="packages.config" />
+    <None Include="Properties\AppManifest.xml">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Properties\WMAppManifest.xml">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="ApplicationIcon.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Background.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    <Content Include="Foto\acciuga.jpg" />
+    <Content Include="Foto\acciughe.jpg" />
+    <Content Include="Foto\acetobalsamico.jpg" />
+    <Content Include="Foto\agnello.jpg" />
+    <Content Include="Foto\albicocca.jpg" />
+    <Content Include="Foto\amaro.jpg" />
+    <Content Include="Foto\ananas.jpg" />
+    <Content Include="Foto\anguilla.jpg" />
+    <Content Include="Foto\anguria.jpg" />
+    <Content Include="Foto\aperitivo.jpg" />
+    <Content Include="Foto\arachidi.jpg" />
+    <Content Include="Foto\arancia.jpg" />
+    <Content Include="Foto\aranciata.jpg" />
+    <Content Include="Foto\asparagi.jpg" />
+    <Content Include="Foto\astice.jpg" />
+    <Content Include="Foto\banana.jpg" />
+    <Content Include="Foto\bicchierinograppa.jpg" />
+    <Content Include="Foto\bicchierinolimoncello.jpg" />
+    <Content Include="Foto\birrabionda.jpg" />
+    <Content Include="Foto\birrascura.jpg" />
+    <Content Include="Foto\biscotto.jpg" />
+    <Content Include="Foto\biscottoburro.jpg" />
+    <Content Include="Foto\biscottocioccolato.jpg" />
+    <Content Include="Foto\bocconcinipollo.jpg" />
+    <Content Include="Foto\bresaola.jpg" />
+    <Content Include="Foto\braciolagriglia.jpg" />
+    <Content Include="Foto\brioche.jpg" />
+    <Content Include="Foto\broccoli.jpg" />
+    <Content Include="Foto\bruschetta.jpg" />
+    <Content Include="Foto\budino.jpg" />
+    <Content Include="Foto\burrata.jpg" />
+    <Content Include="Foto\burro.jpg" />
+    <Content Include="Foto\burroarachidi.jpg" />
+    <Content Include="Foto\caffe.jpg" />
+    <Content Include="Foto\caffelatte.jpg" />
+    <Content Include="Foto\capperi.jpg" />
+    <Content Include="Foto\caramelledure.jpg" />
+    <Content Include="Foto\carciofi.jpg" />
+    <Content Include="Foto\carnecavallo.jpg" />
+    <Content Include="Foto\carote.jpg" />
+    <Content Include="Foto\cavolo.jpg" />
+    <Content Include="Foto\ceci.jpg" />
+    <Content Include="Foto\cedrata.jpg" />
+    <Content Include="Foto\cetrioli.jpg" />
+    <Content Include="Foto\ciliegie.jpg" />
+    <Content Include="Foto\cioccolata.jpg" />
+    <Content Include="Foto\cioccolatacalda.jpg" />
+    <Content Include="Foto\cipolle.jpg" />
+    <Content Include="Foto\cocacola.jpg" />
+    <Content Include="Foto\cocco.jpg" />
+    <Content Include="Foto\cocktail.jpg" />
+    <Content Include="Foto\coniglio.jpg" />
+    <Content Include="Foto\cono.jpg" />
+    <Content Include="Foto\coppagelato.jpg" />
+    <Content Include="Foto\cornflakes.jpg" />
+    <Content Include="Foto\cornflakescioccolato.jpg" />
+    <Content Include="Foto\costoletta.jpg" />
+    <Content Include="Foto\cotoletta.jpg" />
+    <Content Include="Foto\couscous.jpg" />
+    <Content Include="Foto\cozze.jpg" />
+    <Content Include="Foto\crackers.JPG" />
+    <Content Include="Foto\crepe.jpg" />
+    <Content Include="Foto\crispy.jpg" />
+    <Content Include="Foto\datteri.jpg" />
+    <Content Include="Foto\emmental.jpg" />
+    <Content Include="Foto\espresso.jpg" />
+    <Content Include="Foto\fagioli.jpg" />
+    <Content Include="Foto\fagiolini.jpg" />
+    <Content Include="Foto\fesatacchino.jpg" />
+    <Content Include="Foto\fico.jpg" />
+    <Content Include="Foto\fiorentina.jpg" />
+    <Content Include="Foto\formaggio.jpg" />
+    <Content Include="Foto\fragola.jpg" />
+    <Content Include="Foto\frittata.jpg" />
+    <Content Include="Foto\fritturadipesce.jpg" />
+    <Content Include="Foto\fruttibosco.jpg" />
+    <Content Include="Foto\funghi.jpg" />
+    <Content Include="Foto\gallettariso.jpg" />
+    <Content Include="Foto\gamberetti.jpg" />
+    <Content Include="Foto\gambero.jpg" />
+    <Content Include="Foto\ghiacciolo.jpg" />
+    <Content Include="Foto\ginger.jpg" />
+    <Content Include="Foto\gnocchi.jpg" />
+    <Content Include="Foto\gnocchiformaggi.jpg" />
+    <Content Include="Foto\gorgonzola.jpg" />
+    <Content Include="Foto\grissini.jpg" />
+    <Content Include="Foto\hotdog.jpg" />
+    <Content Include="Foto\insalata.jpg" />
+    <Content Include="Foto\insalatonatonnoformaggio.jpg" />
+    <Content Include="Foto\kebab.jpg" />
+    <Content Include="Foto\ketchup.jpg" />
+    <Content Include="Foto\kinderbrioss.jpg" />
+    <Content Include="Foto\kinderbueno.jpg" />
+    <Content Include="Foto\kindercereali.jpg" />
+    <Content Include="Foto\kindercioccolato.jpg" />
+    <Content Include="Foto\kinderdelice.jpg" />
+    <Content Include="Foto\kinderfettalatte.jpg" />
+    <Content Include="Foto\kinderfiesta.jpg" />
+    <Content Include="Foto\kinderpingui.jpg" />
+    <Content Include="Foto\kiwi.jpg" />
+    <Content Include="Foto\lasagne.jpg" />
+    <Content Include="Foto\latte.jpg" />
+    <Content Include="Foto\lattenesquik.jpg" />
+    <Content Include="Foto\lemonsoda.jpg" />
+    <Content Include="Foto\lenticchie.jpg" />
+    <Content Include="Foto\lupini.jpg" />
+    <Content Include="Foto\macedonia.jpg" />
+    <Content Include="Foto\maionese.jpg" />
+    <Content Include="Foto\mandarino.jpg" />
+    <Content Include="Foto\mandorle.jpg" />
+    <Content Include="Foto\manzo.jpg" />
+    <Content Include="Foto\marmellata.jpg" />
+    <Content Include="Foto\mascarpone.jpg" />
+    <Content Include="Foto\mela.jpg" />
+    <Content Include="Foto\melanzane.jpg" />
+    <Content Include="Foto\melone.jpg" />
+    <Content Include="Foto\merluzzo.jpg" />
+    <Content Include="Foto\miele.jpg" />
+    <Content Include="Foto\minestrone.jpg" />
+    <Content Include="Foto\mortadella.jpg" />
+    <Content Include="Foto\mozzarella.jpg" />
+    <Content Include="Foto\mozzarellabufala.jpg" />
+    <Content Include="Foto\muffin.jpg" />
+    <Content Include="Foto\muffincioccolato.jpg" />
+    <Content Include="Foto\noce.jpg" />
+    <Content Include="Foto\olio.jpg" />
+    <Content Include="Foto\oratacartoccio.jpg" />
+    <Content Include="Foto\ossobuco.jpg" />
+    <Content Include="Foto\ostriche.jpg" />
+    <Content Include="Foto\paella.jpg" />
+    <Content Include="Foto\pancake.jpg" />
+    <Content Include="Foto\pancetta.jpg" />
+    <Content Include="Foto\pane.jpg" />
+    <Content Include="Foto\panenero.jpg" />
+    <Content Include="Foto\panettone.jpg" />
+    <Content Include="Foto\paninocheeseburger.jpg" />
+    <Content Include="Foto\paninodolce.jpg" />
+    <Content Include="Foto\paninohamburger.jpg" />
+    <Content Include="Foto\paninoprosciuttoeformaggio.jpg" />
+    <Content Include="Foto\parmigiano.jpg" />
+    <Content Include="Foto\pasta.jpg" />
+    <Content Include="Foto\pastacarbonara.jpg" />
+    <Content Include="Foto\pastapesto.jpg" />
+    <Content Include="Foto\pastaragu.jpg" />
+    <Content Include="Foto\pasticcino.jpg" />
+    <Content Include="Foto\patatadolce.jpg" />
+    <Content Include="Foto\patate.jpg" />
+    <Content Include="Foto\patatefritte.jpg" />
+    <Content Include="Foto\patatine.jpg" />
+    <Content Include="Foto\pateolive.jpg" />
+    <Content Include="Foto\pecorino.jpg" />
+    <Content Include="Foto\peperoncino.jpg" />
+    <Content Include="Foto\peperoni.jpg" />
+    <Content Include="Foto\pera.jpg" />
+    <Content Include="Foto\pesca.jpg" />
+    <Content Include="Foto\pescespada.jpg" />
+    <Content Include="Foto\piadinabianca.jpg" />
+    <Content Include="Foto\piselli.jpg" />
+    <Content Include="Foto\pistacchi.jpg" />
+    <Content Include="Foto\pizza.jpg" />
+    <Content Include="Foto\pizzafarcita.jpg" />
+    <Content Include="Foto\polenta.jpg" />
+    <Content Include="Foto\polipo.jpg" />
+    <Content Include="Foto\polloarrosto.jpg" />
+    <Content Include="Foto\polpetta.jpg" />
+    <Content Include="Foto\polpettedimerluzzo.jpg" />
+    <Content Include="Foto\pomodori.jpg" />
+    <Content Include="Foto\popcorn.jpg" />
+    <Content Include="Foto\porri.jpg" />
+    <Content Include="Foto\prosciuttocotto.jpg" />
+    <Content Include="Foto\prosciuttocrudo.jpg" />
+    <Content Include="Foto\prugna.jpg" />
+    <Content Include="Foto\prugnasecca.jpg" />
+    <Content Include="Foto\pure.jpg" />
+    <Content Include="Foto\radicchio.jpg" />
+    <Content Include="Foto\redbull.jpg" />
+    <Content Include="Foto\ricotta.jpg" />
+    <Content Include="Foto\risobianco.jpg" />
+    <Content Include="Foto\risotto.jpg" />
+    <Content Include="Foto\risottozafferano.jpg" />
+    <Content Include="Foto\risottozucca.jpg" />
+    <Content Include="Foto\salame.jpg" />
+    <Content Include="Foto\salmone.jpg" />
+    <Content Include="Foto\salsabarbecue.jpg" />
+    <Content Include="Foto\salsafunghi.jpg" />
+    <Content Include="Foto\salsarosa.jpg" />
+    <Content Include="Foto\salsasoia.jpg" />
+    <Content Include="Foto\salsiccia.jpg" />
+    <Content Include="Foto\scamorza.jpg" />
+    <Content Include="Foto\seitan.jpg" />
+    <Content Include="Foto\senape.jpg" />
+    <Content Include="Foto\sfilaccicavallo.jpg" />
+    <Content Include="Foto\shake.jpg" />
+    <Content Include="Foto\shakecioccolato.jpg" />
+    <Content Include="Foto\shotgin.jpg" />
+    <Content Include="Foto\shotrum.jpg" />
+    <Content Include="Foto\shotvodka.jpg" />
+    <Content Include="Foto\sottilette.jpg" />
+    <Content Include="Foto\spaghettiaglioeolio.jpg" />
+    <Content Include="Foto\spaghettivongole.jpg" />
+    <Content Include="Foto\speck.jpg" />
+    <Content Include="Foto\spinaci.jpg" />
+    <Content Include="Foto\sprite.jpg" />
+    <Content Include="Foto\spumante.jpg" />
+    <Content Include="Foto\stracchino.jpg" />
+    <Content Include="Foto\succoace.jpg" />
+    <Content Include="Foto\succoalbicocca.jpg" />
+    <Content Include="Foto\succoananas.jpg" />
+    <Content Include="Foto\succopera.jpg" />
+    <Content Include="Foto\succopesca.jpg" />
+    <Content Include="Foto\sushi.jpg" />
+    <Content Include="Foto\tacchino.jpg" />
+    <Content Include="Foto\tacchinoarrosto.jpg" />
+    <Content Include="Foto\te.jpg" />
+    <Content Include="Foto\thefreddo.jpg" />
+    <Content Include="Foto\theinfuso.jpg" />
+    <Content Include="Foto\tisana.jpg" />
+    <Content Include="Foto\toastprosciuttoefontina.jpg" />
+    <Content Include="Foto\tofu.jpg" />
+    <Content Include="Foto\tonno.jpg" />
+    <Content Include="Foto\torta.jpg" />
+    <Content Include="Foto\tortacioccolato.jpg" />
+    <Content Include="Foto\tortasalata.jpg" />
+    <Content Include="Foto\tortellini.jpg" />
+    <Content Include="Foto\tramezzino.jpg" />
+    <Content Include="Foto\trippa.jpg" />
+    <Content Include="Foto\trota.jpg" />
+    <Content Include="Foto\tzatziki.jpg" />
+    <Content Include="Foto\uovaocchio.jpg" />
+    <Content Include="Foto\uovo.jpg" />
+    <Content Include="Foto\uva.jpg" />
+    <Content Include="Foto\vinobianco.jpg" />
+    <Content Include="Foto\vinorosso.jpg" />
+    <Content Include="Foto\wafers.jpg" />
+    <Content Include="Foto\wurstel.jpg" />
+    <Content Include="Foto\yogurt.jpg" />
+    <Content Include="Foto\yogurtbianco.jpg" />
+    <Content Include="Foto\zucca.jpg" />
+    <Content Include="Foto\zucchine.jpg" />
+    <Content Include="Foto\zuppapesce.jpg" />
     <Content Include="dll\Microsoft.Phone.Controls.Toolkit.dll" />
-    <Content Include="Immagini\appbar.back.png" />
-    <Content Include="Immagini\appbar.next.png" />
-    <Content Include="Immagini\appbarAggiungi.png" />
-    <Content Include="Immagini\appbar.cancel.rest.png" />
-    <Content Include="Immagini\appbar.check.rest.png" />
-    <Content Include="Immagini\appbar.delete.rest.png" />
-    <Content Include="Immagini\cocacoea.jpg" />
-    <Content Include="Immagini\crispy.png" />
+    <Content Include="Immagini\adduser2.png" />
+    <Content Include="Immagini\aggiungi.png" />
+    <Content Include="Immagini\back.png" />
+    <Content Include="Immagini\bidone.png" />
+    <Content Include="Immagini\Blue.png" />
+    <Content Include="Immagini\calcolo.png" />
+    <Content Include="Immagini\calendar.png" />
+    <Content Include="Immagini\calendario.png" />
+    <Content Include="Immagini\calendarioTutorial.png" />
+    <Content Include="Immagini\calorieTutorial.png" />
+    <Content Include="Immagini\categoriaTutorial.png" />
+    <Content Include="Immagini\check.png" />
+    <Content Include="Immagini\cibiTutorial.png" />
+    <Content Include="Immagini\distribuzioneTutorial.png" />
+    <Content Include="Immagini\donna.png" />
+    <Content Include="Immagini\forchetta.png" />
+    <Content Include="Immagini\Green.png" />
+    <Content Include="Immagini\icona2.png" />
+    <Content Include="Immagini\icona3.png" />
+    <Content Include="Immagini\info.png" />
+    <Content Include="Immagini\login.png" />
+    <Content Include="Immagini\logo.png" />
+    <Content Include="Immagini\mainTutorial.png" />
+    <Content Include="Immagini\minusRed.png" />
+    <Content Include="Immagini\next.png" />
+    <Content Include="Immagini\no1.png" />
+    <Content Include="Immagini\okTutorial.png" />
+    <Content Include="Immagini\pasto.png" />
+    <Content Include="Immagini\plus.png" />
+    <Content Include="Immagini\plusGreen.png" />
+    <Content Include="Immagini\prodottoTutorial.png" />
+    <Content Include="Immagini\Red.png" />
+    <Content Include="Immagini\removeuser.png" />
+    <Content Include="Immagini\reset.png" />
+    <Content Include="Immagini\rimuovi.png" />
+    <Content Include="Immagini\search.png" />
+    <Content Include="Immagini\stopTutorial.png" />
+    <Content Include="Immagini\suTutorial.png" />
+    <Content Include="Immagini\tutorial.png" />
+    <Content Include="Immagini\uomo.png" />
+    <Content Include="Immagini\utenti.png" />
+    <Content Include="Prodotti.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Screen\screen1.png" />
+    <Content Include="Screen\screen2.png" />
+    <Content Include="Screen\screen3.png" />
+    <Content Include="Screen\screen4.png" />
+    <Content Include="Screen\screen5.png" />
+    <Content Include="Screen\screen6.png" />
+    <Content Include="Screen\screen7.png" />
+    <Content Include="Screen\screen8.png" />
     <Content Include="SplashScreenImage.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BindableApplicationBar\BindableApplicationBar.csproj">
+      <Project>{4BE7F5D8-A46B-4FB8-AB58-11C9C425960E}</Project>
+      <Name>BindableApplicationBar</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\Silverlight for Phone\$(TargetFrameworkVersion)\Microsoft.Silverlight.$(TargetFrameworkProfile).Overrides.targets" />
